@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cassert>
-#include <thread>
 #include <portaudio.h>
 #include <portmidi.h>
 #include "SynthEngine.h"
