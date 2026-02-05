@@ -18,7 +18,7 @@ void SynthEngine::initialize(float sampleRate, int framesPerBuffer)
     m_synth.setMalletHeadStiffness(0.5f);   // 0.8
     m_synth.setBarTimbre(1.0f);             // 0.0
     m_synth.setBarDamping(0.5f);            // 0.05
-    m_synth.setTube(true);
+    m_synth.setTubeOn(true);
 
     PaError paErr = Pa_Initialize();
     if (paErr != paNoError)
@@ -174,10 +174,10 @@ void SynthEngine::handleMessage(MidiMessage msg)
     if (msg.status == 0x99)
     {
         if (msg.data1 == 40)
-            m_synth.setTube(true);
+            m_synth.setTubeOn(true);
 
         else if (msg.data1 == 41)
-            m_synth.setTube(false);
+            m_synth.setTubeOn(false);
     }
 
     else if ((msg.status & 0xF0) == 0x90) // Note on

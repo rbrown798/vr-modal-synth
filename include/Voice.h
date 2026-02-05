@@ -39,6 +39,6 @@ public:
     void setMalletHeadMass(float malletHeadMass);
     void setContactModulus(float contactModulus);
     void renderBlock(float* outBuffer, unsigned int length, int outChannels);
-    void setTube(bool isTubeOn);
+    void setTubeOn(bool isTubeOn);
 };
 };

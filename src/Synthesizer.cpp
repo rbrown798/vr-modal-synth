@@ -115,10 +115,10 @@ void Synthesizer::setBarDamping(float barDamping)
         m_voices[i]->setBarDamping(barDamping);
 }
 
-void Synthesizer::setTube(bool isTubeOn)
+void Synthesizer::setTubeOn(bool isTubeOn)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
-        m_voices[i]->setTube(isTubeOn);
+        m_voices[i]->setTubeOn(isTubeOn);
 }
 
 void Synthesizer::setMotorFrequency(float motorFrequency)

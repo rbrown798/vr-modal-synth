@@ -240,7 +240,7 @@ void Voice::setContactModulus(float contactModulus)
     m_impactForce.setContactModulus(contactModulus);
 }
 
-void Voice::setTube(bool isTubeOn)
+void Voice::setTubeOn(bool isTubeOn)
 {
     m_isTubeOn = isTubeOn;
 }
