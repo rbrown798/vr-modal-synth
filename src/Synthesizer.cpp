@@ -32,7 +32,7 @@ void Synthesizer::noteOn(int note, float velocity, float position)
 {
     assert((0 < note) && (note < 128));
 
-    m_voices[m_currentVoice]->playNote(note, velocity, position);
+    m_voices[m_currentVoice]->noteOn(note, velocity, position);
     m_activeKeys[note] = m_voices[m_currentVoice].get();
     m_currentVoice = (m_currentVoice + 1) % MAX_NUM_VOICES;
 }

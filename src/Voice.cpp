@@ -150,7 +150,7 @@ void Voice::initialize(float sampleRate)
     m_tube.initialize(sampleRate);
 }
 
-void Voice::playNote(int note, float velocity, float position)
+void Voice::noteOn(int note, float velocity, float position)
 {
     float freq = 440.f * powf(2.f, static_cast<float>(note - 69) / 12.f);
 

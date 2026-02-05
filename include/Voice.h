@@ -31,7 +31,7 @@ public:
 
     void initialize(float sampleRate);
     void update();
-    void playNote(int note, float velocity, float position);
+    void noteOn(int note, float velocity, float position);
     void noteOff();
     void setBarTimbre(float barTimbre);
     void setBarDamping(float barDamping);
