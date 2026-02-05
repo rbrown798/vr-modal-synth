@@ -169,7 +169,7 @@ void SynthEngine::handleMessage(MidiMessage msg)
         float position = 0.5f + 0.5f * (static_cast<float>(random()) / 
                 static_cast<float>(RAND_MAX) - 1.f);
 
-        m_synth.playNote(note, velocity, position);
+        m_synth.noteOn(note, velocity, position);
     }
     else if ((msg.status & 0xF0) == 0x80) // Note off
     {

@@ -28,7 +28,7 @@ void Synthesizer::initialize(float sampleRate, int dspBufferSize)
     m_tubeLfo.initialize(sampleRate);
 }
 
-void Synthesizer::playNote(int note, float velocity, float position)
+void Synthesizer::noteOn(int note, float velocity, float position)
 {
     assert((0 < note) && (note < 128));
 

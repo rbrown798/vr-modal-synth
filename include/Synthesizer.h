@@ -30,7 +30,7 @@ private:
 public:
     Synthesizer();
     void initialize(float sampleRate, int dspBufferSize);
-    void playNote(int note, float velocity, float position);
+    void noteOn(int note, float velocity, float position);
     void noteOff(int note);
     void renderBlock(float* outBuffer, unsigned int length, int outChannels);
     void setMalletHeadDiameter(float malletHeadDiameter);
