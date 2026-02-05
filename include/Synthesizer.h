@@ -22,6 +22,7 @@ private:
 
     std::vector<float>      m_lfoBuffer;
     SinOsc                  m_tubeLfo{1.f};
+    bool                    m_isMotorOn{true};
 
     float m_malletHeadDensity{};
     float m_malletHeadVolume{}; 
@@ -38,7 +39,8 @@ public:
     void setMalletHeadStiffness(float malletHeadStiffness);
     void setBarTimbre(float barTimbre);
     void setBarDamping(float barDamping);
-    void setTubeOn(bool isTubeOn); // setTubeEnabled
+    void setTubeOn(bool isTubeOn);
+    void setMotorOn(bool isMotorOn);
     void setMotorFrequency(float motorFrequency);
 };
 };

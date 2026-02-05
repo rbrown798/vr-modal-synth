@@ -178,6 +178,12 @@ void SynthEngine::handleMessage(MidiMessage msg)
 
         else if (msg.data1 == 41)
             m_synth.setTubeOn(false);
+
+        else if (msg.data1 == 36)
+            m_synth.setMotorOn(true);
+
+        else if (msg.data1 == 37)
+            m_synth.setMotorOn(false);
     }
 
     else if ((msg.status & 0xF0) == 0x90) // Note on

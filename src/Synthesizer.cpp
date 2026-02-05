@@ -49,10 +49,16 @@ void Synthesizer::noteOff(int note)
 void Synthesizer::renderBlock(float* outBuffer, unsigned int length, 
                               int outChannels)
 {
-    m_tubeLfo.renderBlock(m_lfoBuffer.data(), length);
-    for (unsigned int i = 0; i < length; i++)
+    if (m_isMotorOn == true)
     {
-        m_lfoBuffer[i] = fabsf(m_lfoBuffer[i]);
+        m_tubeLfo.renderBlock(m_lfoBuffer.data(), length);
+
+        for (unsigned int i = 0; i < length; i++)
+            m_lfoBuffer[i] = fabsf(m_lfoBuffer[i]);
+    }
+    else
+    {
+        std::fill(m_lfoBuffer.begin(), m_lfoBuffer.end(), 1.f);
     }
 
     std::fill(outBuffer, outBuffer + length * outChannels, 0.0f);
@@ -119,6 +125,11 @@ void Synthesizer::setTubeOn(bool isTubeOn)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
         m_voices[i]->setTubeOn(isTubeOn);
+}
+
+void Synthesizer::setMotorOn(bool isMotorOn)
+{
+    m_isMotorOn = isMotorOn;
 }
 
 void Synthesizer::setMotorFrequency(float motorFrequency)
