@@ -1,0 +1,44 @@
+#pragma once
+
+#include <vector>
+#include <memory>
+#include "Voice.h"
+#include "SinOsc.h"
+
+
+namespace ModalSynth
+{
+const int MAX_NUM_VOICES{ 10 };
+
+class Synthesizer
+{
+private:
+    std::unique_ptr<Voice>  m_voices[MAX_NUM_VOICES]{};
+    Voice*                  m_activeKeys[128]{};
+    int                     m_currentVoice{};
+    std::vector<float>      m_tempBuffer1;
+    std::vector<float>      m_tempBuffer2;
+    std::vector<float>      m_tempBuffer3;
+
+    std::vector<float>      m_lfoBuffer;
+    SinOsc                  m_tubeLfo{1.f};
+
+    float m_malletHeadDensity{};
+    float m_malletHeadVolume{}; 
+    void setMass();
+
+public:
+    Synthesizer();
+    void initialize(float sampleRate, int dspBufferSize);
+    void playNote(int note, float velocity, float position);
+    void noteOff(int note);
+    void renderBlock(float* outBuffer, unsigned int length, int outChannels);
+    void setMalletHeadDiameter(float malletHeadDiameter);
+    void setMalletHeadDensity(float malletHeadDensity);
+    void setMalletHeadStiffness(float malletHeadStiffness);
+    void setBarTimbre(float barTimbre);
+    void setBarDamping(float barDamping);
+    void setTube(bool isTubeOn); // setTubeEnabled
+    void setMotorFrequency(float motorFrequency);
+};
+};
