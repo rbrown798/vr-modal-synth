@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include <portaudio.h>
 #include <portmidi.h>
 #include "SynthEngine.h"
@@ -24,16 +25,38 @@ int main()
 
     ModalSynth::SynthEngine engine;
 
-    engine.initialize(SAMPLE_RATE, FRAMES_PER_BUFFER);
-    engine.start();
+    try 
+    {
+        engine.initialize(SAMPLE_RATE, FRAMES_PER_BUFFER);
+        engine.start();
 
-    std::cout << "Enter 'q' to quit: " << std::endl;
-    char input = ' ';
-    while (input != 'q')
-        std::cin >> input;
+        std::cout << "Enter 'q' to quit: " << std::endl;
+        char input = ' ';
+        while (input != 'q')
+            std::cin >> input;
+    }
+    catch (const std::runtime_error& error)
+    {
+        std::cout << error.what() << std::endl;
+    }
 
-    engine.stop();
-    engine.terminate();
+    try
+    {
+        engine.stop();
+    }
+    catch (const std::runtime_error& error)
+    {
+        std::cout << error.what() << std::endl;
+    }
+
+    try
+    {
+        engine.terminate();
+    }
+    catch (const std::runtime_error& error)
+    {
+        std::cout << error.what() << std::endl;
+    }
 
     return 0;
 }

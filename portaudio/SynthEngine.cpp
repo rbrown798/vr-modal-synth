@@ -23,15 +23,17 @@ void SynthEngine::initialize(float sampleRate, int framesPerBuffer)
     PaError paErr = Pa_Initialize();
     if (paErr != paNoError)
     {
-        std::cout << "Could not initialize PortAudio. PaEror: "
-            << Pa_GetErrorText(paErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not initialize PortAudio. PaError: ") +
+                Pa_GetErrorText(paErr));
     }
 
     PmError pmErr = Pm_Initialize();
     if (pmErr != pmNoError)
     {
-        std::cerr << "Could not initialize PortMidi. PmError: " 
-            << Pm_GetErrorText(pmErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not initialize PortMidi. PmError: ") + 
+                Pm_GetErrorText(pmErr));
     }
 }
 
@@ -40,15 +42,17 @@ void SynthEngine::terminate()
     PmError pmErr = Pm_Terminate();
     if (pmErr != pmNoError)
     {
-        std::cerr << "Could not terminate PortMidi. PmError: " 
-            << Pm_GetErrorText(pmErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not terminate PortMidi. PmError: ") +
+                Pm_GetErrorText(pmErr));
     }
 
     PaError paErr = Pa_Terminate();
     if (paErr != paNoError)
     {
-        std::cout << "Could not terminate PortAudio. PaError: "
-            << Pa_GetErrorText(paErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not terminate PortAudio. PaError: ") +
+                Pa_GetErrorText(paErr));
     }
 }
 
@@ -71,25 +75,35 @@ void SynthEngine::start()
                                   paNoFlag,
                                   SynthEngine::audioCallback,
                                   this);
-
     if (paErr != paNoError)
     {
-        std::cout << "PortAudioError: " << Pa_GetErrorText(paErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not open audio output stream. PaError: ") +
+                Pa_GetErrorText(paErr));
     }
 
     paErr = Pa_StartStream(m_audioStream);
     if (paErr != paNoError)
     {
-        std::cout << "PortAudioError: " << Pa_GetErrorText(paErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not start audio output stream. PaError: ") +
+                Pa_GetErrorText(paErr));
     }
 
+    // deal with this better
     int deviceSelection = 3;
-    PmError pmErr = Pm_OpenInput(&m_midiStream, deviceSelection, nullptr, 512, 
-            nullptr, nullptr);
+
+    PmError pmErr = Pm_OpenInput(&m_midiStream, 
+                                 deviceSelection, 
+                                 nullptr, 
+                                 512, 
+                                 nullptr, 
+                                 nullptr);
     if (pmErr != pmNoError)
     {
-        std::cout << "Could not open input stream. PmError: " 
-            << Pm_GetErrorText(pmErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not open midi input stream. PmError: ") +
+                Pa_GetErrorText(pmErr));
     }
 
     m_isRunning.store(true);
@@ -101,25 +115,29 @@ void SynthEngine::stop()
     m_isRunning.store(false);
     m_thread.join();
 
-    PmError pmErr;
-    pmErr = Pm_Close(m_midiStream);
+    PmError pmErr = Pm_Close(m_midiStream);
     if (pmErr != pmNoError)
     {
-        std::cerr << "Could not close input stream. PmError: " 
-            << Pm_GetErrorText(pmErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not close midi input stream. PmError: ") +
+                Pm_GetErrorText(pmErr));
     }
 
     PaError paErr;
     paErr = Pa_StopStream(m_audioStream);
     if (paErr != paNoError)
     {
-        std::cout << "PortAudioError: " << Pa_GetErrorText(paErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not stop audio output stream. PaError: ") +
+                Pa_GetErrorText(paErr));
     }
 
     paErr = Pa_CloseStream(m_audioStream);
     if (paErr != paNoError)
     {
-        std::cout << "PortAudioError: " << Pa_GetErrorText(paErr) << std::endl;
+        throw std::runtime_error(
+                std::string("Could not close audio output stream. PaError: ") +
+                Pa_GetErrorText(paErr));
     }
 }
 
