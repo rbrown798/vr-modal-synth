@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iostream> // testing
 #include "MalletSpring.h"
 
 // Alternatively could make stuff static?
@@ -38,12 +39,15 @@ void MalletSpring::setCoefs()
     float angularFreq = undampedAngularFreq * 
         sqrtf(1.0f - m_dampingRatio * m_dampingRatio);
 
+    std::cout << "norm angularFreq: " << angularFreq * m_samplingInterval 
+        << std::endl;
+
     float poleRadius = expf(-m_dampingRatio * undampedAngularFreq * 
                                     m_samplingInterval);
 
     m_a1 = -2.0f * poleRadius * cosf(angularFreq * m_samplingInterval);
     m_a2 = poleRadius * poleRadius;
-    m_b0 = 1.0f / m_mass;
+    m_b0 = (1.f + m_a1 + m_a2) / m_springConstant;
 }
 
 void MalletSpring::setMass(float mass)

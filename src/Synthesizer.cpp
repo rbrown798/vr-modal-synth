@@ -102,6 +102,7 @@ void Synthesizer::setMalletHeadStiffness(float malletHeadStiffness)
 
     float maxContactModulus = 80e+09f;
     float minContactModulus = 480000099.f;
+
     float contactModulus = minContactModulus + malletHeadStiffness * 
                                 (maxContactModulus - minContactModulus);
 

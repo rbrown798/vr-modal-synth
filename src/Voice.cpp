@@ -190,12 +190,13 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     {
         m_tube.processBlock(temp2, temp3, length);
     }
-    gain(temp3, temp3, length, 0.07f);   // Resonator gain
+    gain(temp3, temp3, length, 0.07f);  // Resonator gain
     gain(temp2, temp2, length, 0.8f);   // Bar gain
     mix(temp2, temp3, temp2, length);
  
     m_malletSpring.processBlock(temp1, temp1, length);
-    gain(temp1, temp1, length, 0.005f); // Mallet gain
+    //gain(temp1, temp1, length, 0.005f); // Mallet gain
+    gain(temp1, temp1, length, 5000000.f); // Mallet gain (changed b0)
     mix(temp2, temp1, temp2, length);
 
     m_highPass.processBlock(temp2, temp2, length);
