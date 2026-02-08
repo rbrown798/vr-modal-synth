@@ -4,8 +4,8 @@
 
 namespace ModalSynth
 {
-const float MALLET_SPRING_CONSTANT{ 5.82e+05f }; //2.81e+08f };
-const float MALLET_DAMPING_RATIO{ 0.072f }; //0.09f };
+const float MALLET_SPRING_CONSTANT{ 5.59e+05f }; 
+const float MALLET_DAMPING_RATIO{ 0.072f }; 
 
 class MalletSpring
 {

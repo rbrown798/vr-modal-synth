@@ -60,8 +60,14 @@ dampingRatio = 0.072
 
         k = 5.82e5 ??? (check this)
 
+
+        k = m * (2pi * f)^2 / (1 - zeta^2)
+            density = 1150
+
+            m = 4/3 * pi * ((0.019)/2)^3 * 1150
         
+              = 0.00413 kg
 
-
+        k = 5.59e5
 
 
