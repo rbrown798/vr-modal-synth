@@ -260,7 +260,9 @@ void ModalBank::setCoefs()
         {
             float upperHarmonics = 2.0f;
             // Still figuring this out
-            m_gain[i] = 400.0f * expf(-0.25f / upperHarmonics * i);
+            //m_gain[i] = 400.0f * expf(-0.25f / upperHarmonics * i);
+            m_gain[i] = 400.f; // making mode gains the same for now, 
+                               // Feb 7, 2026
         }
     }
 

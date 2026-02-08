@@ -16,6 +16,9 @@
 //          - Deal with stereo
 //          - handle errors properly in SynthEngine
 //          - set midi device properly
+//          - determine mallet spring constant
+//          - choose better gain values 
+//          - experiment with mode gains
 
 
 int main()

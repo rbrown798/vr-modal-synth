@@ -9,6 +9,7 @@
 namespace ModalSynth
 {
 const int MAX_NUM_VOICES{ 10 };
+const float DEFAULT_MALLET_HEAD_DENSITY{ 8000.f };
 
 class Synthesizer
 {

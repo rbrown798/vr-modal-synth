@@ -1,0 +1,38 @@
+* Vibraphone bars are made from aluminum. 
+* Glockenspiel bars made from aluminum or steel
+
+Material    Density (kg/m^2)    Young's Modulus (GPa)   Poisson's Ratio
+
+Aluminum    2700                70                      0.334
+
+Steel       ?                   200                     ?
+
+Rubber      1100 (soft)         0.01 - 0.1              0.48 - 0.5
+            1200 (hard)
+
+ABS         1060                1.4 - 3.1               (0.35, different src)
+
+Source: engineeringtoolbox.com
+
+1 GPa = 10^9 Pa 
+Pa = N/m^2
+
+    
+ 1     1 - v1^2     1 - v2^2
+--- = ---------- + ----------
+ E*       E1           E2
+
+     4
+F = --- E* R^(1/2) d^(3/2)
+     3
+
+     4
+K = --- E* sqrt(R)
+     3
+
+F = K d^(3/2)
+
+
+ABS (from matweb.com)
+	Poissons Ratio:		0.36 - 0.38 --- avg. 0.364
+

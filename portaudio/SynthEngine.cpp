@@ -20,6 +20,14 @@ void SynthEngine::initialize(float sampleRate, int framesPerBuffer)
     m_synth.setBarDamping(0.5f);            // 0.05
     m_synth.setTubeOn(true);
 
+    // Testing different values Feb 7, 2026
+    m_synth.setMalletHeadDensity(1150.f);   // avg. of soft/hard rubber
+                                            // Note: ABS density is lower 
+                                            // (1060 kg/m3)
+                                            // Consider only using rubber
+                                            // for values of K, since density
+                                            // will be kept constant.
+
     PaError paErr = Pa_Initialize();
     if (paErr != paNoError)
     {
@@ -218,6 +226,8 @@ void SynthEngine::handleMessage(MidiMessage msg)
             float maxDiameter = 4.0f;
             m_synth.setMalletHeadDiameter(minDiameter + (maxDiameter - 
                         minDiameter) * t);
+            std::cout << "diameter: " << minDiameter + (maxDiameter -
+                    minDiameter) * t << std::endl;
         }
         else if (msg.data1 == 24)
         {

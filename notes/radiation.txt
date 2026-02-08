@@ -1,0 +1,11 @@
+monopole source:
+
+    pressure amplitude  =  C * omega
+
+    6 dB per octave slope   -  1 pole high-pass
+
+dipole source
+
+    pressure amplitude  =  C * omega^2
+
+    12 dB per octave filter?    - 2 pole high-pass?

@@ -1,0 +1,67 @@
+glockenspiel mallet (measured):
+
+freq     = 1847 Hz
+bw       = 267 Hz
+diameter = 1.9 cm
+
+R = exp(-pi * bw * T)
+
+known parameters:   
+
+    mass = 4/3 pi * r^3 * density
+    poleRadius
+
+unknown:
+
+    springConstant 
+    dampingConstant / dampingRatio
+
+TODO:
+
+    Find the springConstant given mass and frequency.
+
+    w0 = sqrt(k/m)
+    zeta = c / (2 * sqrt(mk))
+    w = w0 * sqrt(1 - zeta^2)
+
+
+    R = exp(-cT / 2m) = exp(-pi * bw * T)
+
+        -cT / 2m = -pi * bw * T
+
+        -c / 2m = -pi * bw
+
+         c = 2pi * m * bw
+
+
+    Q = 1 / (2 * zeta)          Q = f / bw
+
+        zeta = 1 / 2Q 
+
+             = bw / 2f
+
+             = 267 / (2 * 1847)
+
+             = 0.072279372
+
+
+dampingRatio = 0.072
+
+
+    w = w0 * sqrt(1 - zeta^2)
+
+        2pi * f = sqrt(k/m) * sqrt(1 - zeta^2)
+:
+        2pi * f = sqrt(k/m * (1 - zeta^2))
+
+        (2pi * f)^2 = k * (1 - zeta^2)/m
+
+        k = m * (2pi * f)^2 / (1 - zeta^2)
+
+        k = 5.82e5 ??? (check this)
+
+        
+
+
+
+

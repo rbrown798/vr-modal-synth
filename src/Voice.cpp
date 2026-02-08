@@ -194,13 +194,20 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     gain(temp2, temp2, length, 0.8f);   // Bar gain
     mix(temp2, temp3, temp2, length);
  
+    // temporarily commented out for testing Feb 7, 2026
     m_malletSpring.processBlock(temp1, temp1, length);
-    //gain(temp1, temp1, length, 0.005f); // Mallet gain
-    gain(temp1, temp1, length, 5000000.f); // Mallet gain (changed b0)
+    //gain(temp1, temp1, length, 5000000.f); // Mallet gain (changed b0)
+    //gain(temp1, temp1, length, 10000000.f); // Mallet gain (changed b0)
+    gain(temp1, temp1, length, 30000.f); // Mallet gain (changed b0)
     mix(temp2, temp1, temp2, length);
 
     m_highPass.processBlock(temp2, temp2, length);
-    gain(temp2, temp2, length, 0.0005);
+    //gain(temp2, temp2, length, 0.0005);       // commented out Feb 7, 2026
+
+    // added Feb 7, 2026 (testing)
+    //gain(temp2, temp2, length, 0.005f);
+    gain(temp2, temp2, length, 0.01f);
+    
 
     // TODO: Need to handle spatialization
 
