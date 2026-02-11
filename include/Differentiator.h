@@ -3,7 +3,7 @@
 
 namespace ModalSynth
 {
-class HighPass
+class Differentiator
 {
 private:
     float m_x1{};

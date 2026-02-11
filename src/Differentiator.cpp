@@ -1,4 +1,4 @@
-#include "HighPass.h"
+#include "Differentiator.h"
 #include <immintrin.h>
 
 
@@ -26,7 +26,7 @@ namespace ModalSynth
 //    }
 //}
 //#else
-void HighPass::processBlock(float *in, float *out, unsigned int length)
+void Differentiator::processBlock(float *in, float *out, unsigned int length)
 {
     for (unsigned int i{ 0 }; i < length; i++)
     {

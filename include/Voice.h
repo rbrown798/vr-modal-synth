@@ -6,7 +6,8 @@
 #include "ModalBank.h"
 #include "MalletSpring.h"
 #include "Tube.h"
-#include "HighPass.h"
+#include "Differentiator.h"
+#include "HighPass1P.h"
 
 
 namespace ModalSynth
@@ -19,7 +20,10 @@ private:
     MalletSpring            m_malletSpring;
     Tube                    m_tube;
     bool                    m_isTubeOn{true};
-    HighPass                m_highPass;
+    Differentiator          m_differentiator;
+    HighPass1P              m_malletRadiation;
+    HighPass1P              m_barRadiation;
+    HighPass1P              m_tubeRadiation;
     std::vector<float>&     m_tempBuffer1;
     std::vector<float>&     m_tempBuffer2;
     std::vector<float>&     m_tempBuffer3;

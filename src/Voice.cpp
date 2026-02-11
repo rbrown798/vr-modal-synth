@@ -148,6 +148,12 @@ void Voice::initialize(float sampleRate)
     m_modalBank.initialize(sampleRate);
     m_malletSpring.initialize(sampleRate);
     m_tube.initialize(sampleRate);
+    m_barRadiation.initialize(sampleRate);
+    m_tubeRadiation.initialize(sampleRate);
+    m_malletRadiation.initialize(sampleRate);
+    m_barRadiation.setCutoff(200.f);
+    m_tubeRadiation.setCutoff(100.f);
+    m_malletRadiation.setCutoff(1000.f);
 }
 
 void Voice::noteOn(int note, float velocity, float position)
@@ -184,31 +190,36 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
     m_impactForce.renderBlock(temp1, length);
 
+    // bar and mallet should output surface velocity, not positon.
+    // both are LTI, so differentiator can be applied beforehand.
+    m_differentiator.processBlock(temp1, temp1, length);
+
     m_modalBank.processBlock(temp1, temp2, length);
  
     if (m_isTubeOn)
     {
         m_tube.processBlock(temp2, temp3, length);
     }
+    m_tubeRadiation.processBlock(temp3, temp3, length);
     gain(temp3, temp3, length, 0.07f);  // Resonator gain
+                                        
+    m_barRadiation.processBlock(temp2, temp2, length);
     gain(temp2, temp2, length, 0.8f);   // Bar gain
     mix(temp2, temp3, temp2, length);
+
+    // testing mixing impulse directly
+    //gain(temp1, temp1, length, 0.1f);
+    //mix(temp2, temp1, temp2, length);
+    //gain(temp1, temp1, length, 10.f);
  
-    // temporarily commented out for testing Feb 7, 2026
     m_malletSpring.processBlock(temp1, temp1, length);
-    //gain(temp1, temp1, length, 5000000.f); // Mallet gain (changed b0)
-    //gain(temp1, temp1, length, 10000000.f); // Mallet gain (changed b0)
-    gain(temp1, temp1, length, 30000.f); // Mallet gain (changed b0)
+    m_malletRadiation.processBlock(temp1, temp1, length); 
+
+    gain(temp1, temp1, length, 30000.f); // Mallet gain
     mix(temp2, temp1, temp2, length);
 
-    m_highPass.processBlock(temp2, temp2, length);
-    //gain(temp2, temp2, length, 0.0005);       // commented out Feb 7, 2026
-
-    // added Feb 7, 2026 (testing)
-    //gain(temp2, temp2, length, 0.005f);
     gain(temp2, temp2, length, 0.01f);
     
-
     // TODO: Need to handle spatialization
 
     for (unsigned int n{ 0 }; n < length; n++)
