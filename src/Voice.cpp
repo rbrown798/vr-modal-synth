@@ -205,6 +205,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
                                         
     m_barRadiation.processBlock(temp2, temp2, length);
     gain(temp2, temp2, length, 0.8f);   // Bar gain
+                                        
     mix(temp2, temp3, temp2, length);
 
     // testing mixing impulse directly
@@ -219,6 +220,9 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     mix(temp2, temp1, temp2, length);
 
     gain(temp2, temp2, length, 0.01f);
+
+    // test
+    gain(temp2, temp2, length, 0.5f);
     
     // TODO: Need to handle spatialization
 
