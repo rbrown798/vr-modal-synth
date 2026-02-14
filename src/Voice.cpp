@@ -201,7 +201,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
         m_tube.processBlock(temp2, temp3, length);
     }
     m_tubeRadiation.processBlock(temp3, temp3, length);
-    gain(temp3, temp3, length, 0.07f);  // Resonator gain
+    gain(temp3, temp3, length, 0.03f);  // Resonator gain
                                         
     m_barRadiation.processBlock(temp2, temp2, length);
     gain(temp2, temp2, length, 0.8f);   // Bar gain
