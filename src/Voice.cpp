@@ -208,21 +208,13 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
                                         
     mix(temp2, temp3, temp2, length);
 
-    // testing mixing impulse directly
-    //gain(temp1, temp1, length, 0.1f);
-    //mix(temp2, temp1, temp2, length);
-    //gain(temp1, temp1, length, 10.f);
- 
     m_malletSpring.processBlock(temp1, temp1, length);
     m_malletRadiation.processBlock(temp1, temp1, length); 
 
     gain(temp1, temp1, length, 30000.f); // Mallet gain
-    mix(temp2, temp1, temp2, length);
+    mix(temp1, temp1, temp2, length);
 
-    gain(temp2, temp2, length, 0.01f);
-
-    // test
-    gain(temp2, temp2, length, 0.5f);
+    gain(temp1, temp1, length, 0.005f);
     
     // TODO: Need to handle spatialization
 
@@ -230,7 +222,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     {
         for (int ch{ 0 }; ch < outChannels; ch++)
         {
-            outBuffer[n * outChannels + ch] += temp2[n];
+            outBuffer[n * outChannels + ch] += temp1[n];
         }
     }
 }
