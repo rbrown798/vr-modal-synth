@@ -1,0 +1,36 @@
+
+    bar length is inversely proportional to sqrt(frequency)
+
+    if note is in C major scale, 
+
+        x = 7 * (width + pad) * note/12 + positions[note % 12]
+        y = -L/2
+
+    else:
+
+        x = 
+        y = L/2
+
+
+    note 440 Hz A, midi note 69
+
+    length = 0.161369471974333 m
+
+    0.161 = C / sqrt(440)
+
+    C = 0.161 * sqrt(440) = 3.385
+
+	  = 3.384914601
+
+  +-------------------------------+
+  | L = 3.384914601 / sqrt(freq)  |
+  +-------------------------------+
+
+	width = 0.005 m
+	spacing = 0.006 m
+ 
+	x_positions = [0, 0.5, 1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6]
+	x_positions[note % 12] * (width + spacing)
+
+	c_major_scale = [0, 2, 4, 5, 7, 9, 11]
+
