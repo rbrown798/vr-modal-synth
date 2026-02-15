@@ -33,9 +33,9 @@ void Voice::initialize(float sampleRate)
 
     m_spatializer.initialize(sampleRate);
     m_spatializer.setSourcePosition(Vector3(-3.f, 0.f, 0.f));
-    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.5, 0.f));
+    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.2, 0.6f));
     m_spatializer.setLeftEarDirection(Vector3(-0.66913f, 0.f, 0.74314f));
-    m_spatializer.setRightEarPosition(Vector3(0.085f, -0.5f, 0.f));
+    m_spatializer.setRightEarPosition(Vector3(0.085f, -0.2f, 0.6f));
     m_spatializer.setRightEarDirection(Vector3(0.66913f, 0.f, 0.74314f));
 }
 
@@ -99,7 +99,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     gain(temp1, temp1, length, 30000.f); // Mallet gain
     mix(temp1, temp1, temp2, length);
 
-    gain(temp1, temp3, length, 0.005f);
+    gain(temp1, temp3, length, 0.2f);
     
     m_spatializer.processBlock(temp3, outBuffer, length);
 

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Spatializer.h"
 #include "Utils.h"
 
@@ -17,12 +18,19 @@ void Spatializer::update()
     m_leftGain = (0.5f / leftDistance) * (1.f + leftResultant.dot(
                 m_leftEarDirection) / leftDistance);
 
+    // Don't let gain exceed 1. First scale down so that a gain of 1 occurs 
+    // 10 cm from the source (otherwise the max gain will be one meter away) 
+    m_leftGain = std::min(0.1f * m_leftGain, 1.f);
+
+    // Divide distance by speed of sound
     m_leftDelay.setDelay(leftDistance * 0.00291545);
 
     Vector3 rightResultant = m_sourcePosition - m_rightEarPosition;
     float rightDistance = rightResultant.norm();
     m_rightGain = (0.5f / rightDistance) * (1.f + rightResultant.dot(
                 m_rightEarDirection) / rightDistance);
+
+    m_rightGain = std::min(0.1f * m_rightGain, 1.f);
 
     m_rightDelay.setDelay(rightDistance * 0.00291545);
 }
