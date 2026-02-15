@@ -8,6 +8,7 @@
 #include "Tube.h"
 #include "Differentiator.h"
 #include "HighPass1P.h"
+#include "Spatializer.h"
 
 
 namespace ModalSynth
@@ -24,6 +25,7 @@ private:
     HighPass1P              m_malletRadiation;
     HighPass1P              m_barRadiation;
     HighPass1P              m_tubeRadiation;
+    Spatializer             m_spatializer;
     std::vector<float>&     m_tempBuffer1;
     std::vector<float>&     m_tempBuffer2;
     std::vector<float>&     m_tempBuffer3;

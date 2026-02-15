@@ -50,6 +50,15 @@ float DelayLine::read()
     return (1.0f - m_frac) * y1 + m_frac * y;
 }
 
+void DelayLine::processBlock(float* in, float* out, unsigned long length)
+{
+    for (unsigned long i{ 0 }; i < length; i++)
+    {
+        write(in[i]);
+        out[i] = read();
+    }
+}
+
 void DelayLine::clear()
 {
     std::fill(m_delayBuffer.begin(), m_delayBuffer.end(), 0.0f);

@@ -1,143 +1,19 @@
-#include "Voice.h"
 #include <immintrin.h>
 #include <cstdlib>
 #include <iostream>
+#include <cassert>
+#include "Voice.h"
+#include "Utils.h"
 
 
 namespace ModalSynth
 {
-#ifdef __AVX__
-void gain_avx(float* in, float* out, unsigned int length, float g)
-{
-    constexpr auto FLOATS_IN_AVX_REGISTER = 8u;
-    const auto vectorizableSamples = (length / FLOATS_IN_AVX_REGISTER) *
-        FLOATS_IN_AVX_REGISTER;
-
-    __m256 gRegister = _mm256_set1_ps(g);
-    
-    unsigned int i{};
-    for (; i < vectorizableSamples; i += FLOATS_IN_AVX_REGISTER)
-    {
-        __m256 inRegister = _mm256_loadu_ps(in + i);
-        __m256 outRegister = _mm256_mul_ps(inRegister, gRegister);
-        _mm256_storeu_ps(out + i, outRegister);
-    }
-
-    for (; i < length; i++)
-    {
-        out[i] = g * in[i];
-    }
-}
-#endif
-
-#ifdef __SSE__
-void gain_sse(float* in, float* out, unsigned int length, float g)
-{
-    constexpr auto FLOATS_IN_SSE_REGISTER = 4u;
-    const auto vectorizableSamples = (length / FLOATS_IN_SSE_REGISTER) *
-        FLOATS_IN_SSE_REGISTER;
-
-    __m128 gRegister = _mm_set1_ps(g);
-    
-    unsigned int i{};
-    for (; i < vectorizableSamples; i += FLOATS_IN_SSE_REGISTER)
-    {
-        __m128 inRegister = _mm_loadu_ps(in + i);
-        __m128 outRegister = _mm_mul_ps(inRegister, gRegister);
-        _mm_storeu_ps(out + i, outRegister);
-    }
-
-    for (; i < length; i++)
-    {
-        out[i] = g * in[i];
-    }
-}
-#endif
-
-void gain_scalar(float* in, float* out, unsigned int length, float g)
-{
-    for (unsigned int i{ 0 }; i < length; i++)
-        out[i] = g * in[i];
-}
-
-void gain(float* in, float* out, unsigned int length, float g)
-{
-#ifdef __AVX__
-    gain_avx(in, out, length, g);
-#elif defined(__SSE__)
-    gain_sse(in, out, length, g);
-#else
-    gain_scalar(in, out, length, g);
-#endif
-}
-
-#ifdef __AVX__
-void mix_avx(float* out, float* in1, float* in2, unsigned int length)
-{
-    constexpr auto FLOATS_IN_AVX_REGISTER = 8u;
-    const auto vectorizableSamples = (length / FLOATS_IN_AVX_REGISTER) *
-        FLOATS_IN_AVX_REGISTER;
-
-    unsigned int i{};
-    for (; i < vectorizableSamples; i += FLOATS_IN_AVX_REGISTER)
-    {
-        __m256 in1Register = _mm256_loadu_ps(in1 + i);
-        __m256 in2Register = _mm256_loadu_ps(in2 + i);
-        __m256 outRegister = _mm256_add_ps(in1Register, in2Register);
-        _mm256_storeu_ps(out + i, outRegister);
-    }
-
-    for (; i < length; i++)
-    {
-        out[i] = in1[i] * in2[i];
-    }
-}
-#endif
-
-#ifdef __SSE__
-void mix_sse(float* out, float* in1, float* in2, unsigned int length)
-{
-    constexpr auto FLOATS_IN_AVX_REGISTER = 4u;
-    const auto vectorizableSamples = (length / FLOATS_IN_AVX_REGISTER) *
-        FLOATS_IN_AVX_REGISTER;
-
-    unsigned int i{};
-    for (; i < vectorizableSamples; i += FLOATS_IN_AVX_REGISTER)
-    {
-        __m128 in1Register = _mm_loadu_ps(in1 + i);
-        __m128 in2Register = _mm_loadu_ps(in2 + i);
-        __m128 outRegister = _mm_add_ps(in1Register, in2Register);
-        _mm_storeu_ps(out + i, outRegister);
-    }
-
-    for (; i < length; i++)
-    {
-        out[i] = in1[i] * in2[i];
-    }
-}
-#endif
-
-void mix_scalar(float* out, float* in1, float* in2, unsigned int length)
-{
-    for (unsigned int i{ 0 }; i < length; i++)
-        out[i] = in1[i] + in2[i];
-}
-
-
-void mix(float* out, float* in1, float* in2, unsigned int length)
-{
-#ifdef __AVX__
-    mix_avx(out, in1, in2, length);
-#elif defined(__SSE__)
-    mix_sse(out, in1, in2, length);
-#else
-    mix_scalar(out, in1, in2, length);
-#endif
-}
 
 Voice::Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 
         std::vector<float>& tempBuffer2, std::vector<float>& tempBuffer3) : 
-    m_tube{lfoBuffer}, m_tempBuffer1{tempBuffer1}, m_tempBuffer2{tempBuffer2}, 
+    m_tube(lfoBuffer), 
+    m_spatializer(tempBuffer1, tempBuffer2), 
+    m_tempBuffer1{tempBuffer1}, m_tempBuffer2{tempBuffer2}, 
     m_tempBuffer3{tempBuffer3}
 {
 }
@@ -154,11 +30,20 @@ void Voice::initialize(float sampleRate)
     m_barRadiation.setCutoff(200.f);
     m_tubeRadiation.setCutoff(100.f);
     m_malletRadiation.setCutoff(1000.f);
+
+    m_spatializer.initialize(sampleRate);
+    m_spatializer.setSourcePosition(Vector3(-3.f, 0.f, 0.f));
+    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.5, 0.f));
+    m_spatializer.setLeftEarDirection(Vector3(-0.66913f, 0.f, 0.74314f));
+    m_spatializer.setRightEarPosition(Vector3(0.085f, -0.5f, 0.f));
+    m_spatializer.setRightEarDirection(Vector3(0.66913f, 0.f, 0.74314f));
 }
 
 void Voice::noteOn(int note, float velocity, float position)
 {
     float freq = 440.f * powf(2.f, static_cast<float>(note - 69) / 12.f);
+    float pos = static_cast<float>(note - 60) * 0.05f;
+    m_spatializer.setSourcePosition(Vector3(pos, 0.f, 0.f));
 
     m_modalBank.clear();
     m_modalBank.setFreq(freq);
@@ -214,17 +99,17 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     gain(temp1, temp1, length, 30000.f); // Mallet gain
     mix(temp1, temp1, temp2, length);
 
-    gain(temp1, temp1, length, 0.005f);
+    gain(temp1, temp3, length, 0.005f);
     
-    // TODO: Need to handle spatialization
+    m_spatializer.processBlock(temp3, outBuffer, length);
 
-    for (unsigned int n{ 0 }; n < length; n++)
-    {
-        for (int ch{ 0 }; ch < outChannels; ch++)
-        {
-            outBuffer[n * outChannels + ch] += temp1[n];
-        }
-    }
+    //for (unsigned int n{ 0 }; n < length; n++)
+    //{
+    //    for (int ch{ 0 }; ch < outChannels; ch++)
+    //    {
+    //        outBuffer[n * outChannels + ch] += temp1[n];
+    //    }
+    //}
 }
 
 void Voice::setBarTimbre(float barTimbre)

@@ -5,7 +5,7 @@ SOURCES=main.cpp ../src/ImpactForce.cpp ../src/ModalBank.cpp \
 		../src/Voice.cpp ../src/Synthesizer.cpp ../src/MalletSpring.cpp \
 		../src/DelayLine.cpp ../src/Tube.cpp ../src/Differentiator.cpp \
 		../src/SinOsc.cpp ../src/Utils.cpp SynthEngine.cpp \
-		../src/HighPass1P.cpp
+		../src/HighPass1P.cpp ../src/Vector3.cpp ../src/Spatializer.cpp
 EXECUTABLE=build/app
 
 all: $(SOURCES)

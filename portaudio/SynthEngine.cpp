@@ -68,7 +68,7 @@ void SynthEngine::start()
 {
     PaStreamParameters outParams;
     outParams.device = Pa_GetDefaultOutputDevice(); 
-    outParams.channelCount = 1;
+    outParams.channelCount = 2; //1;
     outParams.hostApiSpecificStreamInfo = NULL;
     outParams.sampleFormat = paFloat32;
     outParams.suggestedLatency = Pa_GetDeviceInfo( 
@@ -265,7 +265,7 @@ int SynthEngine::audioCallback(const void* inputBuffer,
     float* out = static_cast<float*>(outputBuffer);
 
     SynthEngine* synthEngine = static_cast<SynthEngine*>(userData);
-    synthEngine->renderBlock(out, framesPerBuffer, 1);
+    synthEngine->renderBlock(out, framesPerBuffer, 2);
 
     return paContinue;
 }

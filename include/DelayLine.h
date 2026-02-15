@@ -21,6 +21,7 @@ public:
     void setDelay(float delayInSeconds);
     void write(float x);
     float read();
+    void processBlock(float* in, float* out, unsigned long length);
     void clear();
 };
 };
