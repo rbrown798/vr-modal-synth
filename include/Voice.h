@@ -9,6 +9,7 @@
 #include "Differentiator.h"
 #include "HighPass1P.h"
 #include "Spatializer.h"
+#include "Vector3.h"
 
 
 namespace ModalSynth
@@ -46,5 +47,10 @@ public:
     void setContactModulus(float contactModulus);
     void renderBlock(float* outBuffer, unsigned int length, int outChannels);
     void setTubeOn(bool isTubeOn);
+    void setSourcePosition(const Vector3& sourcePosition);
+    void setLeftEarPosition(const Vector3& leftEarPosition);
+    void setLeftEarDirection(const Vector3& leftEarDirection);
+    void setRightEarPosition(const Vector3& rightEarPosition);
+    void setRightEarDirection(const Vector3& rightEarDirection);
 };
 };

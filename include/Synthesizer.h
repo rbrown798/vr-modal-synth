@@ -4,6 +4,7 @@
 #include <memory>
 #include "Voice.h"
 #include "SinOsc.h"
+#include "Vector3.h"
 
 
 namespace ModalSynth
@@ -43,5 +44,9 @@ public:
     void setTubeOn(bool isTubeOn);
     void setMotorOn(bool isMotorOn);
     void setMotorFrequency(float motorFrequency);
+    void setLeftEarPosition(const Vector3& leftEarPosition);
+    void setLeftEarDirection(const Vector3& leftEarDirection);
+    void setRightEarPosition(const Vector3& rightEarPosition);
+    void setRightEarDirection(const Vector3& rightEarDirection);
 };
 };

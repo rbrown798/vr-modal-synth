@@ -2,7 +2,6 @@
 #include "Synthesizer.h"
 #include "Utils.h"
 
-// TODO: Make sure mass spring damper is stable!!! Analyze stability
 
 namespace ModalSynth
 {
@@ -140,5 +139,29 @@ void Synthesizer::setMotorOn(bool isMotorOn)
 void Synthesizer::setMotorFrequency(float motorFrequency)
 {
     m_tubeLfo.setFreq(motorFrequency);
+}
+
+void Synthesizer::setLeftEarPosition(const Vector3& leftEarPosition)
+{
+    for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
+        m_voices[i]->setLeftEarPosition(leftEarPosition);
+}
+
+void Synthesizer::setLeftEarDirection(const Vector3& leftEarDirection)
+{
+    for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
+        m_voices[i]->setLeftEarDirection(leftEarDirection);
+}
+
+void Synthesizer::setRightEarPosition(const Vector3& rightEarPosition)
+{
+    for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
+        m_voices[i]->setRightEarPosition(rightEarPosition);
+}
+
+void Synthesizer::setRightEarDirection(const Vector3& rightEarDirection)
+{
+    for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
+        m_voices[i]->setRightEarDirection(rightEarDirection);
 }
 };

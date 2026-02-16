@@ -144,4 +144,29 @@ void Voice::setTubeOn(bool isTubeOn)
 {
     m_isTubeOn = isTubeOn;
 }
+
+void Voice::setSourcePosition(const Vector3& sourcePosition)
+{
+    m_spatializer.setSourcePosition(sourcePosition);
+}
+
+void Voice::setLeftEarPosition(const Vector3& leftEarPosition)
+{
+    m_spatializer.setLeftEarPosition(leftEarPosition);
+}
+
+void Voice::setLeftEarDirection(const Vector3& leftEarDirection)
+{
+    m_spatializer.setLeftEarDirection(leftEarDirection);
+}
+
+void Voice::setRightEarPosition(const Vector3& rightEarPosition)
+{
+    m_spatializer.setRightEarPosition(rightEarPosition);
+}
+
+void Voice::setRightEarDirection(const Vector3& rightEarDirection)
+{
+    m_spatializer.setRightEarDirection(rightEarDirection);
+}
 };
