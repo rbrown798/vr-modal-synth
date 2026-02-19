@@ -14,6 +14,16 @@
 
 namespace ModalSynth
 {
+const float BAR_WIDTH = 0.025f;  
+const float BAR_PAD = 0.006f;          
+const int CENTER_NOTE = 53;
+
+const float NOTE_XPOS_TABLE[] = { 0.f, 0.5f, 1.f, 1.5f, 2.f, 3.f, 3.5f, 4.f, 
+                                    4.5f, 5.f, 5.5f, 6.f };
+
+const float NOTE_XPOS_OFFSET = 7.f * static_cast<float>(CENTER_NOTE / 12) +
+                                    NOTE_XPOS_TABLE[CENTER_NOTE % 12];
+
 class Voice
 {
 private:

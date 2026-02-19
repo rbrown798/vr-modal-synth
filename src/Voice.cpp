@@ -42,8 +42,18 @@ void Voice::initialize(float sampleRate)
 void Voice::noteOn(int note, float velocity, float position)
 {
     float freq = 440.f * powf(2.f, static_cast<float>(note - 69) / 12.f);
-    float pos = static_cast<float>(note - 60) * 0.05f;
-    m_spatializer.setSourcePosition(Vector3(pos, 0.f, 0.f));
+
+    float barXPos = (7.f * static_cast<float>(note / 12) + 
+                        NOTE_XPOS_TABLE[note % 12] - NOTE_XPOS_OFFSET) * 
+                    (BAR_WIDTH + BAR_PAD);
+
+    float barLength = 3.384914601f / sqrtf(freq);
+    float barYPos = 0.5f * barLength;
+
+    if (std::fmodf(NOTE_XPOS_TABLE[note % 12], 1.f) == 0.f)
+        barYPos *= -1.f;
+
+    m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f));
 
     m_modalBank.clear();
     m_modalBank.setFreq(freq);
