@@ -47,7 +47,8 @@ void Voice::noteOn(int note, float velocity, float position)
                         NOTE_XPOS_TABLE[note % 12] - NOTE_XPOS_OFFSET) * 
                     (BAR_WIDTH + BAR_PAD);
 
-    float barLength = 3.384914601f / sqrtf(freq);
+    float barLength = 4.912847188f / sqrtf(freq);
+
     float barYPos = 0.5f * barLength;
 
     if (std::fmodf(NOTE_XPOS_TABLE[note % 12], 1.f) == 0.f)

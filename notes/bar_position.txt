@@ -34,3 +34,12 @@
 
 	c_major_scale = [0, 2, 4, 5, 7, 9, 11]
 
+Unity:
+440 Hz A - position = 0.1171054
+            L = 2 * position = 0.2342108 
+
+            C = 0.2342108 * sqrt(440)
+              = 4.912847188
+
+    L = 4.912847188 / sqrt(freq)
+
