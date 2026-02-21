@@ -45,6 +45,11 @@ void LowPass1P::clear()
     m_y1 = 0.f;
 }
 
+void LowPass1P::set(float y1)
+{
+    m_y1 = y1;
+}
+
 void LowPass1P::setCoefs()
 {
     float omega = 2.f * PI * m_cutoffFreq;

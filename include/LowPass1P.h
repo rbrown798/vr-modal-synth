@@ -19,5 +19,6 @@ public:
     void processBlock(float* in, float* out, unsigned long length);
     void setCutoff(float cutoffFreq);
     void clear();
+    void set(float y1);
 };
 };
