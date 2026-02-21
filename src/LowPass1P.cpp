@@ -12,6 +12,15 @@ void LowPass1P::initialize(float sampleRate)
     setCoefs();
 }
 
+float LowPass1P::processSample(float x)
+{
+    float y = m_b0 * x - m_a1 * m_y1;
+
+    m_y1 = y;
+
+    return y;
+}
+
 void LowPass1P::processBlock(float* in, float* out, unsigned long length)
 {
     for (unsigned long i{ 0 }; i < length; i++)
