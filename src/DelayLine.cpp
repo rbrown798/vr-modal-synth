@@ -47,7 +47,7 @@ float DelayLine::read()
     float y1 = m_delayBuffer[lastIndex];
 
     m_readIndex = (m_readIndex + 1) & m_mask;
-    return (1.0f - m_frac) * y1 + m_frac * y;
+    return y + m_frac * (y1 - y);
 }
 
 void DelayLine::processBlock(float* in, float* out, unsigned long length)
