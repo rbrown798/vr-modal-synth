@@ -54,6 +54,7 @@ void Voice::noteOn(int note, float velocity, float position)
     if (std::fmodf(NOTE_XPOS_TABLE[note % 12], 1.f) == 0.f)
         barYPos *= -1.f;
 
+    m_spatializer.clear();
     m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f));
 
     m_modalBank.clear();
@@ -156,28 +157,29 @@ void Voice::setTubeOn(bool isTubeOn)
     m_isTubeOn = isTubeOn;
 }
 
-void Voice::setSourcePosition(const Vector3& sourcePosition)
+void Voice::setSourcePosition(const Vector3& sourcePosition, bool immediate)
 {
-    m_spatializer.setSourcePosition(sourcePosition);
+    m_spatializer.setSourcePosition(sourcePosition, immediate);
 }
 
-void Voice::setLeftEarPosition(const Vector3& leftEarPosition)
+void Voice::setLeftEarPosition(const Vector3& leftEarPosition, bool immediate)
 {
-    m_spatializer.setLeftEarPosition(leftEarPosition);
+    m_spatializer.setLeftEarPosition(leftEarPosition, immediate);
 }
 
-void Voice::setLeftEarDirection(const Vector3& leftEarDirection)
+void Voice::setLeftEarDirection(const Vector3& leftEarDirection, bool immediate)
 {
-    m_spatializer.setLeftEarDirection(leftEarDirection);
+    m_spatializer.setLeftEarDirection(leftEarDirection, immediate);
 }
 
-void Voice::setRightEarPosition(const Vector3& rightEarPosition)
+void Voice::setRightEarPosition(const Vector3& rightEarPosition, bool immediate)
 {
-    m_spatializer.setRightEarPosition(rightEarPosition);
+    m_spatializer.setRightEarPosition(rightEarPosition, immediate);
 }
 
-void Voice::setRightEarDirection(const Vector3& rightEarDirection)
+void Voice::setRightEarDirection(const Vector3& rightEarDirection, 
+        bool immediate)
 {
-    m_spatializer.setRightEarDirection(rightEarDirection);
+    m_spatializer.setRightEarDirection(rightEarDirection, immediate);
 }
 };

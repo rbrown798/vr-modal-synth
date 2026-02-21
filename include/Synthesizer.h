@@ -44,9 +44,13 @@ public:
     void setTubeOn(bool isTubeOn);
     void setMotorOn(bool isMotorOn);
     void setMotorFrequency(float motorFrequency);
-    void setLeftEarPosition(const Vector3& leftEarPosition);
-    void setLeftEarDirection(const Vector3& leftEarDirection);
-    void setRightEarPosition(const Vector3& rightEarPosition);
-    void setRightEarDirection(const Vector3& rightEarDirection);
+    void setLeftEarPosition(const Vector3& leftEarPosition, 
+            bool immediate=true);
+    void setLeftEarDirection(const Vector3& leftEarDirection, 
+            bool immediate=true);
+    void setRightEarPosition(const Vector3& rightEarPosition, 
+            bool immediate=true);
+    void setRightEarDirection(const Vector3& rightEarDirection, 
+            bool immediate=true);
 };
 };

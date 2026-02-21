@@ -141,27 +141,31 @@ void Synthesizer::setMotorFrequency(float motorFrequency)
     m_tubeLfo.setFreq(motorFrequency);
 }
 
-void Synthesizer::setLeftEarPosition(const Vector3& leftEarPosition)
+void Synthesizer::setLeftEarPosition(const Vector3& leftEarPosition,
+        bool immediate)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
-        m_voices[i]->setLeftEarPosition(leftEarPosition);
+        m_voices[i]->setLeftEarPosition(leftEarPosition, immediate);
 }
 
-void Synthesizer::setLeftEarDirection(const Vector3& leftEarDirection)
+void Synthesizer::setLeftEarDirection(const Vector3& leftEarDirection,
+        bool immediate)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
-        m_voices[i]->setLeftEarDirection(leftEarDirection);
+        m_voices[i]->setLeftEarDirection(leftEarDirection, immediate);
 }
 
-void Synthesizer::setRightEarPosition(const Vector3& rightEarPosition)
+void Synthesizer::setRightEarPosition(const Vector3& rightEarPosition,
+        bool immediate)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
-        m_voices[i]->setRightEarPosition(rightEarPosition);
+        m_voices[i]->setRightEarPosition(rightEarPosition, immediate);
 }
 
-void Synthesizer::setRightEarDirection(const Vector3& rightEarDirection)
+void Synthesizer::setRightEarDirection(const Vector3& rightEarDirection,
+        bool immediate)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
-        m_voices[i]->setRightEarDirection(rightEarDirection);
+        m_voices[i]->setRightEarDirection(rightEarDirection, immediate);
 }
 };
