@@ -241,6 +241,16 @@ void SynthEngine::handleMessage(MidiMessage msg)
             float end = 4.f;
             m_synth.setMotorFrequency(start + (end - start) * t);
         }
+        else if (msg.data1 == 26)
+        {
+            float t = static_cast<float>(msg.data2) / 127.f;
+            float start = -2.f;
+            float end = 2.f;
+            float pos = start + (end - start) * t;
+            m_synth.setLeftEarPosition(Vector3(pos - 0.085, -1.f, 0.f), false);
+            m_synth.setLeftEarPosition(Vector3(pos + 0.085, -1.f, 0.f), false);
+        }
+
     }
 }
 
