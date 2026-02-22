@@ -247,8 +247,8 @@ void SynthEngine::handleMessage(MidiMessage msg)
             float start = -2.f;
             float end = 2.f;
             float pos = start + (end - start) * t;
-            m_synth.setLeftEarPosition(Vector3(pos - 0.085, -1.f, 0.f), false);
-            m_synth.setLeftEarPosition(Vector3(pos + 0.085, -1.f, 0.f), false);
+            m_synth.setLeftEarPosition(Vector3(pos - 0.085, -1.f, 0.f));
+            m_synth.setLeftEarPosition(Vector3(pos + 0.085, -1.f, 0.f));
         }
 
     }

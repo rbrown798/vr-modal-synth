@@ -32,11 +32,11 @@ void Voice::initialize(float sampleRate)
     m_malletRadiation.setCutoff(1000.f);
 
     m_spatializer.initialize(sampleRate);
-    m_spatializer.setSourcePosition(Vector3(-3.f, 0.f, 0.f));
-    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.2, 0.6f));
-    m_spatializer.setLeftEarDirection(Vector3(-0.66913f, 0.f, 0.74314f));
-    m_spatializer.setRightEarPosition(Vector3(0.085f, -0.2f, 0.6f));
-    m_spatializer.setRightEarDirection(Vector3(0.66913f, 0.f, 0.74314f));
+    m_spatializer.setSourcePosition(Vector3(-3.f, 0.f, 0.f), true);
+    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.2, 0.6f), true);
+    m_spatializer.setLeftEarDirection(Vector3(-0.66913f, 0.f, 0.74314f), true);
+    m_spatializer.setRightEarPosition(Vector3(0.085f, -0.2f, 0.6f), true);
+    m_spatializer.setRightEarDirection(Vector3(0.66913f, 0.f, 0.74314f), true);
 }
 
 void Voice::noteOn(int note, float velocity, float position)
@@ -55,7 +55,7 @@ void Voice::noteOn(int note, float velocity, float position)
         barYPos *= -1.f;
 
     m_spatializer.clear();
-    m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f));
+    m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f), true);
 
     m_modalBank.clear();
     m_modalBank.setFreq(freq);

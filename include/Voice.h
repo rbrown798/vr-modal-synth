@@ -57,14 +57,14 @@ public:
     void setContactModulus(float contactModulus);
     void renderBlock(float* outBuffer, unsigned int length, int outChannels);
     void setTubeOn(bool isTubeOn);
-    void setSourcePosition(const Vector3& sourcePosition, bool immediate=true);
+    void setSourcePosition(const Vector3& sourcePosition, bool immediate=false);
     void setLeftEarPosition(const Vector3& leftEarPosition, 
-            bool immediate=true);
+            bool immediate=false);
     void setLeftEarDirection(const Vector3& leftEarDirection, 
-            bool immediate=true);
+            bool immediate=false);
     void setRightEarPosition(const Vector3& rightEarPosition, 
-            bool immediate=true);
+            bool immediate=false);
     void setRightEarDirection(const Vector3& rightEarDirection, 
-            bool immediate=true);
+            bool immediate=false);
 };
 };
