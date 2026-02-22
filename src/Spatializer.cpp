@@ -5,12 +5,6 @@
 
 namespace ModalSynth
 {
-Spatializer::Spatializer(std::vector<float>& tempBuffer1, 
-        std::vector<float>& tempBuffer2) : m_tempBuffer1{tempBuffer1}, 
-    m_tempBuffer2{tempBuffer2}
-{
-}
-
 void Spatializer::update()
 {
     Vector3 leftResultant = m_sourcePosition - m_leftEarPosition;
@@ -61,20 +55,6 @@ void Spatializer::processBlock(float* in, float* out, unsigned long length)
         out[2 * i] += m_leftGain * m_leftDelay.read();
         out[2 * i + 1] += m_rightGain * m_rightDelay.read();
     }
-
-    // PREVIOUS ///////////////////////////////
-
-    // m_leftDelay.processBlock(in, m_tempBuffer1.data(), length);
-    // gain(m_tempBuffer1.data(), m_tempBuffer1.data(), length, m_leftGain);
-
-    // m_rightDelay.processBlock(in, m_tempBuffer2.data(), length);
-    // gain(m_tempBuffer2.data(), m_tempBuffer2.data(), length, m_rightGain);
-
-    // for (unsigned long i{ 0 }; i < length; i++)
-    // {
-    //     out[2 * i] += m_tempBuffer1[i];
-    //     out[2 * i + 1] += m_tempBuffer2[i];
-    // }
 }
 
 void Spatializer::setSourcePosition(Vector3 sourcePosition, bool immediate)

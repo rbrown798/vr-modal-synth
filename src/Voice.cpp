@@ -12,7 +12,6 @@ namespace ModalSynth
 Voice::Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 
         std::vector<float>& tempBuffer2, std::vector<float>& tempBuffer3) : 
     m_tube(lfoBuffer), 
-    m_spatializer(tempBuffer1, tempBuffer2), 
     m_tempBuffer1{tempBuffer1}, m_tempBuffer2{tempBuffer2}, 
     m_tempBuffer3{tempBuffer3}
 {
