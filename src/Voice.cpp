@@ -74,6 +74,12 @@ void Voice::noteOff()
     m_modalBank.setDamping(std::max(0.4f, m_barDamping));
 }
 
+void Voice::retrigger(float velocity, float position)
+{
+    m_modalBank.setPosition(position);
+    m_impactForce.play(velocity);
+}
+
 void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 { 
     std::fill(m_tempBuffer1.begin(), m_tempBuffer1.end(), 0.0f);

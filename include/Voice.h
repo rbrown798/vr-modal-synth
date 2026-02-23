@@ -50,6 +50,7 @@ public:
     void update();
     void noteOn(int note, float velocity, float position);
     void noteOff();
+    void retrigger(float velocity, float position);
     void setBarTimbre(float barTimbre);
     void setBarDamping(float barDamping);
     void setMalletHeadRadius(float malletHeadRadius);
