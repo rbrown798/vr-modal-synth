@@ -1,6 +1,7 @@
 #include <cassert>
 #include "Synthesizer.h"
 #include "Utils.h"
+#include <iostream>
 
 
 namespace ModalSynth
@@ -31,18 +32,93 @@ void Synthesizer::noteOn(int note, float velocity, float position)
 {
     assert((0 < note) && (note < 128));
 
-    m_voices[m_currentVoice]->noteOn(note, velocity, position);
-    m_activeKeys[note] = m_voices[m_currentVoice].get();
-    m_currentVoice = (m_currentVoice + 1) % MAX_NUM_VOICES;
+    for (int i = 0; i < MAX_NUM_VOICES; i++)
+    {
+        m_voices[i]->incrementTimestamp();
+    }
+
+    Voice* voice = m_activeNotes[note];
+    if (voice != nullptr)
+    {
+        voice->retrigger(velocity, position);
+        return;
+    }
+
+    voice = getAvailableVoice();
+    if (voice == nullptr)
+    {
+        voice = getVoiceToSteal();
+        int noteToSteal = voice->getNote();
+        m_activeNotes[noteToSteal] = nullptr;
+    }
+
+    voice->noteOn(note, velocity, position);
+    m_activeNotes[note] = voice;
 }
 
 void Synthesizer::noteOff(int note)
 {
     assert((0 < note) && (note < 128));
 
-    if (m_activeKeys[note] != nullptr)
-        m_activeKeys[note]->noteOff();
-    m_activeKeys[note] = nullptr;
+    if (m_activeNotes[note] != nullptr)
+    {
+        m_activeNotes[note]->noteOff();
+        m_activeNotes[note] = nullptr;
+    }
+}
+
+Voice* Synthesizer::getAvailableVoice()
+{
+    // Return the oldest available voice
+    Voice* voice{};
+    int maxTimestamp = -1;
+
+    for (int i = 0; i < MAX_NUM_VOICES; i++)
+    {
+        if ((m_voices[i]->isVoiceActive() == false) && 
+                (m_voices[i]->getTimestamp() > maxTimestamp))
+        {
+            maxTimestamp = m_voices[i]->getTimestamp();
+            voice = m_voices[i].get();
+        }
+    }
+    return voice;
+}
+
+Voice* Synthesizer::getVoiceToSteal()
+{
+    Voice* voice1{};
+    Voice* voice2{};
+
+    int maxTimestamp1 = -1;
+    int maxTimestamp2 = -1;
+
+    // get oldest 2 voices
+    for (int i = 0; i < MAX_NUM_VOICES; i++)
+    {
+        int currentTimestamp = m_voices[i]->getTimestamp();
+
+        if (currentTimestamp > maxTimestamp1)
+        {
+            maxTimestamp2 = maxTimestamp1;
+            maxTimestamp1 = currentTimestamp;
+
+            voice2 = voice1;
+            voice1 = m_voices[i].get();
+        }
+        else if ((currentTimestamp > maxTimestamp2) && 
+                (currentTimestamp < maxTimestamp1))
+        {
+            maxTimestamp2 = currentTimestamp;
+            voice2 = m_voices[i].get();
+        }
+    }
+    if (voice2 == nullptr)
+    {
+        return voice1;
+    }
+
+    return (voice1->getNote() > voice2->getNote()) ? voice1 : voice2;
 }
 
 void Synthesizer::renderBlock(float* outBuffer, unsigned int length, 

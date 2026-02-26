@@ -40,6 +40,8 @@ void Voice::initialize(float sampleRate)
 
 void Voice::noteOn(int note, float velocity, float position)
 {
+    m_note = note;
+
     float freq = 440.f * powf(2.f, static_cast<float>(note - 69) / 12.f);
 
     float barXPos = (7.f * static_cast<float>(note / 12) + 
@@ -65,6 +67,9 @@ void Voice::noteOn(int note, float velocity, float position)
     m_tube.setFreq(freq);
 
     m_impactForce.play(velocity);
+
+    m_isActive = true;
+    m_timestamp = 0;
 }
 
 void Voice::noteOff()
@@ -72,12 +77,16 @@ void Voice::noteOff()
     // temporary solution
     //m_modalBank.clear();
     m_modalBank.setDamping(std::max(0.4f, m_barDamping));
+
+    m_isActive = false;
 }
 
 void Voice::retrigger(float velocity, float position)
 {
     m_modalBank.setPosition(position);
     m_impactForce.play(velocity);
+
+    m_timestamp = 0;
 }
 
 void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
@@ -127,6 +136,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
     //        outBuffer[n * outChannels + ch] += temp1[n];
     //    }
     //}
+
 }
 
 void Voice::setBarTimbre(float barTimbre)
@@ -186,5 +196,25 @@ void Voice::setRightEarDirection(const Vector3& rightEarDirection,
         bool immediate)
 {
     m_spatializer.setRightEarDirection(rightEarDirection, immediate);
+}
+
+bool Voice::isVoiceActive() const
+{
+    return m_isActive;
+}
+
+int Voice::getTimestamp() const
+{
+    return m_timestamp;
+}
+
+void Voice::incrementTimestamp()
+{
+    m_timestamp++;
+}
+
+int Voice::getNote() const
+{
+    return m_note;
 }
 };

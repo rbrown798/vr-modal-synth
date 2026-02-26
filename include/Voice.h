@@ -24,6 +24,7 @@ const float NOTE_XPOS_TABLE[] = { 0.f, 0.5f, 1.f, 1.5f, 2.f, 3.f, 3.5f, 4.f,
 const float NOTE_XPOS_OFFSET = 7.f * static_cast<float>(CENTER_NOTE / 12) +
                                     NOTE_XPOS_TABLE[CENTER_NOTE % 12];
 
+
 class Voice
 {
 private:
@@ -41,6 +42,9 @@ private:
     std::vector<float>&     m_tempBuffer2;
     std::vector<float>&     m_tempBuffer3;
     float                   m_barDamping{};
+    bool                    m_isActive{};
+    int                     m_timestamp{};
+    int                     m_note{};
 
 public:
     Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 
@@ -67,5 +71,9 @@ public:
             bool immediate=false);
     void setRightEarDirection(const Vector3& rightEarDirection, 
             bool immediate=false);
+    bool isVoiceActive() const;
+    int getTimestamp() const;
+    void incrementTimestamp();
+    int getNote() const;
 };
 };

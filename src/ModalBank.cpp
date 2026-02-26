@@ -133,7 +133,6 @@ void ModalBank::setFreq(float f1)
         m_freq[i + 1] = m_overtoneRatios[i] * f1; 
     
     setCoefs();
-    std::cout << "highest mode: " << m_freq[7] << std::endl;
 }
 
 void ModalBank::setPosition(float position)
