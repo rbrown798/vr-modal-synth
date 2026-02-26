@@ -74,8 +74,6 @@ void Voice::noteOn(int note, float velocity, float position)
 
 void Voice::noteOff()
 {
-    // temporary solution
-    //m_modalBank.clear();
     m_modalBank.setDamping(std::max(0.4f, m_barDamping));
 
     m_isActive = false;
@@ -146,9 +144,12 @@ void Voice::setBarTimbre(float barTimbre)
 
 void Voice::setBarDamping(float barDamping)
 {
-    // TODO: Fix this, probably will cause problems for note off
     m_barDamping = barDamping;
-    m_modalBank.setDamping(barDamping);
+
+    // Only set if the note is currently playing so it doesn't compete with 
+    // note off
+    if (m_isActive)
+        m_modalBank.setDamping(barDamping);
 }
 
 void Voice::setMalletHeadRadius(float malletHeadRadius)
