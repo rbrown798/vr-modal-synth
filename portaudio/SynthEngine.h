@@ -1,6 +1,8 @@
 #pragma once
 
 #include <thread>
+#include <string>
+#include <unordered_map>
 #include <portaudio.h>
 #include <portmidi.h>
 #include "Synthesizer.h"
@@ -14,6 +16,11 @@ struct MidiMessage
     int status;
     int data1;
     int data2;
+};
+
+const std::unordered_map<std::string, int> COMMAND_MAP = {
+    {"timb", 21}, {"damp", 22}, {"diam", 23}, {"stif", 24}, {"trem", 25}, 
+    {"lpos", 26}
 };
 
 class SynthEngine
@@ -35,6 +42,7 @@ public:
     void stop();
     void run();
     void handleMessage(MidiMessage msg);
+    void handleCommand(std::string command, float value);
     void renderBlock(float* out, unsigned long N, int outChannels);
     static int audioCallback(const void* inputBuffer,
                              void *outputBuffer, 

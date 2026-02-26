@@ -4,6 +4,7 @@
 #include <portmidi.h>
 #include "SynthEngine.h"
 
+#include <string>
 
 // TODO:    - Better voice handling
 //          - Fix mallet spring aliasing
@@ -34,9 +35,20 @@ int main()
         engine.start();
 
         std::cout << "Enter 'q' to quit: " << std::endl;
-        char input = ' ';
-        while (input != 'q')
-            std::cin >> input;
+        std::string command{};
+        float value{};
+
+        while (command != "q")
+        {
+            std::cin >> command;
+
+            if (command != "q")
+            {
+                std::cin >> value;
+                std::cout << "val: " << value << std::endl;
+                engine.handleCommand(command, value);
+            }
+        }
     }
     catch (const std::runtime_error& error)
     {

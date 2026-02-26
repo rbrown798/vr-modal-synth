@@ -6,6 +6,7 @@
 
 namespace ModalSynth 
 {
+
 void SynthEngine::initialize(float sampleRate, int framesPerBuffer)
 {
     m_sampleRate = sampleRate;
@@ -259,8 +260,18 @@ void SynthEngine::handleMessage(MidiMessage msg)
             m_synth.setLeftEarPosition(Vector3(pos - 0.085, -1.f, 0.f));
             m_synth.setLeftEarPosition(Vector3(pos + 0.085, -1.f, 0.f));
         }
-
     }
+}
+
+void SynthEngine::handleCommand(std::string command, float value)
+{
+    MidiMessage msg;
+
+    msg.status = 0xB0;
+    msg.data1 = COMMAND_MAP.at(command);
+    msg.data2 = value;
+
+    m_midiMessages.push(msg);
 }
 
 void SynthEngine::renderBlock(float* out, unsigned long N, int outChannels)
