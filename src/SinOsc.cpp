@@ -24,6 +24,9 @@ void SinOsc::renderBlock(float* out, unsigned int N)
     {
         out[i] = sinf(m_phase); 
         m_phase += phaseIncr;
+
+        if (m_phase >= 2.f * PI)
+            m_phase -= 2.f * PI;
     }
 }
 
