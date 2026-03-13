@@ -217,6 +217,12 @@ void Synthesizer::setMotorFrequency(float motorFrequency)
     m_tubeLfo.setFreq(motorFrequency);
 }
 
+void Synthesizer::setPedalValue(float pedalValue)
+{
+    for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
+        m_voices[i]->setPedalValue(pedalValue);
+}
+
 void Synthesizer::setLeftEarPosition(const Vector3& leftEarPosition,
         bool immediate)
 {

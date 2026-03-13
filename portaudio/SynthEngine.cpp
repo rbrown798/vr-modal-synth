@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <thread>
+#include <algorithm>
 #include "SynthEngine.h"
 
 
@@ -216,11 +217,19 @@ void SynthEngine::handleMessage(MidiMessage msg)
     else if ((msg.status & 0xF0) == 0x80) // Note off
     {
         int note = msg.data1;
-        m_synth.noteOff(note);
+        //m_synth.noteOff(note);
     }
     else if ((msg.status & 0xF0) == 0xB0)
     {
-        if (msg.data1 == 21)
+        if (msg.data1 == 1)    // modulation
+        {
+            //float damping = 1.f - static_cast<float>(msg.data2) / 127.f;
+            //damping = std::clamp(damping, 0.f, 0.25f);
+
+            //m_synth.setBarDamping(damping);
+            m_synth.setPedalValue(static_cast<float>(msg.data2) / 127.f);
+        }
+        else if (msg.data1 == 21)
         {
             m_synth.setBarTimbre(static_cast<float>(msg.data2) / 127.f);
         } 

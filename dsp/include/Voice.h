@@ -24,6 +24,9 @@ const float NOTE_XPOS_TABLE[] = { 0.f, 0.5f, 1.f, 1.5f, 2.f, 3.f, 3.5f, 4.f,
 const float NOTE_XPOS_OFFSET = 7.f * static_cast<float>(CENTER_NOTE / 12) +
                                     NOTE_XPOS_TABLE[CENTER_NOTE % 12];
 
+const float MAX_DAMPING = 0.5f;
+const float PEDAL_DAMP_COEF = 2.5f;
+
 
 class Voice
 {
@@ -42,9 +45,12 @@ private:
     std::vector<float>&     m_tempBuffer2;
     std::vector<float>&     m_tempBuffer3;
     float                   m_barDamping{};
+    float                   m_pedalDamping{};
     bool                    m_isActive{};
     int                     m_timestamp{};
     int                     m_note{};
+
+    float getBarTotalDamping() const;
 
 public:
     Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 
@@ -62,6 +68,7 @@ public:
     void setContactModulus(float contactModulus);
     void renderBlock(float* outBuffer, unsigned int length, int outChannels);
     void setTubeOn(bool isTubeOn);
+    void setPedalValue(float pedalValue);
     void setSourcePosition(const Vector3& sourcePosition, bool immediate=false);
     void setLeftEarPosition(const Vector3& leftEarPosition, 
             bool immediate=false);

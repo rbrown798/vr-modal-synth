@@ -46,6 +46,7 @@ public:
     void setTubeOn(bool isTubeOn);
     void setMotorOn(bool isMotorOn);
     void setMotorFrequency(float motorFrequency);
+    void setPedalValue(float pedalValue);
     void setLeftEarPosition(const Vector3& leftEarPosition, 
             bool immediate=false);
     void setLeftEarDirection(const Vector3& leftEarDirection, 

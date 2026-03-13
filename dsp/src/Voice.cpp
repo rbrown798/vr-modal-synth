@@ -61,7 +61,8 @@ void Voice::noteOn(int note, float velocity, float position)
     m_modalBank.clear();
     m_modalBank.setFreq(freq);
     m_modalBank.setPosition(position);
-    m_modalBank.setDamping(m_barDamping);
+
+    m_modalBank.setDamping(getBarTotalDamping());
 
     m_tube.clear();
     m_tube.setFreq(freq);
@@ -72,10 +73,15 @@ void Voice::noteOn(int note, float velocity, float position)
     m_timestamp = 0;
 }
 
+float Voice::getBarTotalDamping() const
+{
+    return std::min(m_barDamping * (1.f + PEDAL_DAMP_COEF * m_pedalDamping), 
+            MAX_DAMPING);
+}
+
 void Voice::noteOff()
 {
-    m_modalBank.setDamping(std::max(0.4f, m_barDamping));
-
+    m_modalBank.setDamping(std::max(0.4f, getBarTotalDamping()));
     m_isActive = false;
 }
 
@@ -149,7 +155,7 @@ void Voice::setBarDamping(float barDamping)
     // Only set if the note is currently playing so it doesn't compete with 
     // note off
     if (m_isActive)
-        m_modalBank.setDamping(barDamping);
+        m_modalBank.setDamping(getBarTotalDamping());
 }
 
 void Voice::setMalletHeadRadius(float malletHeadRadius)
@@ -171,6 +177,12 @@ void Voice::setContactModulus(float contactModulus)
 void Voice::setTubeOn(bool isTubeOn)
 {
     m_isTubeOn = isTubeOn;
+}
+
+void Voice::setPedalValue(float pedalValue)
+{
+    m_pedalDamping = 1.f - pedalValue;
+    m_modalBank.setDamping(getBarTotalDamping());
 }
 
 void Voice::setSourcePosition(const Vector3& sourcePosition, bool immediate)
