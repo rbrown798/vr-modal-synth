@@ -36,6 +36,7 @@ namespace ModalSynth
         P_RESONATOR_TREMOLO_RATE,
         P_RESONATORS_ON,
         P_LFO_ON,
+        P_PEDAL_VALUE,
         P_NUM
     };
 
@@ -74,6 +75,9 @@ namespace ModalSynth
 
         AudioPluginUtil::RegisterParameter(definition, "LfoOn", "",
             -1.f, 1.f, 1.f, 1.0f, 1.0f, P_LFO_ON);
+
+        AudioPluginUtil::RegisterParameter(definition, "PedalValue", "",
+            0.f, 1.f, 0.f, 1.0f, 1.0f, P_PEDAL_VALUE);
 
         return numparams;
     }
@@ -148,6 +152,7 @@ namespace ModalSynth
         synth->setMotorFrequency(p[P_RESONATOR_TREMOLO_RATE]);
         synth->setTubeOn(p[P_RESONATORS_ON] > 0);
         synth->setMotorOn(p[P_LFO_ON] > 0);
+        synth->setPedalValue(p[P_PEDAL_VALUE]);
     }
 
     static void HandleEvent(EffectData* effectData, Event::Message msg)
