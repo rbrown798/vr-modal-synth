@@ -23,10 +23,10 @@ void Voice::initialize(float sampleRate)
     m_modalBank.initialize(sampleRate);
     m_malletSpring.initialize(sampleRate);
     m_tube.initialize(sampleRate);
-    m_barRadiation.initialize(sampleRate);
+    //m_barRadiation.initialize(sampleRate);
     m_tubeRadiation.initialize(sampleRate);
     m_malletRadiation.initialize(sampleRate);
-    m_barRadiation.setCutoff(200.f);
+    //m_barRadiation.setCutoff(200.f);
     m_tubeRadiation.setCutoff(100.f);
     m_malletRadiation.setCutoff(1000.f);
 

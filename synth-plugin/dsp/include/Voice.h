@@ -10,6 +10,7 @@
 #include "HighPass1P.h"
 #include "Spatializer.h"
 #include "Vector3.h"
+#include "DipoleRadiation.h"
 
 
 namespace ModalSynth
@@ -38,7 +39,7 @@ private:
     bool                    m_isTubeOn{true};
     Differentiator          m_differentiator;
     HighPass1P              m_malletRadiation;
-    HighPass1P              m_barRadiation;
+    DipoleRadiation         m_barRadiation;
     HighPass1P              m_tubeRadiation;
     Spatializer             m_spatializer;
     std::vector<float>&     m_tempBuffer1;
