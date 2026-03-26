@@ -36,7 +36,6 @@ private:
     MalletSpring            m_malletSpring;
     Tube                    m_tube;
     bool                    m_isTubeOn{true};
-    Differentiator          m_differentiator;
     DipoleRadiation         m_malletRadiation;
     DipoleRadiation         m_barRadiation;
     MonopoleRadiation       m_tubeRadiation;
