@@ -19,11 +19,8 @@ private:
 
     float m_a1{};
     float m_a2{};
-    //float m_b1{1.0f};
     float m_b0{};
 
-    //float m_x1{};
-    //float m_x2{};
     float m_y1{};
     float m_y2{};
 
