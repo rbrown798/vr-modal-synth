@@ -8,7 +8,7 @@
 
 namespace ModalSynth
 {
-float ModalBank::s_modeShapes[8][MODE_SHAPE_LUT_SIZE]{};
+float ModalBank::s_modeShapes[NUM_MODES][MODE_SHAPE_LUT_SIZE]{};
 
 float ModalBank::getModeShape(float knL, float x)
 {
@@ -18,10 +18,10 @@ float ModalBank::getModeShape(float knL, float x)
 
 void ModalBank::initModeShapes()
 {
-    float knLValues[8] = { 4.73004f, 7.8532f, 10.99561f, 14.13717f, 17.27876f,
-                           20.42035f, 23.56194f, 26.70354f };
+    float knLValues[NUM_MODES] = { 4.73004f, 7.8532f, 10.99561f, 14.13717f, 
+                                   17.27876f, 20.42035f, 23.56194f, 26.70354f };
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < NUM_MODES; i++)
     {
         for (int j = 0; j < MODE_SHAPE_LUT_SIZE; j++)
         {
@@ -65,7 +65,7 @@ void ModalBank::initialize(float sampleRate)
     setFreq(880.0f);
     setTimbre(0.0f);
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < NUM_MODES; i++)
     {
         m_outPosGain[i] = s_modeShapes[i][0];
     }
@@ -109,7 +109,7 @@ float ModalBank::lerp(float a, float b, float t)
 
 void ModalBank::setDamping(float damping)
 {
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < NUM_MODES; i++)
     {
         m_radius[i] = MAX_R * expf(-0.0005f * damping *
                                             static_cast<float>(i + 1));
@@ -134,7 +134,7 @@ void ModalBank::setFreq(float f1)
 
     m_freq[0] = f1;
 
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < NUM_MODES-1; i++)
         m_freq[i + 1] = m_overtoneRatios[i] * f1; 
     
     setCoefs();
@@ -233,7 +233,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
     for (unsigned int n = 0; n < length; n++)
     {
         out = 0.0f;
-        for (int i{ 0 }; i < 8; i++)
+        for (int i{ 0 }; i < NUM_MODES; i++)
         {
             float x = inBuffer[n] * m_positionGain[i] * sqrtf(m_f1);
 
@@ -255,7 +255,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
 
 void ModalBank::setCoefs()
 {
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < NUM_MODES; i++)
     {
         if (m_freq[i] > 20000.0f)
         {
@@ -268,7 +268,7 @@ void ModalBank::setCoefs()
         }
     }
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < NUM_MODES; i++)
     {
         float omega = 2.f * PI * m_freq[i];
         float k = omega * omega;
@@ -280,9 +280,9 @@ void ModalBank::setCoefs()
 
 void ModalBank::clear()
 {
-    std::fill(m_x1, m_x1 + 8, 0.f);
-    std::fill(m_x2, m_x2 + 8, 0.f);
-    std::fill(m_y1, m_y1 + 8, 0.f);
-    std::fill(m_y2, m_y2 + 8, 0.f);
+    std::fill(m_x1, m_x1 + NUM_MODES, 0.f);
+    std::fill(m_x2, m_x2 + NUM_MODES, 0.f);
+    std::fill(m_y1, m_y1 + NUM_MODES, 0.f);
+    std::fill(m_y2, m_y2 + NUM_MODES, 0.f);
 }
 };
