@@ -3,13 +3,18 @@
 
 namespace ModalSynth
 {
+void DipoleRadiation::initialize(float sampleRate)
+{
+    m_gain = sampleRate * sampleRate * sampleRate;
+}
+
 void DipoleRadiation::processBlock(float *in, float *out, unsigned int length)
 {
     for (unsigned int i{ 0 }; i < length; i++)
     {
         float x = in[i];
 
-        out[i] = x - 3.f * m_x1 + 3.f * m_x2 - m_x3;
+        out[i] = m_gain * (x - 3.f * m_x1 + 3.f * m_x2 - m_x3);
 
         m_x3 = m_x2;
         m_x2 = m_x1;
