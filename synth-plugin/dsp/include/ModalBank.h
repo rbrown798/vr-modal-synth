@@ -14,6 +14,7 @@ private:
     float m_radius[8]{};
     float m_gain[8]{};
     float m_positionGain[8]{};
+    float m_outPosGain[8]{};
     float m_overtoneRatios[7]{};
 
     float m_f1{};
