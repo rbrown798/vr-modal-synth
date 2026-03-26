@@ -28,12 +28,19 @@ void MalletSpring::setCoefs()
 
     m_a1 = -2.0f * poleRadius * cosf(angularFreq * m_samplingInterval);
     m_a2 = poleRadius * poleRadius;
-    m_b0 = (1.f + m_a1 + m_a2) / m_springConstant;
+    m_b0 = (m_radius * m_radius) * (1.f + m_a1 + m_a2) / m_springConstant;
+    // radius^2 is to make amplitude proportional to surface area
 }
 
 void MalletSpring::setMass(float mass)
 {
     m_mass = mass;
+    setCoefs();
+}
+
+void MalletSpring::setRadius(float radius)
+{
+    m_radius = radius;
     setCoefs();
 }
 

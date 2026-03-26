@@ -1,6 +1,5 @@
 #pragma once
 
-//#include "MalletProperties.h"
 
 namespace ModalSynth
 {
@@ -14,6 +13,7 @@ private:
     float m_dampingRatio{ MALLET_DAMPING_RATIO };
     float m_mass{};
     float m_samplingInterval{};
+    float m_radius{};
 
     float m_sampleRate{};
 
@@ -30,6 +30,7 @@ public:
     MalletSpring() = default;
     void initialize(float sampleRate);
     void setMass(float mass);
+    void setRadius(float radius);
     void processBlock(float *in, float *out, unsigned int length);
 };
 };
