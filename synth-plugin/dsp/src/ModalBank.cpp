@@ -109,11 +109,13 @@ float ModalBank::lerp(float a, float b, float t)
 
 void ModalBank::setDamping(float damping)
 {
-    for (int i = 0; i < NUM_MODES; i++)
-    {
-        m_radius[i] = MAX_R * expf(-0.0005f * damping *
-                                            static_cast<float>(i + 1));
-    }
+    m_globalDamping = MIN_BAR_GLOBAL_DAMPING + damping * 
+                            (MAX_BAR_GLOBAL_DAMPING - MIN_BAR_GLOBAL_DAMPING);
+
+    for (int i{ 0 }; i < NUM_MODES; i++)
+        m_alpha[i] = m_globalDamping + m_overtoneDamping * 
+                powf(m_overtoneRatios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
+                                                            powf(m_f1, 2.f);
 
     setCoefs();
 }
@@ -142,7 +144,7 @@ void ModalBank::setFreq(float f1)
 
 void ModalBank::setPosition(float position)
 {
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < NUM_MODES; i++)
     {
         m_positionGain[i] = readModeShapeLerp(i, position);
     }
@@ -270,10 +272,11 @@ void ModalBank::setCoefs()
 
     for (int i = 0; i < NUM_MODES; i++)
     {
+        float radius = expf(-m_alpha[i] / m_sampleRate);
         float omega = 2.f * PI * m_freq[i];
-        float k = omega * omega;
-        m_a1[i] = -2.f * m_radius[i] * cosf(omega / m_sampleRate);
-        m_a2[i] = m_radius[i] * m_radius[i];
+        float k = omega * omega + m_alpha[i] * m_alpha[i];
+        m_a1[i] = -2.f * radius * cosf(omega / m_sampleRate);
+        m_a2[i] = radius * radius;
         m_b0[i] = (1.f + m_a1[i] + m_a2[i]) / k;
     }
 }
