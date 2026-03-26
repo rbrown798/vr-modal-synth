@@ -23,12 +23,10 @@ void Voice::initialize(float sampleRate)
     m_modalBank.initialize(sampleRate);
     m_malletSpring.initialize(sampleRate);
     m_tube.initialize(sampleRate);
-    //m_barRadiation.initialize(sampleRate);
+
+    m_barRadiation.initialize(sampleRate);
     m_tubeRadiation.initialize(sampleRate);
     m_malletRadiation.initialize(sampleRate);
-    //m_barRadiation.setCutoff(200.f);
-    m_tubeRadiation.setCutoff(100.f);
-    m_malletRadiation.setCutoff(1000.f);
 
     m_spatializer.initialize(sampleRate);
     m_spatializer.setSourcePosition(Vector3(-3.f, 0.f, 0.f), true);
@@ -105,42 +103,44 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
     m_impactForce.renderBlock(temp1, length);
 
-    // bar and mallet should output surface velocity, not positon.
-    // both are LTI, so differentiator can be applied beforehand.
-    m_differentiator.processBlock(temp1, temp1, length);
-
     m_modalBank.processBlock(temp1, temp2, length);
+
+    // for (unsigned int i = 0; i < length; i++)
+    // {
+    //     temp2[i] = (float)random() / (float)RAND_MAX;
+    // }
+
+    // test
+    //m_barRadiation.processBlock(temp2, temp2, length);
+    //gain(temp2, temp2, length, 8e13f);
+    //for (unsigned int i = 0; i < length; i++)
+    //{
+    //    for (int ch = 0; ch < outChannels; ch++)
+    //        *outBuffer++ = temp2[i];
+    //}
+    //return;
+
  
     if (m_isTubeOn)
     {
         m_tube.processBlock(temp2, temp3, length);
     }
     m_tubeRadiation.processBlock(temp3, temp3, length);
-    gain(temp3, temp3, length, 0.03f);  // Resonator gain
+    gain(temp3, temp3, length, 4e-5f);  // Resonator gain
                                         
     m_barRadiation.processBlock(temp2, temp2, length);
-    gain(temp2, temp2, length, 0.8f);   // Bar gain
+    gain(temp2, temp2, length, 1e-8f);   // Bar gain
                                         
     mix(temp2, temp3, temp2, length);
 
     m_malletSpring.processBlock(temp1, temp1, length);
     m_malletRadiation.processBlock(temp1, temp1, length); 
+    gain(temp1, temp1, length, 0.00015); // Mallet gain
 
-    gain(temp1, temp1, length, 30000.f); // Mallet gain
     mix(temp1, temp1, temp2, length);
 
-    gain(temp1, temp3, length, 0.2f);
-    
-    m_spatializer.processBlock(temp3, outBuffer, length);
-
-    //for (unsigned int n{ 0 }; n < length; n++)
-    //{
-    //    for (int ch{ 0 }; ch < outChannels; ch++)
-    //    {
-    //        outBuffer[n * outChannels + ch] += temp1[n];
-    //    }
-    //}
-
+    //gain(temp1, temp1, length, 8e10f);
+    m_spatializer.processBlock(temp1, outBuffer, length);
 }
 
 void Voice::setBarTimbre(float barTimbre)
@@ -161,6 +161,7 @@ void Voice::setBarDamping(float barDamping)
 void Voice::setMalletHeadRadius(float malletHeadRadius)
 {
     m_impactForce.setMalletHeadRadius(malletHeadRadius);
+    m_malletSpring.setRadius(malletHeadRadius);
 }
 
 void Voice::setMalletHeadMass(float malletHeadMass)

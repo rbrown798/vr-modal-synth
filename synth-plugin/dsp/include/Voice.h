@@ -6,11 +6,10 @@
 #include "ModalBank.h"
 #include "MalletSpring.h"
 #include "Tube.h"
-#include "Differentiator.h"
-#include "HighPass1P.h"
 #include "Spatializer.h"
 #include "Vector3.h"
 #include "DipoleRadiation.h"
+#include "MonopoleRadiation.h"
 
 
 namespace ModalSynth
@@ -38,9 +37,9 @@ private:
     Tube                    m_tube;
     bool                    m_isTubeOn{true};
     Differentiator          m_differentiator;
-    HighPass1P              m_malletRadiation;
+    DipoleRadiation         m_malletRadiation;
     DipoleRadiation         m_barRadiation;
-    HighPass1P              m_tubeRadiation;
+    MonopoleRadiation       m_tubeRadiation;
     Spatializer             m_spatializer;
     std::vector<float>&     m_tempBuffer1;
     std::vector<float>&     m_tempBuffer2;
