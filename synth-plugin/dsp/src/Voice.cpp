@@ -103,25 +103,24 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
     m_impactForce.renderBlock(temp1, length);
 
-    m_modalBank.processBlock(temp1, temp2, length);
-
-    if (m_isTubeOn)
-        m_tube.processBlock(temp2, temp3, length);
-
-    m_tubeRadiation.processBlock(temp3, temp3, length);
-    gain(temp3, temp3, length, TUBE_GAIN);
-                                        
+    m_modalBank.processBlock(temp1, temp2, temp3, length);
     m_barRadiation.processBlock(temp2, temp2, length);
     gain(temp2, temp2, length, BAR_GAIN);
-                                        
-    mix(temp2, temp3, temp2, length);
+
+    if (m_isTubeOn)
+    {
+        m_tube.processBlock(temp3, temp3, length);
+        m_tubeRadiation.processBlock(temp3, temp3, length);
+        gain(temp3, temp3, length, TUBE_GAIN);
+        mix(temp2, temp3, temp2, length);
+    }
 
     m_malletSpring.processBlock(temp1, temp1, length);
     m_malletRadiation.processBlock(temp1, temp1, length); 
     gain(temp1, temp1, length, MALLET_GAIN);
-
     mix(temp1, temp1, temp2, length);
 
+    gain(temp1, temp1, length, 0.1f);
     m_spatializer.processBlock(temp1, outBuffer, length);
 }
 

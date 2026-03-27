@@ -18,6 +18,7 @@ private:
     float m_freq[NUM_MODES]{};
     float m_forcePosGain[NUM_MODES]{};
     float m_outPosGain[NUM_MODES]{};
+    float m_tubePosGain[NUM_MODES]{};
     float m_ratios[NUM_MODES]{};
     float m_alpha[NUM_MODES]{};
 
@@ -54,7 +55,8 @@ public:
     void setDamping(float damping);
     void setFreq(float f0);
     void setPosition(float position);
-    void processBlock(float* inBuffer, float* outBuffer, unsigned int length);
+    void processBlock(float* inBuffer, float* outBuffer1, float* outBuffer2,
+            unsigned int length);
     void clear();
 
     static void initModeShapes();

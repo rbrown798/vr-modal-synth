@@ -68,6 +68,7 @@ void ModalBank::initialize(float sampleRate)
     for (int i = 0; i < NUM_MODES; i++)
     {
         m_outPosGain[i] = s_modeShapes[i][0];
+        m_tubePosGain[i] = s_modeShapes[i][NUM_MODES/2];
     }
 }
 
@@ -220,13 +221,14 @@ void ModalBank::setPosition(float position)
 //    }
 //}
 //#else
-void ModalBank::processBlock(float* inBuffer, float* outBuffer, 
-                             unsigned int length)
+void ModalBank::processBlock(float* inBuffer, float* outBuffer1, 
+        float* outBuffer2, unsigned int length)
 {
     for (unsigned int n = 0; n < length; n++)
     {
         float in = -m_forceInGain * inBuffer[n];
-        float out = 0.f;
+        float outRadiate = 0.f;
+        float outTube = 0.f;
 
         for (int i{ 0 }; i < NUM_MODES; i++)
         {
@@ -240,10 +242,12 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
             m_y2[i] = m_y1[i];
             m_y1[i] = y;
 
-            out += y * m_outPosGain[i];
+            outRadiate += y * m_outPosGain[i];
+            outTube += y * m_tubePosGain[i];
         }
 
-        outBuffer[n] = out;
+        outBuffer1[n] = outRadiate;
+        outBuffer2[n] = outTube;
     }
 }
 //#endif
