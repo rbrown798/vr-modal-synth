@@ -5,11 +5,13 @@
 
 namespace ModalSynth
 {
+const float TUBE_FEEDBACK_GAIN{ 0.9f }; // 0.99
+
 class Tube
 {
 private:
     DelayLine           m_delayLine;
-    float               m_feedbackGain{0.99f};
+    float               m_feedbackGain{ TUBE_FEEDBACK_GAIN };
     std::vector<float>& m_lfoBuffer;
     bool                m_isLfoOn{false};
 
