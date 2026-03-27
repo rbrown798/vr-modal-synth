@@ -27,6 +27,8 @@ AudioMixerEffectController:
     m_GUID: 588c04dbef7b11c438338e6bb4b1bb6c
   - m_ParameterName: PedalValue
     m_GUID: d435a2009c4a9794cb9e8bba4e319fac
+  - m_ParameterName: BarMetallic
+    m_GUID: a04d161fc8d326148b71586dbb92d055
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -104,6 +106,8 @@ AudioMixerController:
     name: LfoOn
   - guid: d435a2009c4a9794cb9e8bba4e319fac
     name: PedalValue
+  - guid: a04d161fc8d326148b71586dbb92d055
+    name: BarMetallic
   - guid: 2f9174edda01278458e992f613dbb8cc
     name: Room
   m_AudioMixerGroupViews:
@@ -167,7 +171,7 @@ AudioMixerSnapshotController:
     f9ec43c2ba13b514a8f63df160ae5cd9: 6.8
     32737a03ee35e014d8e357814ab3a6ec: -1021
     00d66683e9f2a764887cdc9cfb78376f: 4
-    855fd883f2e7b334fa929a36d90e1ad7: -22.9
+    855fd883f2e7b334fa929a36d90e1ad7: -1.3
     7e032d0473987274099cc1c74fdc6211: 1
     99bb3594d8f8e1c499be84c0f9a48d7b: 4
     3dcc6685c9c305347b54a093495b3c5c: 1.38
@@ -189,6 +193,7 @@ AudioMixerSnapshotController:
     609a8d8d427caa34584eaa3468178283: 0.889
     a6e512cded816c9438c6f201b11d81f8: 0.0271
     2f9174edda01278458e992f613dbb8cc: -10000
+    a04d161fc8d326148b71586dbb92d055: 0.511
     68c8592fd419f7842b88557ce704198e: 4
     c88c733f8edf89c4caa03ef31a5bf836: 2.02
     ddb6ee4f51740244994767ec1d3b9839: 0
