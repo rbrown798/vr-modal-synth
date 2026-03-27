@@ -11,6 +11,9 @@ namespace ModalSynth
 {
 const int MAX_NUM_VOICES{ 16 };
 const float DEFAULT_MALLET_HEAD_DENSITY{ 8000.f };
+const float MIN_CONTACT_MODULUS{ 1.32e+07f };  // soft rubber + aluminum
+const float MAX_CONTACT_MODULUS{ 2.51e+09f };  // ABS + aluminum
+
 
 class Synthesizer
 {

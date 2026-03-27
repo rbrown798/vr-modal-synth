@@ -175,15 +175,8 @@ void Synthesizer::setMalletHeadStiffness(float malletHeadStiffness)
 {
     assert((malletHeadStiffness >= 0) && (malletHeadStiffness <= 1));
 
-    //float maxContactModulus = 80e+09f;
-    //float minContactModulus = 480000099.f;
-
-	// Testing different values Feb 7, 2026:
-    float minContactModulus = 1.32e+07f;  // soft rubber + aluminum
-	float maxContactModulus = 2.51e+09f;  // ABS + aluminum
-
-    float contactModulus = minContactModulus + malletHeadStiffness * 
-                                (maxContactModulus - minContactModulus);
+    float contactModulus = MIN_CONTACT_MODULUS + malletHeadStiffness * 
+                                (MAX_CONTACT_MODULUS - MIN_CONTACT_MODULUS);
 
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
         m_voices[i]->setContactModulus(contactModulus);
