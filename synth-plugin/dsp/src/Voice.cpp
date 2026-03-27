@@ -105,41 +105,23 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
     m_modalBank.processBlock(temp1, temp2, length);
 
-    // for (unsigned int i = 0; i < length; i++)
-    // {
-    //     temp2[i] = (float)random() / (float)RAND_MAX;
-    // }
-
-    // test
-    //m_barRadiation.processBlock(temp2, temp2, length);
-    //gain(temp2, temp2, length, 8e13f);
-    //for (unsigned int i = 0; i < length; i++)
-    //{
-    //    for (int ch = 0; ch < outChannels; ch++)
-    //        *outBuffer++ = temp2[i];
-    //}
-    //return;
-
- 
     if (m_isTubeOn)
-    {
         m_tube.processBlock(temp2, temp3, length);
-    }
+
     m_tubeRadiation.processBlock(temp3, temp3, length);
-    gain(temp3, temp3, length, 4e-5f);  // Resonator gain
+    gain(temp3, temp3, length, TUBE_GAIN);
                                         
     m_barRadiation.processBlock(temp2, temp2, length);
-    gain(temp2, temp2, length, 1e-8f);   // Bar gain
+    gain(temp2, temp2, length, BAR_GAIN);
                                         
     mix(temp2, temp3, temp2, length);
 
     m_malletSpring.processBlock(temp1, temp1, length);
     m_malletRadiation.processBlock(temp1, temp1, length); 
-    gain(temp1, temp1, length, 0.00015); // Mallet gain
+    gain(temp1, temp1, length, MALLET_GAIN);
 
     mix(temp1, temp1, temp2, length);
 
-    //gain(temp1, temp1, length, 8e10f);
     m_spatializer.processBlock(temp1, outBuffer, length);
 }
 
