@@ -130,6 +130,8 @@ void ModalBank::setFreq(float f0)
         m_freq[i] = m_ratios[i] * f0; 
     
     setCoefs();
+
+    m_forceInGain = sqrtf(f0);
 }
 
 void ModalBank::setPosition(float position)
@@ -221,13 +223,14 @@ void ModalBank::setPosition(float position)
 void ModalBank::processBlock(float* inBuffer, float* outBuffer, 
                              unsigned int length)
 {
-    float out;
     for (unsigned int n = 0; n < length; n++)
     {
-        out = 0.0f;
+        float in = -m_forceInGain * inBuffer[n];
+        float out = 0.f;
+
         for (int i{ 0 }; i < NUM_MODES; i++)
         {
-            float x = -inBuffer[n] * m_positionGain[i] * sqrtf(m_f0);
+            float x = in * m_positionGain[i];
 
             float y = m_b0[i] * x + m_b2[i] * m_x2[i] - 
                         m_a1[i] * m_y1[i] - m_a2[i] * m_y2[i];
@@ -240,7 +243,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
             out += y * m_outPosGain[i];
         }
 
-        outBuffer[n] = out; //+= out;
+        outBuffer[n] = out;
     }
 }
 //#endif
@@ -249,25 +252,15 @@ void ModalBank::setCoefs()
 {
     for (int i = 0; i < NUM_MODES; i++)
     {
-        if (m_freq[i] > 20000.0f)
-        {
-            m_gain[i] = 0.0f;
-        }
-
-        else
-        {
-            m_gain[i] = m_f0 * m_f0;
-        }
-    }
-
-    for (int i = 0; i < NUM_MODES; i++)
-    {
         float radius = expf(-m_alpha[i] / m_sampleRate);
         float omega = 2.f * PI * m_freq[i];
         float k = omega * omega + m_alpha[i] * m_alpha[i];
         m_a1[i] = -2.f * radius * cosf(omega / m_sampleRate);
         m_a2[i] = radius * radius;
         m_b0[i] = (1.f + m_a1[i] + m_a2[i]) / k;
+
+        if (m_freq[i] > 20000.f) 
+            m_b0[i] = 0.f;
     }
 }
 
