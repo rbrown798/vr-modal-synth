@@ -237,7 +237,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
         out = 0.0f;
         for (int i{ 0 }; i < NUM_MODES; i++)
         {
-            float x = inBuffer[n] * m_positionGain[i] * sqrtf(m_f1);
+            float x = -inBuffer[n] * m_positionGain[i] * sqrtf(m_f1);
 
             float y = m_b0[i] * x + m_b2[i] * m_x2[i] - 
                         m_a1[i] * m_y1[i] - m_a2[i] * m_y2[i];
