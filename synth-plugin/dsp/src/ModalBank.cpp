@@ -138,7 +138,7 @@ void ModalBank::setPosition(float position)
 {
     for (int i = 0; i < NUM_MODES; i++)
     {
-        m_positionGain[i] = readModeShapeLerp(i, position);
+        m_forcePosGain[i] = readModeShapeLerp(i, position);
     }
 }
 
@@ -158,7 +158,7 @@ void ModalBank::setPosition(float position)
 //        unsigned int i{};
 //        for (; i < vectorizableModes; i += FLOATS_IN_SSE_REGISTER)
 //        {
-//            __m128 positionGainReg = _mm_loadu_ps(m_positionGain + i);
+//            __m128 forcePosGainReg = _mm_loadu_ps(m_forcePosGain + i);
 //
 //            __m128 b0Reg = _mm_loadu_ps(m_b0 + i);
 //            __m128 b2Reg = _mm_loadu_ps(m_b2 + i);
@@ -171,7 +171,7 @@ void ModalBank::setPosition(float position)
 //            __m128 y2Reg = _mm_loadu_ps(m_y2 + i);
 //    
 //            __m128 xReg = _mm_set1_ps(inBuffer[n]);
-//            xReg = _mm_mul_ps(xReg, positionGainReg);
+//            xReg = _mm_mul_ps(xReg, forcePosGainReg);
 //
 //            // y[n] = b0 * x[n]
 //            __m128 yReg = _mm_mul_ps(b0Reg, xReg);
@@ -203,7 +203,7 @@ void ModalBank::setPosition(float position)
 //
 //        for (; i < NUM_MODES; i++)
 //        {
-//            float x = inBuffer[n] * m_positionGain[i];
+//            float x = inBuffer[n] * m_forcePosGain[i];
 //
 //            float y = m_b0[i] * x + m_b2[i] * m_x2[i] - 
 //                        m_a1[i] * m_y1[i] - m_a2[i] * m_y2[i];
@@ -230,7 +230,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
 
         for (int i{ 0 }; i < NUM_MODES; i++)
         {
-            float x = in * m_positionGain[i];
+            float x = in * m_forcePosGain[i];
 
             float y = m_b0[i] * x + m_b2[i] * m_x2[i] - 
                         m_a1[i] * m_y1[i] - m_a2[i] * m_y2[i];
