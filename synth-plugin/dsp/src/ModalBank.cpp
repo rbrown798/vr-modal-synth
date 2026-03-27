@@ -120,16 +120,6 @@ void ModalBank::setDamping(float damping)
     setCoefs();
 }
 
-//void ModalBank::setFreq(float f1)
-//{
-//    for (int i = 0; i < 8; i++)
-//    {
-//        m_freq[i] = 0.441f * powf((i + 1.5f), 2.0f) * f1;
-//    }
-//
-//    setCoefs();
-//}
-
 void ModalBank::setFreq(float f1)
 {
     m_f1 = f1;
