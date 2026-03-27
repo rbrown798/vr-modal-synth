@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream> // testing
 #include "MalletSpring.h"
 
 
@@ -19,9 +18,6 @@ void MalletSpring::setCoefs()
 
     float angularFreq = undampedAngularFreq * 
         sqrtf(1.0f - m_dampingRatio * m_dampingRatio);
-
-    std::cout << "norm angularFreq: " << angularFreq * m_samplingInterval 
-        << std::endl;
 
     float poleRadius = expf(-m_dampingRatio * undampedAngularFreq * 
                                     m_samplingInterval);
