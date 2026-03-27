@@ -123,6 +123,13 @@ void ModalBank::setDamping(float damping)
     setCoefs();
 }
 
+void ModalBank::setMetallic(float value)
+{
+    m_overtoneDamping = value * MIN_BAR_OVERTONE_DAMPING + (1.f - value) *
+                                    MAX_BAR_OVERTONE_DAMPING;
+    setCoefs();
+}
+
 void ModalBank::setFreq(float f0)
 {
     m_f0 = f0;
@@ -254,6 +261,12 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer1,
 
 void ModalBank::setCoefs()
 {
+    // set damping rates
+    for (int i{ 0 }; i < NUM_MODES; i++)
+        m_alpha[i] = m_globalDamping + m_overtoneDamping * 
+                powf(m_ratios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
+                                                        powf(m_f0, 2.f);
+
     for (int i = 0; i < NUM_MODES; i++)
     {
         float radius = expf(-m_alpha[i] / m_sampleRate);

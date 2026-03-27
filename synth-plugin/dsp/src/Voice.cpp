@@ -139,6 +139,11 @@ void Voice::setBarDamping(float barDamping)
         m_modalBank.setDamping(getBarTotalDamping());
 }
 
+void Voice::setBarMetallic(float value)
+{
+    m_modalBank.setMetallic(value);
+}
+
 void Voice::setMalletHeadRadius(float malletHeadRadius)
 {
     m_impactForce.setMalletHeadRadius(malletHeadRadius);

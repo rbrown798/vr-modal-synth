@@ -194,6 +194,12 @@ void Synthesizer::setBarDamping(float barDamping)
         m_voices[i]->setBarDamping(barDamping);
 }
 
+void Synthesizer::setBarMetallic(float value)
+{
+    for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
+        m_voices[i]->setBarMetallic(value);
+}
+
 void Synthesizer::setTubeOn(bool isTubeOn)
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)

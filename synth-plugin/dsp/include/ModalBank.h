@@ -53,6 +53,7 @@ public:
     void initialize(float sampleRate);
     void setTimbre(float timbre);
     void setDamping(float damping);
+    void setMetallic(float value);
     void setFreq(float f0);
     void setPosition(float position);
     void processBlock(float* inBuffer, float* outBuffer1, float* outBuffer2,

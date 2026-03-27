@@ -46,6 +46,7 @@ public:
     void setMalletHeadStiffness(float malletHeadStiffness);
     void setBarTimbre(float barTimbre);
     void setBarDamping(float barDamping);
+    void setBarMetallic(float value);
     void setTubeOn(bool isTubeOn);
     void setMotorOn(bool isMotorOn);
     void setMotorFrequency(float motorFrequency);

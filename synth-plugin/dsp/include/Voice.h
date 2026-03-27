@@ -66,6 +66,7 @@ public:
     void retrigger(float velocity, float position);
     void setBarTimbre(float barTimbre);
     void setBarDamping(float barDamping);
+    void setBarMetallic(float value);
     void setMalletHeadRadius(float malletHeadRadius);
     void setMalletHeadMass(float malletHeadMass);
     void setContactModulus(float contactModulus);

@@ -22,6 +22,7 @@ void SynthEngine::initialize(float sampleRate, int framesPerBuffer)
     //m_synth.setBarDamping(0.5f);            // 0.05
     m_synth.setBarDamping(0.1f);            // 0.05
     m_synth.setTubeOn(true);
+    m_synth.setBarMetallic(0.5f);
 
     // Testing different values Feb 7, 2026
     m_synth.setMalletHeadDensity(1150.f);   // avg. of soft/hard rubber
@@ -268,6 +269,10 @@ void SynthEngine::handleMessage(MidiMessage msg)
             float pos = start + (end - start) * t;
             m_synth.setLeftEarPosition(Vector3(pos - 0.085, -1.f, 0.f));
             m_synth.setLeftEarPosition(Vector3(pos + 0.085, -1.f, 0.f));
+        }
+        else if (msg.data1 == 27)
+        {
+            m_synth.setBarMetallic(static_cast<float>(msg.data2) / 127.f);
         }
     }
 }
