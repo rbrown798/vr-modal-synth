@@ -25,7 +25,7 @@ private:
     float m_globalDamping{};
     float m_overtoneDamping{ 0.026f };
 
-    float m_f1{};
+    float m_f0{};
 
     float m_b0[NUM_MODES]{};
     float m_b2[NUM_MODES]{};
@@ -51,7 +51,7 @@ public:
     void initialize(float sampleRate);
     void setTimbre(float timbre);
     void setDamping(float damping);
-    void setFreq(float f1);
+    void setFreq(float f0);
     void setPosition(float position);
     void processBlock(float* inBuffer, float* outBuffer, unsigned int length);
     void clear();

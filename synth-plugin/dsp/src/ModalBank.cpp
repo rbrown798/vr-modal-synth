@@ -91,7 +91,7 @@ void ModalBank::setTimbre(float timbre)
 
     // find a better place for this... (maybe at the top of setCoefs)
     for (int i = 0; i < 7; i++)
-        m_freq[i + 1] = m_overtoneRatios[i] * m_f1;
+        m_freq[i + 1] = m_overtoneRatios[i] * m_f0;
 
     setCoefs();
 }
@@ -115,19 +115,19 @@ void ModalBank::setDamping(float damping)
     for (int i{ 0 }; i < NUM_MODES; i++)
         m_alpha[i] = m_globalDamping + m_overtoneDamping * 
                 powf(m_overtoneRatios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
-                                                            powf(m_f1, 2.f);
+                                                            powf(m_f0, 2.f);
 
     setCoefs();
 }
 
-void ModalBank::setFreq(float f1)
+void ModalBank::setFreq(float f0)
 {
-    m_f1 = f1;
+    m_f0 = f0;
 
-    m_freq[0] = f1;
+    m_freq[0] = f0;
 
     for (int i = 0; i < NUM_MODES-1; i++)
-        m_freq[i + 1] = m_overtoneRatios[i] * f1; 
+        m_freq[i + 1] = m_overtoneRatios[i] * f0; 
     
     setCoefs();
 }
@@ -227,7 +227,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer,
         out = 0.0f;
         for (int i{ 0 }; i < NUM_MODES; i++)
         {
-            float x = -inBuffer[n] * m_positionGain[i] * sqrtf(m_f1);
+            float x = -inBuffer[n] * m_positionGain[i] * sqrtf(m_f0);
 
             float y = m_b0[i] * x + m_b2[i] * m_x2[i] - 
                         m_a1[i] * m_y1[i] - m_a2[i] * m_y2[i];
@@ -256,7 +256,7 @@ void ModalBank::setCoefs()
 
         else
         {
-            m_gain[i] = m_f1 * m_f1;
+            m_gain[i] = m_f0 * m_f0;
         }
     }
 
