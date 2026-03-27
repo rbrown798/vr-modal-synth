@@ -7,7 +7,8 @@ SOURCES=main.cpp ../dsp/src/ImpactForce.cpp ../dsp/src/ModalBank.cpp \
 		../dsp/src/Tube.cpp ../dsp/src/Differentiator.cpp \
 		../dsp/src/SinOsc.cpp ../dsp/src/Utils.cpp SynthEngine.cpp \
 		../dsp/src/HighPass1P.cpp ../dsp/src/Vector3.cpp \
-		../dsp/src/Spatializer.cpp ../dsp/src/LowPass1P.cpp
+		../dsp/src/Spatializer.cpp ../dsp/src/LowPass1P.cpp \
+		../dsp/src/DipoleRadiation.cpp ../dsp/src/MonopoleRadiation.cpp
 EXECUTABLE=build/app
 
 all: $(SOURCES)
