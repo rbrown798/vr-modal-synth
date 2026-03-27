@@ -23,6 +23,8 @@ set(SHARED_SOURCES
     dsp/src/Utils.cpp
     dsp/src/Vector3.cpp
     dsp/src/Voice.cpp
+    dsp/src/MonopoleRadiation.cpp
+    dsp/src/DipoleRadiation.cpp
 )
 
 set(UNITY_SOURCES
