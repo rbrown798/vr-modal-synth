@@ -12,6 +12,7 @@ private:
 
 public:
     void initialize(float sampleRate);
+    void clear();
     void processBlock(float *in, float *out, unsigned int length);
 };
 };
