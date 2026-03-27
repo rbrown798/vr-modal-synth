@@ -75,23 +75,25 @@ void ModalBank::setTimbre(float timbre)
 {
     assert((0 <= timbre) && (timbre <= 1));
 
-    m_overtoneRatios[0] = cubicPoly(0.693042f, 0.472437, 0.078521, 2.756, 
-                            timbre);
+    m_ratios[0] = 1.f;
 
-    m_overtoneRatios[1] = cubicPoly(2.12847f, 1.45529f, 0.252235f, 5.404f, 
-                            timbre);
+    m_ratios[1] = cubicPoly(0.693042f, 0.472437, 0.078521, 2.756, 
+                    timbre);
 
-    m_overtoneRatios[2] = cubicPoly(4.28341f, 2.82088f, 0.232706f, 8.933f, 
-                            timbre);
+    m_ratios[2] = cubicPoly(2.12847f, 1.45529f, 0.252235f, 5.404f, 
+                    timbre);
 
-    m_overtoneRatios[3] = lerp(13.34f, 24.22f, timbre);
-    m_overtoneRatios[4] = lerp(18.63f, 33.54f, timbre);
-    m_overtoneRatios[5] = lerp(24.81f, 42.97f, timbre);
-    m_overtoneRatios[6] = lerp(31.86f, 52.4f, timbre); // 52.4 is a prediction
+    m_ratios[3] = cubicPoly(4.28341f, 2.82088f, 0.232706f, 8.933f, 
+                    timbre);
+
+    m_ratios[4] = lerp(13.34f, 24.22f, timbre);
+    m_ratios[5] = lerp(18.63f, 33.54f, timbre);
+    m_ratios[6] = lerp(24.81f, 42.97f, timbre);
+    m_ratios[7] = lerp(31.86f, 52.4f, timbre); // 52.4 is a prediction
 
     // find a better place for this... (maybe at the top of setCoefs)
-    for (int i = 0; i < 7; i++)
-        m_freq[i + 1] = m_overtoneRatios[i] * m_f0;
+    for (int i{ 0 }; i < NUM_MODES; i++)
+        m_freq[i] = m_ratios[i] * m_f0;
 
     setCoefs();
 }
@@ -114,8 +116,8 @@ void ModalBank::setDamping(float damping)
 
     for (int i{ 0 }; i < NUM_MODES; i++)
         m_alpha[i] = m_globalDamping + m_overtoneDamping * 
-                powf(m_overtoneRatios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
-                                                            powf(m_f0, 2.f);
+                powf(m_ratios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
+                                                        powf(m_f0, 2.f);
 
     setCoefs();
 }
@@ -124,10 +126,8 @@ void ModalBank::setFreq(float f0)
 {
     m_f0 = f0;
 
-    m_freq[0] = f0;
-
-    for (int i = 0; i < NUM_MODES-1; i++)
-        m_freq[i + 1] = m_overtoneRatios[i] * f0; 
+    for (int i = 0; i < NUM_MODES; i++)
+        m_freq[i] = m_ratios[i] * f0; 
     
     setCoefs();
 }

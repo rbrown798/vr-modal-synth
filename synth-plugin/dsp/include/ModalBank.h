@@ -19,7 +19,7 @@ private:
     float m_gain[NUM_MODES]{};
     float m_positionGain[NUM_MODES]{};
     float m_outPosGain[NUM_MODES]{};
-    float m_overtoneRatios[NUM_MODES-1]{};
+    float m_ratios[NUM_MODES]{};
     float m_alpha[NUM_MODES]{};
 
     float m_globalDamping{};
