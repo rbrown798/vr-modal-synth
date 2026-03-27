@@ -59,11 +59,14 @@ void Voice::noteOn(int note, float velocity, float position)
     m_modalBank.clear();
     m_modalBank.setFreq(freq);
     m_modalBank.setPosition(position);
-
     m_modalBank.setDamping(getBarTotalDamping());
 
     m_tube.clear();
     m_tube.setFreq(freq);
+
+    m_barRadiation.clear();
+    m_tubeRadiation.clear();
+    m_malletRadiation.clear();
 
     m_impactForce.play(velocity);
 
