@@ -18,6 +18,10 @@ const float BAR_WIDTH = 0.025f;
 const float BAR_PAD = 0.006f;          
 const int CENTER_NOTE = 53;
 
+const float MALLET_GAIN{ 0.00015f };
+const float BAR_GAIN{ 1e-8f };
+const float TUBE_GAIN{ 4e-5f };
+
 const float NOTE_XPOS_TABLE[] = { 0.f, 0.5f, 1.f, 1.5f, 2.f, 3.f, 3.5f, 4.f, 
                                     4.5f, 5.f, 5.5f, 6.f };
 
