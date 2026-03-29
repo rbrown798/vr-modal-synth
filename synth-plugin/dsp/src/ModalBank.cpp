@@ -90,10 +90,6 @@ void ModalBank::setTimbre(float timbre)
         }
     }
 
-    // find a better place for this (maybe start of setCoefs)
-    for (int i{ 0 }; i < NUM_MODES; i++)
-        m_freq[i] = m_ratios[i] * m_f0;
-
     setCoefs();
 }
 
@@ -113,13 +109,6 @@ void ModalBank::setDamping(float damping)
 {
     m_globalDamping = MIN_BAR_GLOBAL_DAMPING + damping * 
                             (MAX_BAR_GLOBAL_DAMPING - MIN_BAR_GLOBAL_DAMPING);
-
-    for (int i{ 0 }; i < NUM_MODES; i++)
-        m_alpha[i] = m_globalDamping + m_overtoneDamping * 
-                powf(m_ratios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
-                                                        powf(m_f0, 2.f);
-
-    setCoefs();
 }
 
 void ModalBank::setMetallic(float value)
@@ -132,13 +121,9 @@ void ModalBank::setMetallic(float value)
 void ModalBank::setFreq(float f0)
 {
     m_f0 = f0;
-
-    for (int i = 0; i < NUM_MODES; i++)
-        m_freq[i] = m_ratios[i] * f0; 
-    
-    setCoefs();
-
     m_forceInGain = sqrtf(f0);
+
+    setCoefs();
 }
 
 void ModalBank::setPosition(float position)
@@ -260,22 +245,21 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer1,
 
 void ModalBank::setCoefs()
 {
-    // set damping rates
     for (int i{ 0 }; i < NUM_MODES; i++)
-        m_alpha[i] = m_globalDamping + m_overtoneDamping * 
+    {
+        float freq = m_ratios[i] * m_f0;
+        float alpha = m_globalDamping + m_overtoneDamping * 
                 powf(m_ratios[i] - 1.f, 2.f) + BAR_NOTE_DAMPING * 
                                                         powf(m_f0, 2.f);
 
-    for (int i = 0; i < NUM_MODES; i++)
-    {
-        float radius = expf(-m_alpha[i] / m_sampleRate);
-        float omega = 2.f * PI * m_freq[i];
-        float k = omega * omega + m_alpha[i] * m_alpha[i];
+        float radius = expf(-alpha / m_sampleRate);
+        float omega = 2.f * PI * freq;
+        float k = omega * omega + alpha * alpha;
         m_a1[i] = -2.f * radius * cosf(omega / m_sampleRate);
         m_a2[i] = radius * radius;
         m_b0[i] = (1.f + m_a1[i] + m_a2[i]) / k;
 
-        if (m_freq[i] > 20000.f) 
+        if (freq > 20000.f) 
             m_b0[i] = 0.f;
     }
 }

@@ -29,12 +29,10 @@ class ModalBank
 {
 private:
     float m_sampleRate{};
-    float m_freq[NUM_MODES]{};
     float m_forcePosGain[NUM_MODES]{};
     float m_outPosGain[NUM_MODES]{};
     float m_tubePosGain[NUM_MODES]{};
     float m_ratios[NUM_MODES]{};
-    float m_alpha[NUM_MODES]{};
 
     float m_forceInGain{};
 
