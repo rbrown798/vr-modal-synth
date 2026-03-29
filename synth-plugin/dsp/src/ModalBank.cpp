@@ -76,28 +76,27 @@ void ModalBank::setTimbre(float timbre)
 {
     assert((0 <= timbre) && (timbre <= 1));
 
-    m_ratios[0] = 1.f;
+    for (int i{ 0 }; i < NUM_MODES; i++)
+    {
+        if (timbre < 0.5f)
+        {
+            m_ratios[i] = GLOCKEN_RATIOS[i] + 2.f * timbre * 
+                                    (XYLO_RATIOS[i] - GLOCKEN_RATIOS[i]);
+        }
+        else
+        {
+            m_ratios[i] = XYLO_RATIOS[i] + 2.f * (timbre - 0.5f) * 
+                                    (VIBES_RATIOS[i] - XYLO_RATIOS[i]);
+        }
+    }
 
-    m_ratios[1] = cubicPoly(0.693042f, 0.472437, 0.078521, 2.756, 
-                    timbre);
-
-    m_ratios[2] = cubicPoly(2.12847f, 1.45529f, 0.252235f, 5.404f, 
-                    timbre);
-
-    m_ratios[3] = cubicPoly(4.28341f, 2.82088f, 0.232706f, 8.933f, 
-                    timbre);
-
-    m_ratios[4] = lerp(13.34f, 24.22f, timbre);
-    m_ratios[5] = lerp(18.63f, 33.54f, timbre);
-    m_ratios[6] = lerp(24.81f, 42.97f, timbre);
-    m_ratios[7] = lerp(31.86f, 52.4f, timbre); // 52.4 is a prediction
-
-    // find a better place for this... (maybe at the top of setCoefs)
+    // find a better place for this (maybe start of setCoefs)
     for (int i{ 0 }; i < NUM_MODES; i++)
         m_freq[i] = m_ratios[i] * m_f0;
 
     setCoefs();
 }
+
 
 float ModalBank::cubicPoly(float a, float b, float c, float d, float x)
 {
