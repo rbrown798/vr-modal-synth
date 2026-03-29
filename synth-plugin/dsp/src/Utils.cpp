@@ -1,4 +1,5 @@
 #include <immintrin.h>
+#include <cassert>
 #include "Utils.h"
 
 
@@ -16,6 +17,17 @@ int nextPowerOf2(int v)
     v++;
 
     return v;
+}
+
+float lerp(float a, float b, float t)
+{
+    assert((0 <= t) && (t <= 1));
+    return a + (b - a) * t;
+}
+
+float cubicPoly(float a, float b, float c, float d, float x)
+{
+    return ((a * x + b) * x + c) * x + d;
 }
 
 #ifdef __AVX__

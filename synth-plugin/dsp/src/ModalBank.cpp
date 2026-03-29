@@ -92,18 +92,6 @@ void ModalBank::setTimbre(float timbre)
     setCoefs();
 }
 
-
-float ModalBank::cubicPoly(float a, float b, float c, float d, float x)
-{
-    return ((a * x + b) * x + c) * x + d;
-}
-
-float ModalBank::lerp(float a, float b, float t)
-{
-    assert((0 <= t) && (t <= 1));
-    return a + (b - a) * t;
-}
-
 void ModalBank::setDamping(float damping)
 {
     m_globalDamping = MIN_BAR_GLOBAL_DAMPING + damping * 

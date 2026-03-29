@@ -57,8 +57,6 @@ private:
     static float readModeShapeLerp(int modeNumber, float position);
 
     void setCoefs();
-    float cubicPoly(float a, float b, float c, float d, float x);
-    float lerp(float a, float b, float t);
 
 public:
     ModalBank() = default;
