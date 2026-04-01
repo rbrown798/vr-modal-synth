@@ -54,6 +54,7 @@ private:
     int                     m_note{};
 
     float getBarTotalDamping() const;
+    void clear();
 
 public:
     Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 

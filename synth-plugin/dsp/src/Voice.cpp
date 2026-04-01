@@ -53,21 +53,13 @@ void Voice::noteOn(int note, float velocity, float position)
     if (std::fmodf(NOTE_XPOS_TABLE[note % 12], 1.f) == 0.f)
         barYPos *= -1.f;
 
-    m_spatializer.clear();
-    m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f), true);
+    clear();
 
-    m_modalBank.clear();
     m_modalBank.setFreq(freq);
     m_modalBank.setPosition(position);
     m_modalBank.setDamping(getBarTotalDamping());
-
-    m_tube.clear();
     m_tube.setFreq(freq);
-
-    m_barRadiation.clear();
-    m_tubeRadiation.clear();
-    m_malletRadiation.clear();
-
+    m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f), true);
     m_impactForce.play(velocity);
 
     m_isActive = true;
@@ -84,6 +76,16 @@ void Voice::noteOff()
 {
     m_modalBank.setDamping(std::max(0.4f, getBarTotalDamping()));
     m_isActive = false;
+}
+
+void Voice::clear()
+{
+    m_modalBank.clear();
+    m_tube.clear();
+    m_barRadiation.clear();
+    m_tubeRadiation.clear();
+    m_malletRadiation.clear();
+    m_spatializer.clear();
 }
 
 void Voice::retrigger(float velocity, float position)
@@ -166,7 +168,11 @@ void Voice::setContactModulus(float contactModulus)
 
 void Voice::setTubeOn(bool isTubeOn)
 {
-    m_isTubeOn = isTubeOn;
+    if (m_isTubeOn != isTubeOn)
+    {
+        m_isTubeOn = isTubeOn;
+        clear();
+    }
 }
 
 void Voice::setPedalValue(float pedalValue)
