@@ -8,12 +8,10 @@
 
 namespace ModalSynth
 {
-
-Voice::Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 
-        std::vector<float>& tempBuffer2, std::vector<float>& tempBuffer3) : 
+Voice::Voice(std::vector<float>& lfoBuffer, 
+        std::array<std::vector<float>, NUM_TEMP_BUFFERS>& tempBuffers) :
     m_tube(lfoBuffer), 
-    m_tempBuffer1{tempBuffer1}, m_tempBuffer2{tempBuffer2}, 
-    m_tempBuffer3{tempBuffer3}
+    m_tempBuffers(tempBuffers)
 {
 }
 
@@ -98,13 +96,12 @@ void Voice::retrigger(float velocity, float position)
 
 void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 { 
-    std::fill(m_tempBuffer1.begin(), m_tempBuffer1.end(), 0.0f);
-    std::fill(m_tempBuffer2.begin(), m_tempBuffer2.end(), 0.0f);
-    std::fill(m_tempBuffer3.begin(), m_tempBuffer3.end(), 0.0f);
+    for (auto& buffer : m_tempBuffers)
+        std::fill(buffer.begin(), buffer.end(), 0.0f);
 
-    float* temp1 = m_tempBuffer1.data();
-    float* temp2 = m_tempBuffer2.data();
-    float* temp3 = m_tempBuffer3.data();
+    float* temp1 = m_tempBuffers[0].data();
+    float* temp2 = m_tempBuffers[1].data();
+    float* temp3 = m_tempBuffers[2].data();
 
     m_impactForce.renderBlock(temp1, length);
 

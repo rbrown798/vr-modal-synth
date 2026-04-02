@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <array>
 #include "ImpactForce.h"
 #include "ModalBank.h"
 #include "MalletSpring.h"
@@ -31,6 +32,8 @@ const float NOTE_XPOS_OFFSET = 7.f * static_cast<float>(CENTER_NOTE / 12) +
 const float MAX_DAMPING = 0.5f;
 const float PEDAL_DAMP_COEF = 2.5f;
 
+constexpr size_t NUM_TEMP_BUFFERS{ 3 };
+
 
 class Voice
 {
@@ -44,9 +47,7 @@ private:
     DipoleRadiation         m_barRadiation;
     MonopoleRadiation       m_tubeRadiation;
     Spatializer             m_spatializer;
-    std::vector<float>&     m_tempBuffer1;
-    std::vector<float>&     m_tempBuffer2;
-    std::vector<float>&     m_tempBuffer3;
+    std::array<std::vector<float>, NUM_TEMP_BUFFERS>& m_tempBuffers;
     float                   m_barDamping{};
     float                   m_pedalDamping{};
     bool                    m_isActive{};
@@ -57,8 +58,8 @@ private:
     void clear();
 
 public:
-    Voice(std::vector<float>& lfoBuffer, std::vector<float>& tempBuffer1, 
-            std::vector<float>& tempBuffer2, std::vector<float>& tempBuffer3); 
+    Voice(std::vector<float>& lfoBuffer, 
+            std::array<std::vector<float>, NUM_TEMP_BUFFERS>& tempBuffers);
 
     void initialize(float sampleRate);
     void update();

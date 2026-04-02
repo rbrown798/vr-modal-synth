@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <array>
 #include "Voice.h"
 #include "SinOsc.h"
 #include "Vector3.h"
@@ -14,17 +15,13 @@ const float DEFAULT_MALLET_HEAD_DENSITY{ 8000.f };
 const float MIN_CONTACT_MODULUS{ 1.32e+07f };  // soft rubber + aluminum
 const float MAX_CONTACT_MODULUS{ 2.51e+09f };  // ABS + aluminum
 
-
 class Synthesizer
 {
 private:
     std::unique_ptr<Voice>  m_voices[MAX_NUM_VOICES]{};
     Voice*                  m_activeNotes[128]{};
     int                     m_currentVoice{};
-    std::vector<float>      m_tempBuffer1;
-    std::vector<float>      m_tempBuffer2;
-    std::vector<float>      m_tempBuffer3;
-
+    std::array<std::vector<float>, NUM_TEMP_BUFFERS> m_tempBuffers;
     std::vector<float>      m_lfoBuffer;
     SinOsc                  m_tubeLfo{1.f};
     bool                    m_isMotorOn{true};
