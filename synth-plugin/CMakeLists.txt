@@ -10,8 +10,6 @@ option(BUILD_VST_PLUGIN OFF)
 
 set(SHARED_SOURCES
     dsp/src/DelayLine.cpp
-    dsp/src/Differentiator.cpp
-    dsp/src/HighPass1P.cpp
     dsp/src/ImpactForce.cpp
     dsp/src/LowPass1P.cpp
     dsp/src/MalletResonator.cpp
