@@ -14,7 +14,7 @@ Synthesizer::Synthesizer()
 
 void Synthesizer::initialize(float sampleRate, int dspBufferSize)
 {
-    ModalBank::initModeShapes();
+    BarResonator::initModeShapes();
 
     for (auto& buffer : m_tempBuffers)
         buffer.resize(dspBufferSize);

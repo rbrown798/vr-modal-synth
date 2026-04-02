@@ -15,7 +15,7 @@ set(SHARED_SOURCES
     dsp/src/ImpactForce.cpp
     dsp/src/LowPass1P.cpp
     dsp/src/MalletResonator.cpp
-    dsp/src/ModalBank.cpp
+    dsp/src/BarResonator.cpp
     dsp/src/SinOsc.cpp
     dsp/src/Spatializer.cpp
     dsp/src/Synthesizer.cpp

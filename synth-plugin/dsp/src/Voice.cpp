@@ -18,7 +18,7 @@ Voice::Voice(std::vector<float>& lfoBuffer,
 void Voice::initialize(float sampleRate)
 {
     m_impactForce.initialize(sampleRate);
-    m_modalBank.initialize(sampleRate);
+    m_barResonator.initialize(sampleRate);
     m_malletResonator.initialize(sampleRate);
     m_tube.initialize(sampleRate);
 
@@ -53,9 +53,9 @@ void Voice::noteOn(int note, float velocity, float position)
 
     clear();
 
-    m_modalBank.setFreq(freq);
-    m_modalBank.setPosition(position);
-    m_modalBank.setDamping(getBarTotalDamping());
+    m_barResonator.setFreq(freq);
+    m_barResonator.setPosition(position);
+    m_barResonator.setDamping(getBarTotalDamping());
     m_tube.setFreq(freq);
     m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f), true);
     m_impactForce.play(velocity);
@@ -72,13 +72,13 @@ float Voice::getBarTotalDamping() const
 
 void Voice::noteOff()
 {
-    m_modalBank.setDamping(std::max(0.4f, getBarTotalDamping()));
+    m_barResonator.setDamping(std::max(0.4f, getBarTotalDamping()));
     m_isActive = false;
 }
 
 void Voice::clear()
 {
-    m_modalBank.clear();
+    m_barResonator.clear();
     m_tube.clear();
     m_barRadiation.clear();
     m_tubeRadiation.clear();
@@ -88,7 +88,7 @@ void Voice::clear()
 
 void Voice::retrigger(float velocity, float position)
 {
-    m_modalBank.setPosition(position);
+    m_barResonator.setPosition(position);
     m_impactForce.play(velocity);
 
     m_timestamp = 0;
@@ -105,7 +105,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
     m_impactForce.renderBlock(temp1, length);
 
-    m_modalBank.processBlock(temp1, temp2, temp3, length);
+    m_barResonator.processBlock(temp1, temp2, temp3, length);
     m_barRadiation.processBlock(temp2, temp2, length);
     gain(temp2, temp2, length, BAR_GAIN);
 
@@ -128,7 +128,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
 void Voice::setBarTimbre(float barTimbre)
 {
-    m_modalBank.setTimbre(barTimbre);
+    m_barResonator.setTimbre(barTimbre);
 }
 
 void Voice::setBarDamping(float barDamping)
@@ -138,12 +138,12 @@ void Voice::setBarDamping(float barDamping)
     // Only set if the note is currently playing so it doesn't compete with 
     // note off
     if (m_isActive)
-        m_modalBank.setDamping(getBarTotalDamping());
+        m_barResonator.setDamping(getBarTotalDamping());
 }
 
 void Voice::setBarMetallic(float value)
 {
-    m_modalBank.setMetallic(value);
+    m_barResonator.setMetallic(value);
 }
 
 void Voice::setMalletHeadRadius(float malletHeadRadius)
@@ -175,7 +175,7 @@ void Voice::setTubeOn(bool isTubeOn)
 void Voice::setPedalValue(float pedalValue)
 {
     m_pedalDamping = 1.f - pedalValue;
-    m_modalBank.setDamping(getBarTotalDamping());
+    m_barResonator.setDamping(getBarTotalDamping());
 }
 
 void Voice::setSourcePosition(const Vector3& sourcePosition, bool immediate)

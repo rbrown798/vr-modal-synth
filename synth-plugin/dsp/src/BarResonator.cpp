@@ -1,21 +1,21 @@
 #include <cmath>
 #include <iostream>
 #include <cassert>
-#include "ModalBank.h"
+#include "BarResonator.h"
 #include "Utils.h"
 
 
 namespace ModalSynth
 {
-float ModalBank::s_modeShapes[NUM_MODES][MODE_SHAPE_LUT_SIZE]{};
+float BarResonator::s_modeShapes[NUM_MODES][MODE_SHAPE_LUT_SIZE]{};
 
-float ModalBank::getModeShape(float knL, float x)
+float BarResonator::getModeShape(float knL, float x)
 {
     return sinhf(knL * x) + sin(knL * x) + (sin(knL) - sinh(knL))
         / (cosh(knL) - cos(knL)) * (cosh(knL * x) + cos(knL * x));
 }
 
-void ModalBank::initModeShapes()
+void BarResonator::initModeShapes()
 {
     float knLValues[NUM_MODES] = { 4.73004f, 7.8532f, 10.99561f, 14.13717f, 
                                    17.27876f, 20.42035f, 23.56194f, 26.70354f };
@@ -46,7 +46,7 @@ void ModalBank::initModeShapes()
     }
 }
 
-float ModalBank::readModeShapeLerp(int modeNumber, float position)
+float BarResonator::readModeShapeLerp(int modeNumber, float position)
 {
     float indexf = position * static_cast<float>(MODE_SHAPE_LUT_SIZE - 1);
     int index = static_cast<int>(floorf(indexf));
@@ -56,7 +56,7 @@ float ModalBank::readModeShapeLerp(int modeNumber, float position)
         frac * s_modeShapes[modeNumber][index + 1];
 }
 
-void ModalBank::initialize(float sampleRate)
+void BarResonator::initialize(float sampleRate)
 {
     m_sampleRate = sampleRate;
 
@@ -71,7 +71,7 @@ void ModalBank::initialize(float sampleRate)
     }
 }
 
-void ModalBank::setTimbre(float timbre)
+void BarResonator::setTimbre(float timbre)
 {
     assert((0 <= timbre) && (timbre <= 1));
 
@@ -92,20 +92,20 @@ void ModalBank::setTimbre(float timbre)
     setCoefs();
 }
 
-void ModalBank::setDamping(float damping)
+void BarResonator::setDamping(float damping)
 {
     m_globalDamping = MIN_BAR_GLOBAL_DAMPING + damping * 
                             (MAX_BAR_GLOBAL_DAMPING - MIN_BAR_GLOBAL_DAMPING);
 }
 
-void ModalBank::setMetallic(float value)
+void BarResonator::setMetallic(float value)
 {
     m_overtoneDamping = value * MIN_BAR_OVERTONE_DAMPING + (1.f - value) *
                                     MAX_BAR_OVERTONE_DAMPING;
     setCoefs();
 }
 
-void ModalBank::setFreq(float f0)
+void BarResonator::setFreq(float f0)
 {
     m_f0 = f0;
     m_forceInGain = sqrtf(f0);
@@ -113,7 +113,7 @@ void ModalBank::setFreq(float f0)
     setCoefs();
 }
 
-void ModalBank::setPosition(float position)
+void BarResonator::setPosition(float position)
 {
     for (int i = 0; i < NUM_MODES; i++)
     {
@@ -121,7 +121,7 @@ void ModalBank::setPosition(float position)
     }
 }
 
-void ModalBank::processBlock(float* inBuffer, float* outBuffer1, 
+void BarResonator::processBlock(float* inBuffer, float* outBuffer1, 
         float* outBuffer2, unsigned int length)
 {
     for (unsigned int n = 0; n < length; n++)
@@ -151,7 +151,7 @@ void ModalBank::processBlock(float* inBuffer, float* outBuffer1,
     }
 }
 
-void ModalBank::setCoefs()
+void BarResonator::setCoefs()
 {
     for (int i{ 0 }; i < NUM_MODES; i++)
     {
@@ -172,7 +172,7 @@ void ModalBank::setCoefs()
     }
 }
 
-void ModalBank::clear()
+void BarResonator::clear()
 {
     std::fill(m_x1, m_x1 + NUM_MODES, 0.f);
     std::fill(m_x2, m_x2 + NUM_MODES, 0.f);

@@ -4,7 +4,7 @@
 #include <vector>
 #include <array>
 #include "ImpactForce.h"
-#include "ModalBank.h"
+#include "BarResonator.h"
 #include "MalletResonator.h"
 #include "Tube.h"
 #include "Spatializer.h"
@@ -39,7 +39,7 @@ class Voice
 {
 private:
     ImpactForce             m_impactForce;
-    ModalBank               m_modalBank;
+    BarResonator            m_barResonator;
     MalletResonator         m_malletResonator;
     Tube                    m_tube;
     bool                    m_isTubeOn{true};

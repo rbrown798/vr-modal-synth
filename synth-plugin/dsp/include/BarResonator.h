@@ -25,7 +25,7 @@ const float VIBES_RATIOS[] = {
     1.f, 4.f, 9.7f, 18.3f, 23.5f, 35.4f, 46.3f, 64.f 
 };
 
-class ModalBank
+class BarResonator
 {
 private:
     float m_sampleRate{};
@@ -59,7 +59,7 @@ private:
     void setCoefs();
 
 public:
-    ModalBank() = default;
+    BarResonator() = default;
     void initialize(float sampleRate);
     void setTimbre(float timbre);
     void setDamping(float damping);

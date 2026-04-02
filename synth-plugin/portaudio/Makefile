@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-I../dsp/include -msse3 -Wall -O0 #-mavx -Wall -O0
 LDFLAGS=-lportaudio -lportmidi
-SOURCES=main.cpp ../dsp/src/ImpactForce.cpp ../dsp/src/ModalBank.cpp \
+SOURCES=main.cpp ../dsp/src/ImpactForce.cpp ../dsp/src/BarResonator.cpp \
 		../dsp/src/Voice.cpp ../dsp/src/Synthesizer.cpp \
 		../dsp/src/MalletResonator.cpp ../dsp/src/DelayLine.cpp \
 		../dsp/src/Tube.cpp ../dsp/src/Differentiator.cpp \
