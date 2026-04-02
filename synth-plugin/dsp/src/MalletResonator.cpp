@@ -1,10 +1,10 @@
 #include <cmath>
-#include "MalletSpring.h"
+#include "MalletResonator.h"
 
 
 namespace ModalSynth
 {
-void MalletSpring::initialize(float sampleRate) 
+void MalletResonator::initialize(float sampleRate) 
 {
     m_sampleRate = sampleRate;
     m_samplingInterval = 1.0f / sampleRate;
@@ -12,7 +12,7 @@ void MalletSpring::initialize(float sampleRate)
     setCoefs();
 }
 
-void MalletSpring::setCoefs()
+void MalletResonator::setCoefs()
 {
     float undampedAngularFreq = sqrtf(m_springConstant / m_mass);
 
@@ -28,19 +28,19 @@ void MalletSpring::setCoefs()
     // radius^2 is to make amplitude proportional to surface area
 }
 
-void MalletSpring::setMass(float mass)
+void MalletResonator::setMass(float mass)
 {
     m_mass = mass;
     setCoefs();
 }
 
-void MalletSpring::setRadius(float radius)
+void MalletResonator::setRadius(float radius)
 {
     m_radius = radius;
     setCoefs();
 }
 
-void MalletSpring::processBlock(float *in, float *out, unsigned int length)
+void MalletResonator::processBlock(float *in, float *out, unsigned int length)
 {
     float y;
     for (unsigned int i = 0; i < length; i++)

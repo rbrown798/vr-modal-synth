@@ -9,10 +9,7 @@ namespace ModalSynth
 Synthesizer::Synthesizer()
 {
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
-        //m_voices[i].reset(new Voice(m_lfoBuffer, m_tempBuffer1, m_tempBuffer2, 
-        //            m_tempBuffer3));
         m_voices[i].reset(new Voice(m_lfoBuffer, m_tempBuffers));
-
 }
 
 void Synthesizer::initialize(float sampleRate, int dspBufferSize)
@@ -21,10 +18,6 @@ void Synthesizer::initialize(float sampleRate, int dspBufferSize)
 
     for (auto& buffer : m_tempBuffers)
         buffer.resize(dspBufferSize);
-
-    //m_tempBuffer1.resize(dspBufferSize);
-    //m_tempBuffer2.resize(dspBufferSize);
-    //m_tempBuffer3.resize(dspBufferSize);
 
     m_lfoBuffer.resize(dspBufferSize);
 

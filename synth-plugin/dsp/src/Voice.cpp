@@ -19,7 +19,7 @@ void Voice::initialize(float sampleRate)
 {
     m_impactForce.initialize(sampleRate);
     m_modalBank.initialize(sampleRate);
-    m_malletSpring.initialize(sampleRate);
+    m_malletResonator.initialize(sampleRate);
     m_tube.initialize(sampleRate);
 
     m_barRadiation.initialize(sampleRate);
@@ -117,7 +117,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
         mix(temp2, temp3, temp2, length);
     }
 
-    m_malletSpring.processBlock(temp1, temp1, length);
+    m_malletResonator.processBlock(temp1, temp1, length);
     m_malletRadiation.processBlock(temp1, temp1, length); 
     gain(temp1, temp1, length, MALLET_GAIN);
     mix(temp1, temp1, temp2, length);
@@ -149,13 +149,13 @@ void Voice::setBarMetallic(float value)
 void Voice::setMalletHeadRadius(float malletHeadRadius)
 {
     m_impactForce.setMalletHeadRadius(malletHeadRadius);
-    m_malletSpring.setRadius(malletHeadRadius);
+    m_malletResonator.setRadius(malletHeadRadius);
 }
 
 void Voice::setMalletHeadMass(float malletHeadMass)
 {
     m_impactForce.setMalletHeadMass(malletHeadMass);
-    m_malletSpring.setMass(malletHeadMass);
+    m_malletResonator.setMass(malletHeadMass);
 }
 
 void Voice::setContactModulus(float contactModulus)

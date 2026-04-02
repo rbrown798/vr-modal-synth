@@ -5,7 +5,7 @@
 #include <array>
 #include "ImpactForce.h"
 #include "ModalBank.h"
-#include "MalletSpring.h"
+#include "MalletResonator.h"
 #include "Tube.h"
 #include "Spatializer.h"
 #include "Vector3.h"
@@ -40,7 +40,7 @@ class Voice
 private:
     ImpactForce             m_impactForce;
     ModalBank               m_modalBank;
-    MalletSpring            m_malletSpring;
+    MalletResonator         m_malletResonator;
     Tube                    m_tube;
     bool                    m_isTubeOn{true};
     DipoleRadiation         m_malletRadiation;

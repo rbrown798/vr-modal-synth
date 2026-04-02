@@ -6,7 +6,7 @@ namespace ModalSynth
 const float MALLET_SPRING_CONSTANT{ 5.59e+05f }; 
 const float MALLET_DAMPING_RATIO{ 0.072f }; 
 
-class MalletSpring
+class MalletResonator
 {
 private:
     float m_springConstant{ MALLET_SPRING_CONSTANT };
@@ -27,7 +27,7 @@ private:
     void setCoefs();
 
 public:
-    MalletSpring() = default;
+    MalletResonator() = default;
     void initialize(float sampleRate);
     void setMass(float mass);
     void setRadius(float radius);

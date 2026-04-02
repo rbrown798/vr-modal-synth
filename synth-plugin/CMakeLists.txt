@@ -14,7 +14,7 @@ set(SHARED_SOURCES
     dsp/src/HighPass1P.cpp
     dsp/src/ImpactForce.cpp
     dsp/src/LowPass1P.cpp
-    dsp/src/MalletSpring.cpp
+    dsp/src/MalletResonator.cpp
     dsp/src/ModalBank.cpp
     dsp/src/SinOsc.cpp
     dsp/src/Spatializer.cpp
