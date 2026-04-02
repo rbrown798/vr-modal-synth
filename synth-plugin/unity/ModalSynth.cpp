@@ -33,11 +33,11 @@ namespace ModalSynth
         P_MALLET_HEAD_DIAMETER,
         P_BAR_TIMBRE,
         P_BAR_DAMPING,
+        P_BAR_METALLIC,
         P_RESONATOR_TREMOLO_RATE,
         P_RESONATORS_ON,
         P_LFO_ON,
         P_PEDAL_VALUE,
-        P_BAR_METALLIC,
         P_NUM
     };
 
