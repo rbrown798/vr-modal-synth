@@ -19,7 +19,7 @@ set(SHARED_SOURCES
     dsp/src/SinOsc.cpp
     dsp/src/Spatializer.cpp
     dsp/src/Synthesizer.cpp
-    dsp/src/Tube.cpp
+    dsp/src/TubeResonator.cpp
     dsp/src/Utils.cpp
     dsp/src/Vector3.cpp
     dsp/src/Voice.cpp

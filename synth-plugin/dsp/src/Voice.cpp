@@ -10,7 +10,7 @@ namespace ModalSynth
 {
 Voice::Voice(std::vector<float>& lfoBuffer, 
         std::array<std::vector<float>, NUM_TEMP_BUFFERS>& tempBuffers) :
-    m_tube(lfoBuffer), 
+    m_tubeResonator(lfoBuffer), 
     m_tempBuffers(tempBuffers)
 {
 }
@@ -20,7 +20,7 @@ void Voice::initialize(float sampleRate)
     m_impactForce.initialize(sampleRate);
     m_barResonator.initialize(sampleRate);
     m_malletResonator.initialize(sampleRate);
-    m_tube.initialize(sampleRate);
+    m_tubeResonator.initialize(sampleRate);
 
     m_barRadiation.initialize(sampleRate);
     m_tubeRadiation.initialize(sampleRate);
@@ -56,7 +56,7 @@ void Voice::noteOn(int note, float velocity, float position)
     m_barResonator.setFreq(freq);
     m_barResonator.setPosition(position);
     m_barResonator.setDamping(getBarTotalDamping());
-    m_tube.setFreq(freq);
+    m_tubeResonator.setFreq(freq);
     m_spatializer.setSourcePosition(Vector3(barXPos, barYPos, 0.f), true);
     m_impactForce.play(velocity);
 
@@ -79,7 +79,7 @@ void Voice::noteOff()
 void Voice::clear()
 {
     m_barResonator.clear();
-    m_tube.clear();
+    m_tubeResonator.clear();
     m_barRadiation.clear();
     m_tubeRadiation.clear();
     m_malletRadiation.clear();
@@ -111,7 +111,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
 
     if (m_isTubeOn)
     {
-        m_tube.processBlock(temp3, temp3, length);
+        m_tubeResonator.processBlock(temp3, temp3, length);
         m_tubeRadiation.processBlock(temp3, temp3, length);
         gain(temp3, temp3, length, TUBE_GAIN);
         mix(temp2, temp3, temp2, length);

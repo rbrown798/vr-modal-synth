@@ -6,7 +6,7 @@
 #include "ImpactForce.h"
 #include "BarResonator.h"
 #include "MalletResonator.h"
-#include "Tube.h"
+#include "TubeResonator.h"
 #include "Spatializer.h"
 #include "Vector3.h"
 #include "DipoleRadiation.h"
@@ -41,7 +41,7 @@ private:
     ImpactForce             m_impactForce;
     BarResonator            m_barResonator;
     MalletResonator         m_malletResonator;
-    Tube                    m_tube;
+    TubeResonator           m_tubeResonator;
     bool                    m_isTubeOn{true};
     DipoleRadiation         m_malletRadiation;
     DipoleRadiation         m_barRadiation;

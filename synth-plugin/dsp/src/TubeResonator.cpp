@@ -1,24 +1,24 @@
 #include <cmath>
-#include "Tube.h"
+#include "TubeResonator.h"
 
 
 namespace ModalSynth
 {
-Tube::Tube(std::vector<float>& lfoBuffer) : m_lfoBuffer{lfoBuffer}
+TubeResonator::TubeResonator(std::vector<float>& lfoBuffer) : m_lfoBuffer{lfoBuffer}
 {
 }
 
-void Tube::initialize(float sampleRate)
+void TubeResonator::initialize(float sampleRate)
 {
     m_delayLine.initialize(sampleRate);
 }
 
-void Tube::setFreq(float freq)
+void TubeResonator::setFreq(float freq)
 {
     m_delayLine.setDelay(0.5f / freq);
 }
 
-void Tube::processBlock(float* in, float* out, unsigned int N)
+void TubeResonator::processBlock(float* in, float* out, unsigned int N)
 {
     for (unsigned long i = 0; i < N; i++)
     {
@@ -34,7 +34,7 @@ void Tube::processBlock(float* in, float* out, unsigned int N)
     }
 }
 
-void Tube::clear()
+void TubeResonator::clear()
 {
     m_delayLine.clear();
 }

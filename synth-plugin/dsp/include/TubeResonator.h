@@ -7,7 +7,7 @@ namespace ModalSynth
 {
 const float TUBE_FEEDBACK_GAIN{ 0.9f }; // 0.99
 
-class Tube
+class TubeResonator
 {
 private:
     DelayLine           m_delayLine;
@@ -16,7 +16,7 @@ private:
     bool                m_isLfoOn{false};
 
 public:
-    Tube(std::vector<float>& lfoBuffer);
+    TubeResonator(std::vector<float>& lfoBuffer);
     void initialize(float sampleRate);
     void setFreq(float freq);
     void processBlock(float* in, float* out, unsigned int N);
