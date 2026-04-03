@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 50023240}
   - component: {fileID: 50023241}
   - component: {fileID: 50023242}
+  - component: {fileID: 50023243}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -1040,6 +1041,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barMaterial: {fileID: 2100000, guid: ce892f4ddbd0ef64385e3a2a143c3137, type: 2}
+  mixer: {fileID: 24100000, guid: ee9de0b8872a2514b803e82788f24984, type: 2}
+--- !u!114 &50023243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50023223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297095e5ec10e2444a1142b34ac17302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: ee9de0b8872a2514b803e82788f24984, type: 2}
 --- !u!1 &50814827 stripped
 GameObject:
@@ -2149,16 +2163,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 1425940729}
   m_HandleRect: {fileID: 299662833}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0.6
+  m_Value: -1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50023238}
-        m_TargetAssemblyTypeName: SetMalletHardness, Assembly-CSharp
-        m_MethodName: SetMalletHardnessFromValue
+      - m_Target: {fileID: 50023243}
+        m_TargetAssemblyTypeName: SetOutputVolume, Assembly-CSharp
+        m_MethodName: SetOutputVolumeFromValue
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

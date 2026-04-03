@@ -90,6 +90,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 855fd883f2e7b334fa929a36d90e1ad7
+    name: OutputVolume
   - guid: 609a8d8d427caa34584eaa3468178283
     name: MalletStiffness
   - guid: 68c8592fd419f7842b88557ce704198e
