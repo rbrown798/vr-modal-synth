@@ -1,0 +1,16 @@
+#N canvas 32 32 450 300 10;
+#X obj 37 37 inlet;
+#X obj 37 68 Vec3RotateX;
+#X obj 37 99 Vec3RotateY;
+#X obj 37 130 Vec3RotateZ;
+#X obj 37 161 outlet;
+#X obj 168 31 inlet;
+#X obj 168 52 unpack f f f;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 6 0 1 1;
+#X connect 6 1 2 1;
+#X connect 6 2 3 1;

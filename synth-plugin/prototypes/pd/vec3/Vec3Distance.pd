@@ -1,0 +1,10 @@
+#N canvas 192 192 467 388 10;
+#X obj 42 36 inlet;
+#X obj 42 161 outlet;
+#X obj 42 85 Vec3Sub;
+#X obj 102 36 inlet;
+#X obj 42 106 Vec3Mag;
+#X connect 0 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 1;
+#X connect 4 0 1 0;
