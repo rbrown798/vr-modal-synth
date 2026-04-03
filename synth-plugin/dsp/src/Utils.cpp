@@ -113,7 +113,7 @@ void mix_avx(float* out, float* in1, float* in2, unsigned int length)
 
     for (; i < length; i++)
     {
-        out[i] = in1[i] * in2[i];
+        out[i] = in1[i] + in2[i];
     }
 }
 #endif
@@ -136,7 +136,7 @@ void mix_sse(float* out, float* in1, float* in2, unsigned int length)
 
     for (; i < length; i++)
     {
-        out[i] = in1[i] * in2[i];
+        out[i] = in1[i] + in2[i];
     }
 }
 #endif
