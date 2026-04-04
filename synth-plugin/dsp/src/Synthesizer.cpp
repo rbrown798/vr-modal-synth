@@ -25,6 +25,8 @@ void Synthesizer::initialize(float sampleRate, int dspBufferSize)
         m_voices[i]->initialize(sampleRate);
 
     m_tubeLfo.initialize(sampleRate);
+    m_tubeLfoLowpass.initialize(sampleRate);
+    m_tubeLfoLowpass.setCutoff(30.f);
 }
 
 void Synthesizer::noteOn(int note, float velocity, float position)
@@ -123,17 +125,31 @@ Voice* Synthesizer::getVoiceToSteal()
 void Synthesizer::renderBlock(float* outBuffer, unsigned int length, 
                               int outChannels)
 {
-    if (m_isMotorOn == true)
-    {
-        m_tubeLfo.renderBlock(m_lfoBuffer.data(), length);
+    std::vector<float>& tempBuffer = m_tempBuffers[0];
 
-        for (unsigned int i = 0; i < length; i++)
-            m_lfoBuffer[i] = fabsf(m_lfoBuffer[i]);
-    }
+    if (m_isMotorOn == true)
+        std::fill(tempBuffer.begin(), tempBuffer.end(), 1.f);
+
     else
-    {
-        std::fill(m_lfoBuffer.begin(), m_lfoBuffer.end(), 1.f);
-    }
+        std::fill(tempBuffer.begin(), tempBuffer.end(), 0.f);
+
+    float* temp1 = tempBuffer.data();
+    float* temp2 = m_tempBuffers[1].data();
+    float* temp3 = m_tempBuffers[2].data();
+
+    m_tubeLfoLowpass.processBlock(temp1, temp1, length);
+
+    for (unsigned int i{ 0 }; i < length; i++)
+        temp2[i] = 1.f - temp1[i];
+
+    m_tubeLfo.renderBlock(temp3, length);
+
+    for (unsigned int i{ 0 }; i < length; i++)
+        temp3[i] = fabsf(temp3[i]);
+
+    mul(temp1, temp1, temp3, length);
+    mix(m_lfoBuffer.data(), temp1, temp2, length);
+
 
     std::fill(outBuffer, outBuffer + length * outChannels, 0.0f);
 

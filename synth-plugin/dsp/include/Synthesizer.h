@@ -6,6 +6,7 @@
 #include "Voice.h"
 #include "SinOsc.h"
 #include "Vector3.h"
+#include "LowPass1P.h"
 
 
 namespace ModalSynth
@@ -24,6 +25,7 @@ private:
     std::array<std::vector<float>, NUM_TEMP_BUFFERS> m_tempBuffers;
     std::vector<float>      m_lfoBuffer;
     SinOsc                  m_tubeLfo{1.f};
+    LowPass1P               m_tubeLfoLowpass; // to prevent click when toggled
     bool                    m_isMotorOn{true};
 
     float m_malletHeadDensity{};
