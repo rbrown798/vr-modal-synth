@@ -30,6 +30,7 @@ public class PluginController : MonoBehaviour
     public GameObject rightEar;
     public GameObject rightEarDirection;
 
+    /*
     public MidiHandler midiHandler;
 	public bool midiEnabled;
 	public bool pedalEnabled;
@@ -58,6 +59,7 @@ public class PluginController : MonoBehaviour
 			}
 		}
 	}
+    */
 
 	// Update is called once per frame
 	void Update() 

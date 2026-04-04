@@ -17,6 +17,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class TriggerNote : MonoBehaviour
 {
+	private const bool MALLET_DAMPING_ENABLED = false;
 	private const float DAMPING_ONSET_TIME = 0.15f;
     private const float RETRIGGER_WAIT_TIME = 0.2f;
     private const float MIN_VELOCITY = 0.2f;
@@ -59,7 +60,7 @@ public class TriggerNote : MonoBehaviour
     {
 		float currentTime = Time.time;
 
-		if (isNoteOn && (objectsInCollider > 0) &&
+		if (MALLET_DAMPING_ENABLED && isNoteOn && (objectsInCollider > 0) &&
 				(currentTime - collisionStartTime > DAMPING_ONSET_TIME))
 		{
 			ModalSynth_NoteOff(note);
