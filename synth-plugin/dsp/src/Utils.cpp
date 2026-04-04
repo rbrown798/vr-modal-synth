@@ -158,4 +158,12 @@ void mix(float* out, float* in1, float* in2, unsigned int length)
     mix_scalar(out, in1, in2, length);
 #endif
 }
+
+void mul(float* out, float* in1, float* in2, unsigned int length)
+{
+    for (unsigned int i{ 0 }; i < length; i++)
+        out[i] = in1[i] * in2[i];
+
+}
+
 };

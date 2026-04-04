@@ -19,5 +19,8 @@ void mix_avx(float* out, float* in1, float* in2, unsigned int length);
 void mix_sse(float* out, float* in1, float* in2, unsigned int length);
 void mix_scalar(float* out, float* in1, float* in2, unsigned int length);
 void mix(float* out, float* in1, float* in2, unsigned int length);
+
+void mul(float* out, float* in1, float* in2, unsigned int length);
+
 };
 
