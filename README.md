@@ -16,7 +16,7 @@ This repository is organized into two subdirectories:
 
 
 ## How to build
-To build the Unity native audio plugin, nativage to the `synth-plugin/` directory, and execute:
+To build the Unity native audio plugin, you will need CMake. Navigate to the `synth-plugin/` directory, and execute:
 ```bash
 cmake -S . -B build
 cmake --build build
