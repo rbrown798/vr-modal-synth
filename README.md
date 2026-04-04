@@ -9,9 +9,11 @@ A physical modeling percussion synthesizer controlled in virtual reality.
 - Pedal/controller damping
 
 ## Info
-This repository consists of two parts: 
-1. The Unity native audio plugin source code, located in `synth-plugin/`
-2. The VR Unity project source code, located in `vr-modal-synth-app/`
+This repository is organized into two subdirectories: 
+1. `synth-plugin/` contains the audio source code, wrapped as a Unity Native Audio Plugin.
+2. `vr-modal-synth-app/` contains the VR Unity project.
+
+
 
 ## How to build
 To build the Unity native audio plugin, nativage to the `synth-plugin/` directory, and execute:
