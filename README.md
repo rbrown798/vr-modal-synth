@@ -11,7 +11,7 @@ A physical modeling percussion synthesizer controlled in virtual reality.
 
 1. Download the release.
 2. Extract the zip file.
-3. Plug in a VR headset.
+3. Connect a VR headset.
 4. Run the executable.
 
 (**Note:** This project is still in early development, and releases at this point are largely experimental. It has only been tested on an Meta Quest 2 with a wired connection. 
@@ -22,7 +22,6 @@ This repository is organized into two subdirectories:
 1. `synth-plugin/` contains the audio source code, wrapped as a Unity Native Audio Plugin.
 2. `vr-modal-synth-app/` contains the Unity project for the VR application.
 
-## How to build
 ### Opening the Unity Project
 To open the **Unity project**:
 1. Open **Unity Hub**.
