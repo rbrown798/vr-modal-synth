@@ -8,12 +8,14 @@ A physical modeling percussion synthesizer controlled in virtual reality.
 - Velocity and position sensitivity
 
 ## Installation / Usage
-(**Note:** This project is still in early development, and releases at this point are largely experimental. It has only been tested on an Meta Quest 2 with a wired connection. 
-Some audio output devices may have poor performance or latency—the app will use whichever default device is selected.)
+
 1. Download the release.
 2. Extract the zip file.
 3. Plug in a VR headset.
-4. Run the executable. 
+4. Run the executable.
+
+(**Note:** This project is still in early development, and releases at this point are largely experimental. It has only been tested on an Meta Quest 2 with a wired connection. 
+Some audio output devices may have poor performance or latency—the app will use whichever default device is selected.)
 
 ## Info
 This repository is organized into two subdirectories: 
@@ -29,7 +31,7 @@ To open the **Unity project**:
 4. Select the `vr-modal-synth-app/` folder.
 
 ### Building the Audio Plugin
-To build the **Unity Native Audio Plugin**, you will need CMake. Navigate to the `synth-plugin/` directory, and execute:
+To build the **Unity Native Audio Plugin**, you will need **CMake**. Navigate to the `synth-plugin/` directory, and execute:
 ```bash
 cmake -S . -B build
 cmake --build build
