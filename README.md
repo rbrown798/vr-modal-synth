@@ -14,7 +14,7 @@ A physical modeling percussion synthesizer controlled in virtual reality.
 3. Connect a VR headset.
 4. Run the executable.
 
-(**Note:** This project is still in early development, and releases at this point are largely experimental. It has only been tested on an Meta Quest 2 with a wired connection. 
+(**Note:** This project is still in early development, and releases at this point are largely experimental. It has been tested on an Meta Quest 2 with a wired connection. 
 Some audio output devices may have poor performance or latency—the app will use whichever default device is selected.)
 
 ## Info
