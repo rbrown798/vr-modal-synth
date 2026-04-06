@@ -1,6 +1,6 @@
 # VR Modal Synth
 
-A physical modeling percussion synthesizer controlled in virtual reality. 
+A physical modeling synthesizer controlled in virtual reality. 
 
 ![](vr-modal-synth-app/Assets/ModalVR/Images/screenshot-1.png)
 
