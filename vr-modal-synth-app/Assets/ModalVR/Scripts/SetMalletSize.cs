@@ -9,6 +9,11 @@ public class SetMalletSize : MonoBehaviour
     public GameObject malletHead2;
     public AudioMixer mixer;
 
+    void Start()
+    {
+        SetMalletSizeFromValue(3.5f);
+    }
+
     public void SetMalletSizeFromValue(float value)
     {
         float diameterMeters = value / 100.0f;

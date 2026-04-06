@@ -7,6 +7,11 @@ public class SetTremoloRate : MonoBehaviour
 {
     public AudioMixer mixer;
 
+    void Start()
+    {
+        SetTremoloRateFromValue(1f);
+    }
+
     public void SetTremoloRateFromValue(float value)
     {
         mixer.SetFloat("TremoloRate", value);
