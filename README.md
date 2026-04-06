@@ -2,6 +2,8 @@
 
 A physical modeling percussion synthesizer controlled in virtual reality. 
 
+![](vr-modal-synth-app/Assets/ModalVR/Images/screenshot-1.png)
+
 ## Features
 - Physical parameter controls
 - 16-voice polyphony
