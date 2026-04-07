@@ -17,7 +17,7 @@ void Spatializer::update()
     m_leftGain = std::min(0.1f * m_leftGain, 1.f);
 
     // Divide distance by speed of sound
-    m_leftDelayTime = leftDistance * 0.00291545;
+    m_leftDelayTime = leftDistance * 0.00291545f;
 
     Vector3 rightResultant = m_sourcePosition - m_rightEarPosition;
     float rightDistance = rightResultant.norm();
@@ -26,7 +26,7 @@ void Spatializer::update()
 
     m_rightGain = std::min(0.1f * m_rightGain, 1.f);
 
-    m_rightDelayTime = rightDistance * 0.00291545;
+    m_rightDelayTime = rightDistance * 0.00291545f;
 }
 
 void Spatializer::initialize(float sampleRate)
