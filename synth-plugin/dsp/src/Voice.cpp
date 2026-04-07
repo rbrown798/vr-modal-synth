@@ -28,7 +28,7 @@ void Voice::initialize(float sampleRate)
 
     m_spatializer.initialize(sampleRate);
     m_spatializer.setSourcePosition(Vector3(-3.f, 0.f, 0.f), true);
-    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.2, 0.6f), true);
+    m_spatializer.setLeftEarPosition(Vector3(-0.085f, -0.2f, 0.6f), true);
     m_spatializer.setLeftEarDirection(Vector3(-0.66913f, 0.f, 0.74314f), true);
     m_spatializer.setRightEarPosition(Vector3(0.085f, -0.2f, 0.6f), true);
     m_spatializer.setRightEarDirection(Vector3(0.66913f, 0.f, 0.74314f), true);
