@@ -4,7 +4,7 @@
 
 namespace ModalSynth
 {
-const float MAX_DELAY_SECONDS{ 0.025 };
+const float MAX_DELAY_SECONDS{ 0.025f };
 
 class DelayLine
 {
