@@ -33,6 +33,7 @@ set(UNITY_SOURCES
 #set(JUCE_SOURCES
 #)
 
+add_compile_options(/Wall /WX)
 
 if(BUILD_UNITY_PLUGIN)
     add_library(ModalSynthAudioPlugin SHARED ${SHARED_SOURCES} ${UNITY_SOURCES})
