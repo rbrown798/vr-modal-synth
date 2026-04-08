@@ -15,8 +15,6 @@ private:
     DelayLine       m_rightDelay;
     LowPass1P       m_leftDelayTimeLPF;
     LowPass1P       m_rightDelayTimeLPF;
-    float           m_leftDelayTime{};
-    float           m_rightDelayTime{};
     Vector3         m_sourcePosition;
     Vector3         m_leftEarPosition;
     Vector3         m_leftEarDirection;
@@ -24,6 +22,8 @@ private:
     Vector3         m_rightEarDirection;
     float           m_leftGain{};
     float           m_rightGain{};
+    float           m_leftDelayTime{};
+    float           m_rightDelayTime{};
 
     void update();
 
