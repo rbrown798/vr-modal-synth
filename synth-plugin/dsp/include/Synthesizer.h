@@ -34,7 +34,7 @@ private:
 
 public:
     Synthesizer();
-    void initialize(float sampleRate, int dspBufferSize);
+    void initialize(float sampleRate, unsigned int dspBufferSize);
     void noteOn(int note, float velocity, float position);
     void noteOff(int note);
     Voice* getAvailableVoice();

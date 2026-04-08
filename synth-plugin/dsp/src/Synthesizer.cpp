@@ -12,7 +12,7 @@ Synthesizer::Synthesizer()
         m_voices[i].reset(new Voice(m_lfoBuffer, m_tempBuffers));
 }
 
-void Synthesizer::initialize(float sampleRate, int dspBufferSize)
+void Synthesizer::initialize(float sampleRate, unsigned int dspBufferSize)
 {
     BarResonator::initModeShapes();
 
