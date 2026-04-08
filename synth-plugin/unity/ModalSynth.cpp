@@ -165,10 +165,10 @@ namespace ModalSynth
         switch (msg.commandCode)
         {
         case Event::NOTE_ON:
-            effectData->synth->noteOn(msg.data1, msg.data2, msg.data3);
+            effectData->synth->noteOn(static_cast<int>(msg.data1), msg.data2, msg.data3);
             break;
         case Event::NOTE_OFF:
-            effectData->synth->noteOff(msg.data1);
+            effectData->synth->noteOff(static_cast<int>(msg.data1));
             break;
         case Event::SET_L_EAR_POS:
             effectData->synth->setLeftEarPosition(Vector3(msg.data1, msg.data2, msg.data3));
@@ -216,7 +216,7 @@ namespace ModalSynth
     {
         Event::Message msg;
         msg.commandCode = Event::NOTE_ON;
-        msg.data1 = note;
+        msg.data1 = static_cast<float>(note);
         msg.data2 = velocity;
         msg.data3 = position;
         Event::messages.Feed(msg);
@@ -226,7 +226,7 @@ namespace ModalSynth
     {
         Event::Message msg;
         msg.commandCode = Event::NOTE_OFF;
-        msg.data1 = note;
+        msg.data1 = static_cast<float>(note);
         msg.data2 = 0.f;
         msg.data3 = 0.f;
         Event::messages.Feed(msg);
