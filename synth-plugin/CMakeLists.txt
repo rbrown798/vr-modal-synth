@@ -1,55 +1,39 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.23)
 
-project(ModalSynthAudioPlugin)
+project(ModalSynthPlugin)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD          17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS        OFF)
 
-option(BUILD_STANDALONE OFF)
-option(BUILD_UNITY_PLUGIN "test" ON) 
-option(BUILD_VST_PLUGIN OFF)
-
-set(SHARED_SOURCES
-    dsp/src/DelayLine.cpp
-    dsp/src/ImpactForce.cpp
-    dsp/src/LowPass1P.cpp
-    dsp/src/MalletResonator.cpp
-    dsp/src/BarResonator.cpp
-    dsp/src/SinOsc.cpp
-    dsp/src/Spatializer.cpp
-    dsp/src/Synthesizer.cpp
-    dsp/src/TubeResonator.cpp
-    dsp/src/Utils.cpp
-    dsp/src/Vector3.cpp
-    dsp/src/Voice.cpp
-    dsp/src/MonopoleRadiation.cpp
-    dsp/src/DipoleRadiation.cpp
+set(SYNTH_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/DelayLine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/ImpactForce.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/LowPass1P.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/MalletResonator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/BarResonator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/SinOsc.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/Spatializer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/Synthesizer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/TubeResonator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/Utils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/Vector3.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/Voice.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/MonopoleRadiation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/src/DipoleRadiation.cpp
 )
 
 set(UNITY_SOURCES
-    unity/ModalSynth.cpp
-    unity/unity-sdk/AudioPluginUtil.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/unity/ModalSynth.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/unity/unity-sdk/AudioPluginUtil.cpp
 )
 
-#set(JUCE_SOURCES
-#)
+add_library(ModalSynth_AudioPlugin SHARED ${SYNTH_SOURCES} ${UNITY_SOURCES})
 
-add_compile_options(/Wall /WX)
+target_include_directories(ModalSynth_AudioPlugin
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/dsp/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/unity/unity-sdk
+)
 
-if(BUILD_UNITY_PLUGIN)
-    add_library(ModalSynthAudioPlugin SHARED ${SHARED_SOURCES} ${UNITY_SOURCES})
-    target_include_directories(ModalSynthAudioPlugin PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/unity/unity-sdk)
-
-    target_include_directories(ModalSynthAudioPlugin PRIVATE
-        "${PROJECT_SOURCE_DIR}/dsp/include"
-    )
-    
-    if(WIN32)
-        target_compile_definitions(ModalSynthAudioPlugin PRIVATE UNITY_WIN=1)
-    elseif(APPLE)
-        target_compile_definitions(ModalSynthAudioPlugin PRIVATE UNITY_OSX=1)
-    elseif(UNIX)
-        target_compile_definitions(ModalSynthAudioPlugin PRIVATE UNITY_LINUX=1)
-    endif()
-    
-
-endif()
+#target_compile_options(ModalSynth_AudioPlugin PRIVATE -Wall -WX)
