@@ -10,10 +10,10 @@ class DelayLine
 {
 private:
     std::vector<float>  m_delayBuffer;
-    float               m_sampleRate{};
     size_t              m_readIndex{};
     size_t              m_writeIndex{};
     size_t              m_mask{};
+    float               m_sampleRate{};
     float               m_frac{};
 public:
     DelayLine() = default;
