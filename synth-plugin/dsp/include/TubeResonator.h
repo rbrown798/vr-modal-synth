@@ -11,8 +11,8 @@ class TubeResonator
 {
 private:
     DelayLine           m_delayLine;
-    float               m_feedbackGain{ TUBE_FEEDBACK_GAIN };
     std::vector<float>& m_lfoBuffer;
+    float               m_feedbackGain{ TUBE_FEEDBACK_GAIN };
     bool                m_isLfoOn{false};
 
 public:
