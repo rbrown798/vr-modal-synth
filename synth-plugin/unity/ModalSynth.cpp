@@ -206,7 +206,12 @@ namespace ModalSynth
             HandleEvent(effectData, msg);
         }
 
-        effectData->synth->renderBlock(outbuffer, length, outchannels);
+        if (outchannels == 2)
+            effectData->synth->renderBlock(outbuffer, length);
+
+        else
+            // output silence if incorrect number of out channels
+            memset(outbuffer, 0, sizeof(float) * length * outchannels);
 
         return UNITY_AUDIODSP_OK;
     }
