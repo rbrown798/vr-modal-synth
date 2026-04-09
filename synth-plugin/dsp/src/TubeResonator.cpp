@@ -18,9 +18,9 @@ void TubeResonator::setFreq(float freq)
     m_delayLine.setDelay(0.5f / freq);
 }
 
-void TubeResonator::processBlock(float* in, float* out, unsigned int N)
+void TubeResonator::processBlock(float* in, float* out, unsigned int length)
 {
-    for (unsigned long i = 0; i < N; i++)
+    for (unsigned int i = 0; i < length; i++)
     {
         float lfo = m_lfoBuffer[i];
         float lfoGain = (0.1f + 0.9f * lfo);
