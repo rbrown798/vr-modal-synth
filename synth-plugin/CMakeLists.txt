@@ -36,4 +36,4 @@ target_include_directories(ModalSynth_AudioPlugin
         ${CMAKE_CURRENT_SOURCE_DIR}/unity/unity-sdk
 )
 
-#target_compile_options(ModalSynth_AudioPlugin PRIVATE -Wall -WX)
+#target_compile_options(ModalSynth_AudioPlugin PRIVATE -W4 -WX) #-Wall -WX)
