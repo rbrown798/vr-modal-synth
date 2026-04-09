@@ -19,7 +19,7 @@ public:
     TubeResonator(std::vector<float>& lfoBuffer);
     void initialize(float sampleRate);
     void setFreq(float freq);
-    void processBlock(float* in, float* out, unsigned int N);
+    void processBlock(float* in, float* out, unsigned int length);
     void clear();
 };
 };
