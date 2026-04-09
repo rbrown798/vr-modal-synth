@@ -50,9 +50,9 @@ float DelayLine::read()
     return y + m_frac * (y1 - y);
 }
 
-void DelayLine::processBlock(float* in, float* out, unsigned long length)
+void DelayLine::processBlock(float* in, float* out, unsigned int length)
 {
-    for (unsigned long i{ 0 }; i < length; i++)
+    for (unsigned int i{ 0 }; i < length; i++)
     {
         write(in[i]);
         out[i] = read();
