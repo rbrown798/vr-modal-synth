@@ -122,8 +122,8 @@ Voice* Synthesizer::getVoiceToSteal()
     return (voice1->getNote() > voice2->getNote()) ? voice1 : voice2;
 }
 
-void Synthesizer::renderBlock(float* outBuffer, unsigned int length, 
-                              int outChannels)
+// assumes 2-channel audio
+void Synthesizer::renderBlock(float* outBuffer, unsigned int length)
 {
     std::vector<float>& tempBuffer = m_tempBuffers[0];
 
@@ -151,11 +151,11 @@ void Synthesizer::renderBlock(float* outBuffer, unsigned int length,
     mix(m_lfoBuffer.data(), temp1, temp2, length);
 
 
-    std::fill(outBuffer, outBuffer + length * outChannels, 0.0f);
+    std::fill(outBuffer, outBuffer + length * 2, 0.0f);
 
     for (int i{ 0 }; i < MAX_NUM_VOICES; i++)
     {
-        m_voices[i]->renderBlock(outBuffer, length, outChannels);
+        m_voices[i]->renderBlock(outBuffer, length);
     }
 }
 

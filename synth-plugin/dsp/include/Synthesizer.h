@@ -39,7 +39,7 @@ public:
     void noteOff(int note);
     Voice* getAvailableVoice();
     Voice* getVoiceToSteal();
-    void renderBlock(float* outBuffer, unsigned int length, int outChannels);
+    void renderBlock(float* outBuffer, unsigned int length);
     void setMalletHeadDiameter(float malletHeadDiameter);
     void setMalletHeadDensity(float malletHeadDensity);
     void setMalletHeadStiffness(float malletHeadStiffness);
