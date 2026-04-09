@@ -30,7 +30,7 @@ private:
 public:
     Spatializer() = default;
     void initialize(float sampleRate);
-    void processBlock(float* in, float* out, unsigned long length);
+    void processBlock(float* in, float* out, unsigned int length);
     void setSourcePosition(Vector3 sourcePosition, bool immediate=false);
     void setLeftEarPosition(Vector3 leftEarPosition, bool immediate=false);
     void setLeftEarDirection(Vector3 leftEarDirection, bool immediate=false);

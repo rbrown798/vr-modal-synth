@@ -39,9 +39,9 @@ void Spatializer::initialize(float sampleRate)
     m_rightDelayTimeLPF.setCutoff(30.f);
 }
 
-void Spatializer::processBlock(float* in, float* out, unsigned long length)
+void Spatializer::processBlock(float* in, float* out, unsigned int length)
 {
-    for (unsigned long i{ 0 }; i < length; i++)
+    for (unsigned int i{ 0 }; i < length; i++)
     {
         float leftDelayTime = m_leftDelayTimeLPF.processSample(m_leftDelayTime);
         float rightDelayTime = m_rightDelayTimeLPF.processSample(
