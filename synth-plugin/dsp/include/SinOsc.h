@@ -12,7 +12,7 @@ private:
 public:
     SinOsc(float freq);
     void initialize(float sampleRate);
-    void renderBlock(float* out, unsigned int N);
+    void renderBlock(float* out, unsigned int length);
     void setFreq(float freq);
 };
 };

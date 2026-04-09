@@ -16,11 +16,11 @@ void SinOsc::initialize(float sampleRate)
     m_samplingInterval = 1.f / sampleRate;
 }
 
-void SinOsc::renderBlock(float* out, unsigned int N)
+void SinOsc::renderBlock(float* out, unsigned int length)
 {
     float phaseIncr = 2.f * PI * m_freq * m_samplingInterval;
 
-    for (unsigned int i{ 0 }; i < N; i++)
+    for (unsigned int i{ 0 }; i < length; i++)
     {
         out[i] = sinf(m_phase); 
         m_phase += phaseIncr;
