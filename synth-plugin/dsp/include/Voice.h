@@ -72,7 +72,7 @@ public:
     void setMalletHeadRadius(float malletHeadRadius);
     void setMalletHeadMass(float malletHeadMass);
     void setContactModulus(float contactModulus);
-    void renderBlock(float* outBuffer, unsigned int length, int outChannels);
+    void renderBlock(float* outBuffer, unsigned int length);
     void setTubeOn(bool isTubeOn);
     void setPedalValue(float pedalValue);
     void setSourcePosition(const Vector3& sourcePosition, bool immediate=false);

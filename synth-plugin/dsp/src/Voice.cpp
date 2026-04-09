@@ -94,7 +94,8 @@ void Voice::retrigger(float velocity, float position)
     m_timestamp = 0;
 }
 
-void Voice::renderBlock(float* outBuffer, unsigned int length, int outChannels)
+// assumes 2 channel audio
+void Voice::renderBlock(float* outBuffer, unsigned int length)
 { 
     for (auto& buffer : m_tempBuffers)
         std::fill(buffer.begin(), buffer.end(), 0.0f);
