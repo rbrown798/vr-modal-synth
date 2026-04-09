@@ -21,9 +21,9 @@ float LowPass1P::processSample(float x)
     return y;
 }
 
-void LowPass1P::processBlock(float* in, float* out, unsigned long length)
+void LowPass1P::processBlock(float* in, float* out, unsigned int length)
 {
-    for (unsigned long i{ 0 }; i < length; i++)
+    for (unsigned int i{ 0 }; i < length; i++)
     {
         float y = m_b0 * in[i] - m_a1 * m_y1;
 

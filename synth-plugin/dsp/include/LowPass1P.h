@@ -16,7 +16,7 @@ private:
 public:
     void initialize(float sampleRate);
     float processSample(float x);
-    void processBlock(float* in, float* out, unsigned long length);
+    void processBlock(float* in, float* out, unsigned int length);
     void setCutoff(float cutoffFreq);
     void clear();
     void set(float y1);
