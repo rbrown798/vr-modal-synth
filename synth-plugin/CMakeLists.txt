@@ -28,12 +28,12 @@ set(UNITY_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/unity/unity-sdk/AudioPluginUtil.cpp
 )
 
-add_library(ModalSynth_AudioPlugin SHARED ${SYNTH_SOURCES} ${UNITY_SOURCES})
+add_library(AudioPluginModalSynth SHARED ${SYNTH_SOURCES} ${UNITY_SOURCES})
 
-target_include_directories(ModalSynth_AudioPlugin
+target_include_directories(AudioPluginModalSynth
     PRIVATE 
         ${CMAKE_CURRENT_SOURCE_DIR}/dsp/include
         ${CMAKE_CURRENT_SOURCE_DIR}/unity/unity-sdk
 )
 
-#target_compile_options(ModalSynth_AudioPlugin PRIVATE -W4 -WX) #-Wall -WX)
+#target_compile_options(AudioPluginModalSynth PRIVATE -W4 -WX) #-Wall -WX)
