@@ -127,7 +127,7 @@ void Synthesizer::renderBlock(float* outBuffer, unsigned int length)
 {
     std::vector<float>& tempBuffer = m_tempBuffers[0];
 
-    if (m_isMotorOn == true)
+    if (m_isTremoloOn == true)
         std::fill(tempBuffer.begin(), tempBuffer.end(), 1.f);
 
     else
@@ -221,14 +221,14 @@ void Synthesizer::setTubeOn(bool isTubeOn)
         m_voices[i]->setTubeOn(isTubeOn);
 }
 
-void Synthesizer::setMotorOn(bool isMotorOn)
+void Synthesizer::setTremoloOn(bool isTremoloOn)
 {
-    m_isMotorOn = isMotorOn;
+    m_isTremoloOn = isTremoloOn;
 }
 
-void Synthesizer::setMotorFrequency(float motorFrequency)
+void Synthesizer::setTremoloRate(float tremoloRate)
 {
-    m_tubeLfo.setFreq(motorFrequency);
+    m_tubeLfo.setFreq(tremoloRate);
 }
 
 void Synthesizer::setPedalValue(float pedalValue)

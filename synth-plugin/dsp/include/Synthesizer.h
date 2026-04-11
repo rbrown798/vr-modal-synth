@@ -26,7 +26,7 @@ private:
     std::vector<float>      m_lfoBuffer;
     SinOsc                  m_tubeLfo{1.f};
     LowPass1P               m_tubeLfoLowpass; // to prevent click when toggled
-    bool                    m_isMotorOn{true};
+    bool                    m_isTremoloOn{true};
 
     float m_malletHeadDensity{};
     float m_malletHeadVolume{}; 
@@ -47,8 +47,8 @@ public:
     void setBarDamping(float barDamping);
     void setBarMetallic(float value);
     void setTubeOn(bool isTubeOn);
-    void setMotorOn(bool isMotorOn);
-    void setMotorFrequency(float motorFrequency);
+    void setTremoloOn(bool isTremoloOn);
+    void setTremoloRate(float tremoloRate);
     void setPedalValue(float pedalValue);
     void setLeftEarPosition(const Vector3& leftEarPosition, 
             bool immediate=false);

@@ -154,9 +154,9 @@ namespace ModalSynth
         synth->setBarDamping(p[P_BAR_DAMPING]);
         synth->setBarTimbre(p[P_BAR_TIMBRE]);
         synth->setBarMetallic(p[P_BAR_METALLIC]);
-        synth->setMotorFrequency(p[P_RESONATOR_TREMOLO_RATE]);
+        synth->setTremoloRate(p[P_RESONATOR_TREMOLO_RATE]);
         synth->setTubeOn(p[P_RESONATORS_ON] > 0);
-        synth->setMotorOn(p[P_LFO_ON] > 0);
+        synth->setTremoloOn(p[P_LFO_ON] > 0);
         synth->setPedalValue(p[P_PEDAL_VALUE]);
     }
 
