@@ -1,1 +1,1 @@
-DECLARE_EFFECT("ModalVR", ModalSynth)
+DECLARE_EFFECT("Modal Synth", ModalSynth)
