@@ -35,11 +35,11 @@ public class TriggerNote : MonoBehaviour
     private int objectsInCollider;
     private float collisionStartTime;
 
-	[DllImport("ModalVR_AudioPlugin")]
+	[DllImport("AudioPluginModalSynth")]
 	public static extern void ModalSynth_NoteOn(int note, float velocity, 
         float position);
 
-	[DllImport("ModalVR_AudioPlugin")]
+	[DllImport("AudioPluginModalSynth")]
 	public static extern void ModalSynth_NoteOff(int note);
 
 	void Start()

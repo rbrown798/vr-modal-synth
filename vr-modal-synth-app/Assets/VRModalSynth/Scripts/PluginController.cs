@@ -9,19 +9,19 @@ using UnityEngine.UI;
 
 public class PluginController : MonoBehaviour
 {
-    [DllImport("ModalVR_AudioPlugin")]
+    [DllImport("AudioPluginModalSynth")]
     public static extern void ModalSynth_NoteOn(int note, float velocity, float position);
 
-    [DllImport("ModalVR_AudioPlugin")]
+    [DllImport("AudioPluginModalSynth")]
     public static extern void ModalSynth_SetLeftEarPosition(Vector3 leftEarPosition);
 
-    [DllImport("ModalVR_AudioPlugin")]
+    [DllImport("AudioPluginModalSynth")]
     public static extern void ModalSynth_SetLeftEarDirection(Vector3 leftEarDirection);
 
-    [DllImport("ModalVR_AudioPlugin")]
+    [DllImport("AudioPluginModalSynth")]
     public static extern void ModalSynth_SetRightEarPosition(Vector3 rightEarPosition);
 
-    [DllImport("ModalVR_AudioPlugin")]
+    [DllImport("AudioPluginModalSynth")]
     public static extern void ModalSynth_SetRightEarDirection(Vector3 rightEarDirection);
 
     public AudioMixer mixer;
