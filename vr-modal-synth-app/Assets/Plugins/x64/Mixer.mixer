@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!244 &-9081307949689506318
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: 173dbb9b99328c949a7ae1f0d908d3f0
-  m_EffectName: Modal Synth
-  m_MixLevel: 9578ef62028242246a9f96e932a1c862
-  m_Parameters:
-  - m_ParameterName: MalletStiffness
-    m_GUID: eda672c5e7a6b2b4aa8fb276df78b360
-  - m_ParameterName: MalletDiameter
-    m_GUID: c33af70d6efc080458c5ee952a8bd004
-  - m_ParameterName: BarTimbre
-    m_GUID: d9c6e49ed34de2846a3d73d80577ed8d
-  - m_ParameterName: BarDamping
-    m_GUID: 56e3fde1ef14db04c917676dca25fa60
-  - m_ParameterName: BarMetallic
-    m_GUID: 27dcbd1d7fafdb441b91d17ca39c088e
-  - m_ParameterName: TremoloRate
-    m_GUID: 6d5fd588190b4bf46903f297d6caa5dd
-  - m_ParameterName: TubeOn
-    m_GUID: a189eec6d2aa5ed4eb8aeb92318d2068
-  - m_ParameterName: LfoOn
-    m_GUID: 31a864d111b088f4182b4ca9ff07371e
-  - m_ParameterName: PedalValue
-    m_GUID: b50e9cd63ce750844b1ff43efce6150a
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &-380876935135778064
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -92,23 +60,23 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 855fd883f2e7b334fa929a36d90e1ad7
     name: OutputVolume
-  - guid: eda672c5e7a6b2b4aa8fb276df78b360
+  - guid: 043f3d956d852a047889ef2914568efa
     name: MalletStiffness
-  - guid: c33af70d6efc080458c5ee952a8bd004
+  - guid: 69d9be401ca877b4ea8fdd2b0c075d7e
     name: MalletDiameter
-  - guid: d9c6e49ed34de2846a3d73d80577ed8d
+  - guid: 57c38cefa11326a4db31b066247489b4
     name: BarTimbre
-  - guid: 56e3fde1ef14db04c917676dca25fa60
+  - guid: 28c863b3d8ca9fa458b34799dc43822d
     name: BarDamping
-  - guid: 27dcbd1d7fafdb441b91d17ca39c088e
+  - guid: 9c94ff999ba0d444ca850580205f4da6
     name: BarMetallic
-  - guid: 6d5fd588190b4bf46903f297d6caa5dd
-    name: TremoloRate
-  - guid: a189eec6d2aa5ed4eb8aeb92318d2068
+  - guid: b183538f079384f4c818a855fa547ab8
     name: TubeOn
-  - guid: 31a864d111b088f4182b4ca9ff07371e
-    name: LfoOn
-  - guid: b50e9cd63ce750844b1ff43efce6150a
+  - guid: 483d8184216524640aaad8eddebf2df6
+    name: TremoloOn
+  - guid: b1f03c62484e47e4b895294b203995cd
+    name: TremoloRate
+  - guid: 7ca6fefe391c7de44aafd00b4ff96501
     name: PedalValue
   - guid: 2f9174edda01278458e992f613dbb8cc
     name: Room
@@ -132,7 +100,7 @@ AudioMixerGroupController:
   m_Pitch: 40a33fadefb153443979d3987d18b7f2
   m_Send: 00000000000000000000000000000000
   m_Effects:
-  - {fileID: -9081307949689506318}
+  - {fileID: 7820809259855264392}
   - {fileID: -380876935135778064}
   - {fileID: 24400004}
   m_UserColorIndex: 0
@@ -201,3 +169,35 @@ AudioMixerSnapshotController:
     ddb6ee4f51740244994767ec1d3b9839: 0
   m_TransitionOverrides:
     00000000000000000000000000000000: 4
+--- !u!244 &7820809259855264392
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1b85df563b7242444af9e9aa4fcf5014
+  m_EffectName: Modal Synth
+  m_MixLevel: 414e6aff96958c84fb4835642ec463ee
+  m_Parameters:
+  - m_ParameterName: MalletStiffness
+    m_GUID: 043f3d956d852a047889ef2914568efa
+  - m_ParameterName: MalletDiameter
+    m_GUID: 69d9be401ca877b4ea8fdd2b0c075d7e
+  - m_ParameterName: BarTimbre
+    m_GUID: 57c38cefa11326a4db31b066247489b4
+  - m_ParameterName: BarDamping
+    m_GUID: 28c863b3d8ca9fa458b34799dc43822d
+  - m_ParameterName: BarMetallic
+    m_GUID: 9c94ff999ba0d444ca850580205f4da6
+  - m_ParameterName: TubeOn
+    m_GUID: b183538f079384f4c818a855fa547ab8
+  - m_ParameterName: TremoloOn
+    m_GUID: 483d8184216524640aaad8eddebf2df6
+  - m_ParameterName: TremoloRate
+    m_GUID: b1f03c62484e47e4b895294b203995cd
+  - m_ParameterName: PedalValue
+    m_GUID: 7ca6fefe391c7de44aafd00b4ff96501
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

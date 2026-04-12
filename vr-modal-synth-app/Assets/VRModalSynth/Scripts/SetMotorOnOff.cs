@@ -14,8 +14,8 @@ public class SetMotorOnOff : MonoBehaviour
 	public void SetMotorOnOffFromValue(bool value)
     {
         if (value)
-            mixer.SetFloat("LfoOn", 1f);
+            mixer.SetFloat("TremoloOn", 1f);
         else
-            mixer.SetFloat("LfoOn", -1f);
+            mixer.SetFloat("TremoloOn", -1f);
     }
 }
