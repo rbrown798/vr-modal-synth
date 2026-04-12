@@ -4,6 +4,10 @@ A physical modeling synthesizer controlled in virtual reality.
 
 ![](vr-modal-synth-app/Assets/ModalVR/Images/screenshot-1.png)
 
+## About 
+This is a personal project exploring the potential of VR as a controller for expressive modal synthesis. 
+It was made with Unity, using the XR Interaction Toolkit and the Unity Native Audio Plugin SDK. 
+
 ## Features
 - Physical parameter controls
 - 16-voice polyphony
