@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 
-public class SetMalletHardness : MonoBehaviour
+public class SetMalletStiffness : MonoBehaviour
 {
     public Material malletHeadMaterial;
     public AudioMixer mixer;
 
     void Start()
     {
-        SetMalletHardnessFromValue(0.5f);
+        SetMalletStiffnessFromValue(0.5f);
     }
 
-    public void SetMalletHardnessFromValue(float value)
+    public void SetMalletStiffnessFromValue(float value)
     {
         malletHeadMaterial.SetFloat("_Smoothness", value * 0.8f);
         mixer.SetFloat("MalletStiffness", value);

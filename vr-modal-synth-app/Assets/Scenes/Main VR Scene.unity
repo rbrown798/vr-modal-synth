@@ -2247,8 +2247,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 50023238}
-        m_TargetAssemblyTypeName: SetMalletHardness, Assembly-CSharp
-        m_MethodName: SetMalletHardnessFromValue
+        m_TargetAssemblyTypeName: SetMalletStiffness, Assembly-CSharp
+        m_MethodName: SetMalletStiffnessFromValue
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
