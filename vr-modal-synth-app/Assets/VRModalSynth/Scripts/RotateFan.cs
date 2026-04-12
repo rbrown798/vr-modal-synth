@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RotateObject : MonoBehaviour
+public class RotateFan : MonoBehaviour
 {
     private bool tremoloOn;
     private float tremoloRate;
