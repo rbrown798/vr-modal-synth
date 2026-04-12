@@ -5,48 +5,48 @@ using UnityEngine.UI;
 
 public class RotateObject : MonoBehaviour
 {
-    private bool motorOn;
-    private float frequencyHertz;
+    private bool tremoloOn;
+    private float tremoloRate;
 
-    private Toggle motorToggle;
-    private Slider motorSpeedSlider;
+    private Toggle tremoloToggle;
+    private Slider tremoloRateSlider;
     
     void Start()
     {
-        frequencyHertz = 1.0f;
+		tremoloRate = 1.0f;
 
-        motorToggle = GameObject.Find("Motor Toggle").GetComponent<Toggle>();
-        if (motorToggle != null)
+		tremoloToggle = GameObject.Find("Tremolo Toggle").GetComponent<Toggle>();
+        if (tremoloToggle != null)
         {
-            motorToggle.onValueChanged.AddListener(SetMotorOnOff);
+			tremoloToggle.onValueChanged.AddListener(SetTremoloOnOff);
         }
 
-        motorOn = motorToggle.isOn;
+		tremoloOn = tremoloToggle.isOn;
 
-        motorSpeedSlider = GameObject.Find("Motor Speed Slider").GetComponent<Slider>();
-        if (motorSpeedSlider != null)
+        tremoloRateSlider = GameObject.Find("Tremolo Rate Slider").GetComponent<Slider>();
+        if (tremoloRateSlider != null)
         {
-            motorSpeedSlider.onValueChanged.AddListener(SetMotorSpeed);
+			tremoloRateSlider.onValueChanged.AddListener(SetTremoloRate);
         }
 
-        frequencyHertz = motorSpeedSlider.value;
+		tremoloRate = tremoloRateSlider.value;
     }
 
     void Update()
     {
-        if (motorOn)
+        if (tremoloOn)
         {
             // Convert Hertz to degrees per second
-            float rotationSpeedDegrees = frequencyHertz * 360;
+            float rotationSpeedDegrees = tremoloRate * 360;
 
             // Rotate the object along its local Y axis (upward) by the specified speed
             transform.Rotate(Vector3.right * rotationSpeedDegrees * Time.deltaTime);
         }
     }
 
-    private void SetMotorOnOff(bool value)
+    private void SetTremoloOnOff(bool value)
     {
-        motorOn = value;
+		tremoloOn = value;
 
         // Create a new Quaternion with a 90-degree rotation around the Z-axis
         //Quaternion rotation = Quaternion.Euler(0, 0, 0);
@@ -56,8 +56,8 @@ public class RotateObject : MonoBehaviour
         transform.rotation = rotation;
     }
 
-    private void SetMotorSpeed(float value)
+    private void SetTremoloRate(float value)
     {
-        frequencyHertz = value;
+		tremoloRate = value;
     }
 }

@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 42950061}
   - component: {fileID: 42950062}
   m_Layer: 5
-  m_Name: Motor Speed Slider
+  m_Name: Tremolo Rate Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,12 +718,10 @@ GameObject:
   - component: {fileID: 50023229}
   - component: {fileID: 50023230}
   - component: {fileID: 50023231}
-  - component: {fileID: 50023232}
   - component: {fileID: 50023233}
   - component: {fileID: 50023234}
   - component: {fileID: 50023237}
   - component: {fileID: 50023236}
-  - component: {fileID: 50023235}
   - component: {fileID: 50023238}
   - component: {fileID: 50023239}
   - component: {fileID: 50023240}
@@ -895,19 +893,6 @@ MonoBehaviour:
   malletHead1: {fileID: 1742384367}
   malletHead2: {fileID: 966540286}
   mixer: {fileID: 24100000, guid: ee9de0b8872a2514b803e82788f24984, type: 2}
---- !u!114 &50023232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50023223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bde47048cf6d8343b1aadde26141688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idiophone: {fileID: 0}
 --- !u!114 &50023233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,19 +921,6 @@ MonoBehaviour:
   resonators: {fileID: 318773474}
   fans: {fileID: 1207384274}
   mixer: {fileID: 24100000, guid: ee9de0b8872a2514b803e82788f24984, type: 2}
---- !u!114 &50023235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50023223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e6d608a20c983f4592c6fe7d73436f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idiophone: {fileID: 0}
 --- !u!114 &50023236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15565,7 +15537,7 @@ GameObject:
   - component: {fileID: 1375489892}
   - component: {fileID: 1375489893}
   m_Layer: 5
-  m_Name: Motor Toggle
+  m_Name: Tremolo Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15641,8 +15613,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 50023237}
-        m_TargetAssemblyTypeName: SetMotorOnOff, Assembly-CSharp
-        m_MethodName: SetMotorOnOffFromValue
+        m_TargetAssemblyTypeName: SetTremoloOnOff, Assembly-CSharp
+        m_MethodName: SetTremoloOnOffFromValue
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

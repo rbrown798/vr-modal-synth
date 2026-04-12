@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SetMotorOnOff : MonoBehaviour
+public class SetTremoloOnOff : MonoBehaviour
 {
     public AudioMixer mixer;
 	void Start()
 	{
-		SetMotorOnOffFromValue(false);
+		SetTremoloOnOffFromValue(false);
 	}
 
-	public void SetMotorOnOffFromValue(bool value)
+	public void SetTremoloOnOffFromValue(bool value)
     {
         if (value)
             mixer.SetFloat("TremoloOn", 1f);
