@@ -34,9 +34,9 @@ namespace ModalSynth
         P_BAR_TIMBRE,
         P_BAR_DAMPING,
         P_BAR_METALLIC,
-        P_RESONATOR_TREMOLO_RATE,
         P_RESONATORS_ON,
-        P_LFO_ON,
+        P_TREMOLO_ON,
+        P_TREMOLO_RATE,
         P_PEDAL_VALUE,
         P_NUM
     };
@@ -71,14 +71,14 @@ namespace ModalSynth
         AudioPluginUtil::RegisterParameter(definition, "BarMetallic", "", 0.f,
             1.0f, 0.5f, 1.0f, 1.0f, P_BAR_METALLIC);
 
-        AudioPluginUtil::RegisterParameter(definition, "TremoloRate", "", 
-            0.1f, 5.0f, 4.0f, 1.0f, 1.0f, P_RESONATOR_TREMOLO_RATE);
-
         AudioPluginUtil::RegisterParameter(definition, "TubeOn", "",
             -1.f, 1.f, 1.f, 1.0f, 1.0f, P_RESONATORS_ON);
 
-        AudioPluginUtil::RegisterParameter(definition, "LfoOn", "",
-            -1.f, 1.f, 1.f, 1.0f, 1.0f, P_LFO_ON);
+        AudioPluginUtil::RegisterParameter(definition, "TremoloRate", "", 
+            0.1f, 5.0f, 4.0f, 1.0f, 1.0f, P_TREMOLO_RATE);
+
+        AudioPluginUtil::RegisterParameter(definition, "TremoloOn", "",
+            -1.f, 1.f, 1.f, 1.0f, 1.0f, P_TREMOLO_ON);
 
         AudioPluginUtil::RegisterParameter(definition, "PedalValue", "",
             0.f, 1.f, 0.f, 1.0f, 1.0f, P_PEDAL_VALUE);
@@ -154,9 +154,9 @@ namespace ModalSynth
         synth->setBarDamping(p[P_BAR_DAMPING]);
         synth->setBarTimbre(p[P_BAR_TIMBRE]);
         synth->setBarMetallic(p[P_BAR_METALLIC]);
-        synth->setTremoloRate(p[P_RESONATOR_TREMOLO_RATE]);
+        synth->setTremoloRate(p[P_TREMOLO_RATE]);
         synth->setTubeOn(p[P_RESONATORS_ON] > 0);
-        synth->setTremoloOn(p[P_LFO_ON] > 0);
+        synth->setTremoloOn(p[P_TREMOLO_ON] > 0);
         synth->setPedalValue(p[P_PEDAL_VALUE]);
     }
 
