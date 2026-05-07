@@ -20,6 +20,10 @@ void BarResonator::initModeShapes()
     float knLValues[NUM_MODES] = { 4.73004f, 7.8532f, 10.99561f, 14.13717f, 
                                    17.27876f, 20.42035f, 23.56194f, 26.70354f };
 
+    // L2 norms are very close to 1, so normalizing is somewhat unnecessary
+    float l2Norms[NUM_MODES] = { 1.01780f, 0.99922f, 1.00003f, 0.99999f, 1.f, 
+                                 1.f, 1.f, 1.f };
+
     for (int i = 0; i < NUM_MODES; i++)
     {
         for (int j = 0; j < MODE_SHAPE_LUT_SIZE; j++)
@@ -30,18 +34,9 @@ void BarResonator::initModeShapes()
         }
 
         // Normalize
-        float maxValue = 0.0f;
         for (int j = 0; j < MODE_SHAPE_LUT_SIZE; j++)
         {
-            if (fabsf(s_modeShapes[i][j]) > maxValue)
-            {
-                maxValue = fabsf(s_modeShapes[i][j]);
-            }
-        }
-
-        for (int j = 0; j < MODE_SHAPE_LUT_SIZE; j++)
-        {
-            s_modeShapes[i][j] /= maxValue;
+            s_modeShapes[i][j] /= l2Norms[i];
         }
     }
 }
