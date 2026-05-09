@@ -2,7 +2,7 @@
 
 A physical modeling synthesizer controlled in virtual reality. 
 
-![](vr-modal-synth-app/Assets/ModalVR/Images/screenshot-1.png)
+![](vr-modal-synth-app/Assets/VRModalSynth/Images/screenshot-1.png)
 
 ## About 
 This is a personal project exploring the potential of VR as a controller for expressive modal synthesis. 
@@ -41,7 +41,7 @@ To build the **Unity Native Audio Plugin**, you will need **CMake**. Navigate to
 cmake -S . -B build
 cmake --build build
 ```
-The plugin can then be copied to the plugin directory for the Unity project: `vr-modal-synth-app/Assets/ModalVR/Plugins/`
+The plugin can then be copied to the plugin directory for the Unity project: `vr-modal-synth-app/Assets/VRModalSynth/Plugins/`
 
 ## Planned Features / Releases
 - Pedal damping
