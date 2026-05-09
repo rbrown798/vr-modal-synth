@@ -123,7 +123,7 @@ void Voice::renderBlock(float* outBuffer, unsigned int length)
     gain(temp1, temp1, length, MALLET_GAIN);
     mix(temp1, temp1, temp2, length);
 
-    gain(temp1, temp1, length, 0.1f);
+    gain(temp1, temp1, length, 0.05f);
     m_spatializer.processBlock(temp1, outBuffer, length);
 }
 
