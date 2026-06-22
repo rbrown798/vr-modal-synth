@@ -13,16 +13,6 @@ It was made with Unity, using the XR Interaction Toolkit and the Unity Native Au
 - 16-voice polyphony
 - Velocity and position sensitivity
 
-## Installation / Usage
-
-1. Download the release.
-2. Extract the zip file.
-3. Connect a VR headset.
-4. Run the executable.
-
-(**Note:** This project is still in early development, and releases at this point are largely experimental. It has been tested on an Meta Quest 2 with a wired connection. 
-Some audio output devices may have poor performance or latency—the app will use whichever default device is selected.)
-
 ## Info
 This repository is organized into two subdirectories: 
 1. `synth-plugin/` contains the audio source code, wrapped as a Unity Native Audio Plugin.
